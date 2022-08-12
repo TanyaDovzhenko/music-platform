@@ -1,0 +1,41 @@
+@import "variables.scss";
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $background;
+    box-sizing: border-box;
+    font-family: $font-family;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+input,
+button,
+a {
+    font-family: $font-family;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    max-width: 1230px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.content {
+    width: 100%;
+    padding: 10px 10px 15px 10px;
+    overflow-x: hidden;
+}

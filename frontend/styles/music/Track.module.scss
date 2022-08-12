@@ -1,0 +1,39 @@
+@import "../variables.scss";
+@import '../extensions.scss';
+
+.track {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    margin-top: 20px;
+    padding: 0 7px;
+    cursor: pointer;
+}
+
+.track.active {
+    background-color: $transparent-grey;
+    border-radius: 4px;
+}
+
+.mainInfo {
+    display: grid;
+    grid-template-columns: 85px auto;
+    align-items: center;
+}
+
+.addInfo {
+    display: grid;
+    grid-template-columns: 85px 85px 100px 70px;
+    align-items: center;
+}
+
+.img {
+    @extend %img-background;
+    width: 75px;
+    height: 60px;
+}
+
+.name {
+    font-weight: 700;
+}

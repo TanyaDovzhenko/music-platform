@@ -1,0 +1,22 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.list {
+    column-count: 4;
+}
+
+@media (max-width: 1170px) {
+    .list {
+        column-count: 3;
+    }
+}
+
+@media (max-width: 930px) {
+    .list {
+        column-count: 2;
+    }
+}

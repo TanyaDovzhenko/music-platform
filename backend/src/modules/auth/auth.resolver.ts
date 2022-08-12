@@ -22,8 +22,7 @@ export class AuthResolver {
   @Public()
   @Mutation(() => AuthResponse)
   signup(@Args('createUserInput') createUserInput: CreateUserInput) {
-    console.log(createUserInput)
-    //return this.authService.signup(createUserInput)
+    return this.authService.signup(createUserInput)
   }
 
 }

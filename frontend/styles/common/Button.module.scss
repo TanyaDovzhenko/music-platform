@@ -1,0 +1,41 @@
+@import "../variables.scss";
+
+.button {
+    height: 40px;
+    font-size: 16px;
+    border-radius: 6px;
+    width: 350px;
+    background-color: $orange-grey;
+    transition: all 0.3s;
+    font-weight: 700;
+    color: #6a6a6a;
+
+    &:hover {
+        background-color: $grey;
+    }
+}
+
+.medium {
+    width: 200px;
+}
+
+.small-marg {
+    margin: 5px;
+}
+
+.medium-marg {
+    margin: 10px;
+}
+
+.backButton {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 10;
+    border-radius: 8px;
+    background-color: #dfdfdf5c;
+    height: 25px;
+    padding: 4px;
+}

@@ -1,0 +1,22 @@
+@import "../variables.scss";
+
+.input {
+    height: 40px;
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid $grey;
+    padding: 4px 10px;
+    font-size: 14px;
+}
+
+.small {
+    width: 200px;
+}
+
+.medium {
+    width: 350px;
+}
+
+.lagre {
+    width: 400px;
+}

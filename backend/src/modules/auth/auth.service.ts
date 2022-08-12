@@ -22,16 +22,16 @@ export class AuthService {
     return user
   }
 
-  // async signup(createUserInput: CreateUserInput) {
-  //   const password = bcrypt.hashSync(createUserInput.password, 3)
-  //   const user = await this.userService.createUser({ ...createUserInput, password })
-  //   return {
-  //     access_token: this.jwtService.signAsync(
-  //       { email: user.email, sub: user.id }
-  //     ),
-  //     user
-  //   }
-  // }
+  async signup(createUserInput: CreateUserInput) {
+    const password = bcrypt.hashSync(createUserInput.password, 3)
+    const user = await this.userService.createUser({ ...createUserInput, password })
+    return {
+      access_token: this.jwtService.signAsync(
+        { email: user.email, sub: user.id }
+      ),
+      user
+    }
+  }
 
   async signin(user: User) {
     return {

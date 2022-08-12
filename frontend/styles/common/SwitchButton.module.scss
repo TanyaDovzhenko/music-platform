@@ -1,0 +1,12 @@
+@import "../variables.scss";
+
+.button {
+    padding: 5px 7px;
+    margin: 0 6px;
+    background-color: $light-grey;
+    border-radius: 10px;
+}
+
+.button.active {
+    background-color: $grey;
+}

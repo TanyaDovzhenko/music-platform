@@ -1,0 +1,12 @@
+@import "../variables.scss";
+
+.card {
+    text-transform: lowercase;
+    cursor: pointer;
+    font-size: 14px;
+    color: #000;
+    background-color: $white;
+    padding: 4px;
+    margin: 2px 5px;
+    border-radius: 10px;
+}

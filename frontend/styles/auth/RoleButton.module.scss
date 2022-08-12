@@ -1,0 +1,21 @@
+@import '../variables.scss';
+
+.btn {
+    display: flex;
+    align-items: center;
+    font-weight: 800;
+    color: $white;
+    background-color: #6a6a6a;
+    text-transform: uppercase;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.role {
+    margin-left: 5px;
+}
+
+.btn.active {
+    background-color: $red;
+}
