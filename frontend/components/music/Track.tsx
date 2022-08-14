@@ -1,4 +1,4 @@
-import { BASE_SERVER_USR } from "../../utilities/constants"
+import { BASE_SERVER_URL } from "../../utilities/constants"
 import style from '../../styles/Music/Track.module.scss'
 import PlayerState from "../../store/PlayerState";
 import cn from 'classnames'
@@ -41,7 +41,7 @@ const Track = ({
             onClick={clickTrackHandler}>
             <div className={style.mainInfo}>
                 <div className={style.img}
-                    style={{ backgroundImage: `url(${BASE_SERVER_USR + image})` }}>
+                    style={{ backgroundImage: `url(${BASE_SERVER_URL + image})` }}>
                 </div>
                 <div>
                     <div className={style.name}>{name}</div>

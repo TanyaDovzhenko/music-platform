@@ -10,23 +10,22 @@ export class UserProfileService {
   async createUserProfile(userId: number, email: string) {
     const profile = await this.userProfileRepo.findOne({ where: { userId } })
     if (profile) return
-    const profileName = email.split('@')[0]
-    return this.userProfileRepo.create({ userId, name: profileName })
+
+    const name = email.split('@')[0]
+    const avatar = `image/random-profile-avatar/${Math.floor(Math.random() * 23)}.jpg`
+
+    return await this.userProfileRepo.create({ userId, name, avatar })
   }
 
-  findAll() {
-    return `This action returns all userProfile`;
+  async findOne(userId: number) {
+    return await this.userProfileRepo.findOne({ where: { userId }, include: { all: true } })
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} userProfile`;
+  async findAll() {
+    return await this.userProfileRepo.findAll({ include: { all: true } })
   }
 
   // update(id: number, updateUserProfileInput: UpdateUserProfileInput) {
   //   return `This action updates a #${id} userProfile`;
   // }
-
-  remove(id: number) {
-    return `This action removes a #${id} userProfile`;
-  }
 }

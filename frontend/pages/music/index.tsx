@@ -8,18 +8,11 @@ import SwitchButton from "../../components/common/SwitchButton";
 import MusicSwitchers from "../../components/music/MusicSwitchers";
 
 
-export default function Music({ users }: any) {
+export default function Music() {
 
     return (<MainLayout>
         <MusicSwitchers />
     </MainLayout >)
 }
-
-export async function getServerSideProps(ctx: NextPageContext) {
-
-    return { props: {} }
-}
-
-
 
 

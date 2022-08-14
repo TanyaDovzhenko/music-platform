@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import { Track } from 'src/modules/track/entities/track.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 
 @ObjectType()
@@ -28,6 +29,10 @@ export class UserProfile extends Model<UserProfile>{
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
   userId: number;
+
+  @HasMany(() => Track)
+  @Field(type => [Track], { nullable: true })
+  track: Track[];
 
   // @HasOne(() => ProfileSettings
   // @Field(type => ProfileSettings)

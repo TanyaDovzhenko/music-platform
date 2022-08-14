@@ -1,5 +1,5 @@
 import { UserService } from './user.service';
-import { Resolver, Query } from '@nestjs/graphql';
+import { Resolver, Query, Args } from '@nestjs/graphql';
 import { User } from './entities/user.entity';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 
@@ -13,7 +13,12 @@ export class UserResolver {
   }
 
   @Query(returns => User)
-  user(@CurrentUser() user: User): Promise<User> {
+  currentUser(@CurrentUser() user: User): Promise<User> {
     return this.userService.findOne(user.id);
+  }
+
+  @Query(returns => User)
+  user(@Args('id') id: number): Promise<User> {
+    return this.userService.findOne(id);
   }
 }

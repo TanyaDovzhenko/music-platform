@@ -10,6 +10,8 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { User } from 'src/modules/user/entities/user.entity';
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { UserProfile } from 'src/modules/user-profile/entities/user-profile.entity';
+import { Track } from './modules/track/entities/track.entity';
+import { TrackModule } from './modules/track/track.module';
 
 
 @Module({
@@ -33,10 +35,10 @@ import { UserProfile } from 'src/modules/user-profile/entities/user-profile.enti
       database: 'music-platform',
       models: [
         User,
-        UserProfile
+        UserProfile,
+        Track
         // MusicStyle,
         // UserMusicPrefs,
-        // Track,
         // TrackMusicStyles,
         // PlaylistsTracks,
         // Playlist,
@@ -60,8 +62,8 @@ import { UserProfile } from 'src/modules/user-profile/entities/user-profile.enti
     UserModule,
     AuthModule,
     UserProfileModule,
+    TrackModule,
     // MusicStyleModule,
-    // TrackModule,
     // PlaylistModule,
     // CommentModule,
     // PostModule,

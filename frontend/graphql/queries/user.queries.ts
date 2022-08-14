@@ -18,25 +18,21 @@ query User($id: Float!){
   }
 }`
 
-export const GET_USER_PROFILE = gql`
-query UserProfile{
-  userProfile {
+export const GET_CURRENT_USER = gql`
+query CurrentUser{
+  currentUser {
     id
-    status
+    email
+    role
+  }
+}`
+
+export const GET_USER_PROFILE = gql`
+query CurrentUserProfile{
+  currentUserProfile{
+    id
+    name
     avatar
-    posts{
-      id
-      likes
-      text
-      title
-    }
-    musicStylePreferences{
-      name
-      id
-    }
-    playlists{
-      name
-      image
-    }
+    status
   }
 }`

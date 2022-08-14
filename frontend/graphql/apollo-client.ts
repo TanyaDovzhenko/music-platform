@@ -8,7 +8,6 @@ const httpLink = createHttpLink({
 });
 
 const CreateClient = (ctx: NextPageContext | null) => {
-
     let access_token: any;
     access_token = parseCookies().access_token
     if (!access_token) access_token = ctx?.req?.headers.cookie?.slice(13)

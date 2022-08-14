@@ -1,4 +1,4 @@
-import { BASE_SERVER_USR } from "../../utilities/constants"
+import { BASE_SERVER_URL } from "../../utilities/constants"
 import style from '../../styles/Music/PlaylistCard.module.scss'
 import Link from "next/link"
 
@@ -13,7 +13,7 @@ export default function PlaylistCard({ name, author, img, playlistId }: IPlaylis
 
     return (
         <div className={style.card}>
-            <img src={BASE_SERVER_USR + img} alt="" />
+            <img src={BASE_SERVER_URL + img} alt="" />
             <div className={style.title}>
                 <Link href={`playlists/${playlistId}`}>
                     <a>{name}</a>

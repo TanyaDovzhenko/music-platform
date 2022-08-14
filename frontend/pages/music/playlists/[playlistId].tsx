@@ -5,7 +5,7 @@ import Track from "../../../components/music/Track"
 import { GET_PLAYLIST } from "../../../graphql/queries/music-queries"
 import MainLayout from "../../../layouts/MainLayout"
 import style from '../../../styles/Music/Playlist.module.scss'
-import { BASE_SERVER_USR } from "../../../utilities/constants"
+import { BASE_SERVER_URL } from "../../../utilities/constants"
 import PlayerState from "../../../store/PlayerState"
 import { observer } from "mobx-react-lite"
 import heartIcon from '../../../images/icons/heart-icon.svg'
@@ -34,7 +34,7 @@ function Playlist({ id }: any) {
             <BackButton text='to playlists' margin={true} />
             <div className={style.container}>
                 <div className={style.header}
-                    style={{ backgroundImage: `url(${BASE_SERVER_USR + playlist?.image})` }}>
+                    style={{ backgroundImage: `url(${BASE_SERVER_URL + playlist?.image})` }}>
                     <div className={style.headerInfo}>
                         <div className={style.title}>{playlist?.name}</div>
                         <div className={style.descr}>{playlist?.description}</div>

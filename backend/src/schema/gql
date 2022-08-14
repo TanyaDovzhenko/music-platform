@@ -19,15 +19,29 @@ type Mutation {
 }
 
 type Query {
-  user: User!
+  currentUser: User!
+  currentUserProfile: UserProfile!
+  track(id: Int!): Track!
+  tracks: [Track!]!
+  user(id: Float!): User!
   userProfile(id: Int!): UserProfile!
   userProfiles: [UserProfile!]!
+  userSingles(userProfileId: Int!): [Track!]!
   users: [User!]!
 }
 
 input SignInInput {
   email: String!
   password: String!
+}
+
+type Track {
+  audio: String!
+  id: Int!
+  image: String
+  name: String!
+  rate: Int!
+  userProfileId: Int
 }
 
 type User {
@@ -43,6 +57,7 @@ type UserProfile {
   id: Int!
   name: String!
   status: String
+  track: [Track!]
 }
 
 enum UserRoles {
