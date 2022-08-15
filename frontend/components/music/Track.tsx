@@ -22,6 +22,7 @@ const Track = ({
     id, name, image, audio, musician, setActivePlaylist, playlistId, comments, musicStyles, album }
     : ITrackProps) => {
 
+
     let isActive =
         PlayerState.activeTrack?.id === id
         && PlayerState.activePlaylist?.id === playlistId
@@ -48,12 +49,12 @@ const Track = ({
                     <div>{musician}</div>
                 </div>
             </div>
-            <div className={style.addInfo}>
+            {/* <div className={style.addInfo}>
                 <div>ALBUM</div>
                 <div>RATE</div>
                 <div>MUS STYLE</div>
                 <div>COMMENTS</div>
-            </div>
+            </div> */}
         </div>
     )
 }

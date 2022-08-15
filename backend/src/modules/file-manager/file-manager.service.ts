@@ -12,7 +12,7 @@ export class FileManagerService {
     try {
       const fileExtension = file.originalname.split('.').pop()
       const fileName = uuid.v4() + '.' + fileExtension
-      const filePath = path.resolve(__dirname, '../../', 'static', type, resourceType)
+      const filePath = path.resolve(__dirname, '../../../', 'static', type, resourceType)
 
       if (!fs.existsSync(filePath)) fs.mkdirSync(filePath, { recursive: true })
       fs.writeFileSync(path.resolve(filePath, fileName), file.buffer)

@@ -7,7 +7,7 @@ export default function Home() {
 
   useEffect(() => {
     let cookies = parseCookies()
-    if (cookies.access_token) Router.push('/music')
+    if (cookies.access_token) Router.push('/profile')
     else Router.push('/auth/signin')
   }, [])
 

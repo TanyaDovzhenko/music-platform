@@ -54,6 +54,7 @@ function Player() {
         setAudio(new Audio(PlayerState.activeTrack?.audio))
     }, [])
 
+    console.log(PlayerState.activeTrack?.image)
 
     return (
         <div className={cn(style.player, { [style.notActive]: !PlayerState.activeTrack })}
@@ -64,7 +65,7 @@ function Player() {
                 </div>
                 <div>
                     <div className={style.trackName}>{PlayerState.activeTrack?.name}</div>
-                    <div className={style.author}>{PlayerState.activeTrack?.musician}name</div>
+                    <div className={style.author}>{PlayerState.activeTrack?.musician}</div>
                 </div>
                 <Image className={style.icon} src={heartIcon} />
                 <div className={style.controls}>

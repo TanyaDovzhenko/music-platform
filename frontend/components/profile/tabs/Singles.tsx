@@ -1,7 +1,4 @@
-import { useEffect } from "react";
-import { useLazyQuery } from "@apollo/client";
 import style from '../../../styles/profile/Singles.module.scss'
-import { GET_USER_SINGLES } from "../../../graphql/queries/singles.queries";
 import TrackCreatingPanel from "./TrackCreatingPanel";
 import SinglesList from "./SinglesList";
 
@@ -13,6 +10,7 @@ export default function Singles({ userProfileId }: ISinglesProps) {
     return (
         <div className={style.singles}>
             <TrackCreatingPanel userProfileId={userProfileId} />
+            <div>SEARCH TRACKSSSSSS</div>
             <SinglesList userProfileId={userProfileId} />
         </div >)
 }

@@ -8,6 +8,9 @@ export class CreateTrackInput {
   @Field()
   userProfileId: number;
 
+  // @Field()
+  // albumId: number; NEED
+
   // @Field(type => [Int], { nullable: true })
   // musicStylesIds?: [number];
 }

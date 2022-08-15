@@ -1,6 +1,7 @@
+import { PlaylistService } from './../playlist/playlist.service';
 import { ResourceTypes } from './../../types/file-manager.types';
 import { InjectModel } from '@nestjs/sequelize';
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CreateTrackInput } from './dto/create-track.input';
 import { Track } from './entities/track.entity';
 import { FileTypes } from 'src/types/file-manager.types';
@@ -12,6 +13,8 @@ import { UserProfileService } from '../user-profile/user-profile.service';
 export class TrackService {
   constructor(
     @InjectModel(Track) private trackRepo: typeof Track,
+    @Inject(forwardRef(() => PlaylistService))
+    private playlistService: PlaylistService,
     private fileManagerService: FileManagerService,
     private userProfileService: UserProfileService) { }
 
@@ -44,13 +47,19 @@ export class TrackService {
       ...createTrackInput
     })
 
+    //NEED
+    // if (!track.albumId) {
+    //   await this.playlistService.addUserSingle(track.userProfileId, track.id)
+    // }
+
+    await this.playlistService.addUserSingle(track.userProfileId, track.id)
+
     // await track.$set('musicStyles', [])
     // track.musicStyles = []
     // musicStylesIds?.forEach(async element => {
     //   const musicStyle = await this.musicStyleRepo.findByPk(musicStylesIds[element])
     //   if (musicStyle) await track.$add('musicStyle', musicStyle.id)
     // })
-
     return track
   }
 

@@ -13,11 +13,6 @@ export class TrackResolver {
     return this.trackService.findAll();
   }
 
-  @Query(returns => [Track])
-  userSingles(@Args('userProfileId', { type: () => Int }) userProfileId: number) {
-    return this.trackService.findUserSingles(userProfileId);
-  }
-
   @Query(returns => Track)
   track(@Args('id', { type: () => Int }) id: number) {
     return this.trackService.findOne(id);

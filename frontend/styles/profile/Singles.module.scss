@@ -1,14 +1,17 @@
-.singles {}
-
-.add {
-    &Btn {
-        // font-weight: 600;
-        // margin: 12px auto;
-        // width: 100px;
-        // cursor: pointer;
-    }
+.list {
+    overflow-y: scroll;
+    max-height: 52vh;
 }
 
-.inp {
-    color: #000;
+.list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.list::-webkit-scrollbar-track {
+    background: none;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background-color: rgba(251, 251, 251, 0.4392156863);
+    border-radius: 20px;
 }

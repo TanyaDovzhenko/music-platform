@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { ITrack } from '../types/music/track.interface'
-import { BASE_SERVER_USR } from '../utilities/constants'
+import { BASE_SERVER_URL } from '../utilities/constants'
 
 interface ActivePlaylist {
     id: number,
@@ -20,8 +20,8 @@ class PlayerState {
     setActiveTrack(track: ITrack) {
         this.activeTrack = {
             ...track,
-            audio: BASE_SERVER_USR + track.audio,
-            image: BASE_SERVER_USR + track.image
+            audio: BASE_SERVER_URL + track.audio,
+            image: BASE_SERVER_URL + track.image
         }
         this.activeTrackIndex = this.activePlaylist?.tracks?.findIndex
             (el => el.id === this.activeTrack.id)

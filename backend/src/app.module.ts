@@ -1,6 +1,7 @@
+import { AlbumModule } from './modules/album/album.module';
 import * as path from 'path'
 import { ApolloDriver } from '@nestjs/apollo';
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UserModule } from './modules/user/user.module';
@@ -12,6 +13,12 @@ import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { UserProfile } from 'src/modules/user-profile/entities/user-profile.entity';
 import { Track } from './modules/track/entities/track.entity';
 import { TrackModule } from './modules/track/track.module';
+import { Playlist } from './modules/playlist/entities/playlist.entity';
+import { PlaylistModule } from './modules/playlist/playlist.module';
+import { UserProfilePlaylists } from './modules/playlist/entities/user-profile-playlists.entity';
+import { PlaylistsTracks } from './modules/playlist/entities/playlists-tracks.entity';
+import { Album } from './modules/album/entities/album.entity';
+import { UserProfileAlbums } from './modules/album/entities/user-profile-albums.entity';
 
 
 @Module({
@@ -36,7 +43,12 @@ import { TrackModule } from './modules/track/track.module';
       models: [
         User,
         UserProfile,
-        Track
+        Track,
+        Playlist,
+        UserProfilePlaylists,
+        PlaylistsTracks,
+        Album,
+        UserProfileAlbums
         // MusicStyle,
         // UserMusicPrefs,
         // TrackMusicStyles,
@@ -59,18 +71,12 @@ import { TrackModule } from './modules/track/track.module';
     ServeStaticModule.forRoot({
       rootPath: path.join(__dirname, '..', 'static'),
     }),
-    UserModule,
+    forwardRef(() => UserProfileModule),
+    forwardRef(() => UserModule),
+    forwardRef(() => PlaylistModule),
+    forwardRef(() => AlbumModule),
     AuthModule,
-    UserProfileModule,
     TrackModule,
-    // MusicStyleModule,
-    // PlaylistModule,
-    // CommentModule,
-    // PostModule,
-    // MusicianProfileModule,
-    // AlbumModule,
-    // FollowingModule,
-    // FileManagerModule
   ],
 })
 export class AppModule { }

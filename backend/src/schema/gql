@@ -2,9 +2,41 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input AddTrackInput {
+  playlistId: Int!
+  trackId: Int!
+}
+
+type Album {
+  authorUserProfileId: Int!
+  description: String
+  id: Int!
+  image: String
+  name: String!
+  rate: Float!
+  tracks: [Track!]
+  userProfiles: [UserProfile!]
+}
+
 type AuthResponse {
   access_token: String!
   user: User!
+}
+
+input CreateAlbumInput {
+  authorUserProfileId: Int
+  description: String
+  tracksIds: [Int!]
+}
+
+input CreatePlaylistInput {
+  authorId: Int!
+  description: String
+  image: String
+  isDefault: Boolean = false
+  musicStylesIds: [Int!]
+  name: String!
+  tracksIds: [Int!]
 }
 
 input CreateUserInput {
@@ -14,19 +46,40 @@ input CreateUserInput {
 }
 
 type Mutation {
+  addTrack(addTrackInput: AddTrackInput!): Boolean!
+  createAlbum(createAlbumInput: CreateAlbumInput!): Album!
+  createPlaylist(createPlaylistInput: CreatePlaylistInput!): Playlist!
+  removeAlbum(id: Int!): Album!
   signin(signInInput: SignInInput!): AuthResponse!
   signup(createUserInput: CreateUserInput!): AuthResponse!
+  updateAlbum(updateAlbumInput: UpdateAlbumInput!): Album!
+}
+
+type Playlist {
+  authorId: Int!
+  description: String
+  id: Int!
+  image: String
+  isDefault: Boolean!
+  likes: Float!
+  name: String!
+  tracks: [Track!]
+  userProfiles: [UserProfile!]
 }
 
 type Query {
+  album(id: Int!): Album!
   currentUser: User!
   currentUserProfile: UserProfile!
+  firstImpTracks: Playlist!
+  playlist(id: Int!): Playlist!
+  singlesTracks: Playlist!
   track(id: Int!): Track!
   tracks: [Track!]!
   user(id: Float!): User!
+  userPlaylists: [Playlist!]!
   userProfile(id: Int!): UserProfile!
   userProfiles: [UserProfile!]!
-  userSingles(userProfileId: Int!): [Track!]!
   users: [User!]!
 }
 
@@ -36,12 +89,20 @@ input SignInInput {
 }
 
 type Track {
+  albumId: Int
   audio: String!
   id: Int!
   image: String
   name: String!
   rate: Int!
   userProfileId: Int
+}
+
+input UpdateAlbumInput {
+  authorUserProfileId: Int
+  description: String
+  id: Int!
+  tracksIds: [Int!]
 }
 
 type User {
@@ -53,9 +114,12 @@ type User {
 }
 
 type UserProfile {
+  album: [Album!]
+  albums: [Album!]
   avatar: String
   id: Int!
   name: String!
+  playlists: [Playlist!]
   status: String
   track: [Track!]
 }

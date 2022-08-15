@@ -1,5 +1,9 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import { Album } from 'src/modules/album/entities/album.entity';
+import { UserProfileAlbums } from 'src/modules/album/entities/user-profile-albums.entity';
+import { Playlist } from 'src/modules/playlist/entities/playlist.entity';
+import { UserProfilePlaylists } from 'src/modules/playlist/entities/user-profile-playlists.entity';
 import { Track } from 'src/modules/track/entities/track.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 
@@ -34,6 +38,18 @@ export class UserProfile extends Model<UserProfile>{
   @Field(type => [Track], { nullable: true })
   track: Track[];
 
+  @HasMany(() => Album)
+  @Field(type => [Album], { nullable: true })
+  album: Album[];
+
+  @BelongsToMany(() => Playlist, () => UserProfilePlaylists)
+  @Field(type => [Playlist], { nullable: true })
+  playlists: Playlist[];
+
+  @BelongsToMany(() => Album, () => UserProfileAlbums)
+  @Field(type => [Album], { nullable: true })
+  albums: Album[];
+
   // @HasOne(() => ProfileSettings
   // @Field(type => ProfileSettings)
   // profileSettings: ProfileSettings;
@@ -58,7 +74,5 @@ export class UserProfile extends Model<UserProfile>{
   // @Field(type => [MusicStyle], { nullable: true })
   // musicStylePrefs: MusicStyle[];
 
-  // @BelongsToMany(() => Playlist, () => UserPlaylists)
-  // @Field(type => [Playlist], { nullable: true })
-  // playlists: Playlist[];
+
 }

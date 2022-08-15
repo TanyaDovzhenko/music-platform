@@ -5,10 +5,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 99%;
     height: 70px;
-    margin-top: 20px;
     padding: 0 7px;
     cursor: pointer;
+}
+
+.track:not(:first-child) {
+    margin-top: 17px;
 }
 
 .track.active {

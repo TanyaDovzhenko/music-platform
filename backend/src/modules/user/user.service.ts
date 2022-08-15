@@ -12,7 +12,7 @@ export class UserService {
 
     async createUser(createUserInput: CreateUserInput): Promise<User> {
         const user = await this.userRepo.create({ ...createUserInput })
-        this.userProfileService.createUserProfile(user.id, user.email)
+        await this.userProfileService.createUserProfile(user.id, user.email, user.role)
         return user
     }
 

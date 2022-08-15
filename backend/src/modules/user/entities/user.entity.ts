@@ -29,8 +29,4 @@ export class User extends Model<User>{
     @HasOne(() => UserProfile)
     @Field(type => UserProfile, { nullable: true })
     userProfile: UserProfile;
-
-    // @HasOne(() => MusicianProfile)
-    // @Field(type => MusicianProfile, { nullable: true })
-    // musicianProfile: MusicianProfile;
 }

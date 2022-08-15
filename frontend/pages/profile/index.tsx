@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MainLayout from "../../layouts/MainLayout";
 import { BASE_SERVER_URL } from "../../utilities/constants";
 import style from '../../styles/profile/Profile.module.scss';
@@ -10,14 +10,13 @@ import UserRole from "../../components/profile/UserRole";
 
 
 export default function Profile() {
-    const { data: userProfile } = useQuery(GET_USER_PROFILE)
-    const { data: currentUser } = useQuery(GET_CURRENT_USER)
+    const { data: userProfile } = useQuery(GET_USER_PROFILE);
+    const { data: currentUser } = useQuery(GET_CURRENT_USER);
     const profile = userProfile?.currentUserProfile
 
     const [activeTab, setActiveTab] = useState('first impression')
-    const changeActiveTag = (tab: string) => {
-        setActiveTab(tab)
-    }
+
+    const changeActiveTag = (tab: string) => setActiveTab(tab)
 
     return (<MainLayout>
         <div className={style.container} style={{
@@ -58,3 +57,12 @@ export default function Profile() {
         </div>
     </MainLayout>)
 }
+
+// export async function getServerSideProps(context: NextPageContext) {
+//     const client = CreateClient(context);
+
+//     const { data: userProfile } = useQuery(GET_USER_PROFILE);
+//     const { data: currentUser } = useQuery(GET_CURRENT_USER);
+
+//     return { props: { userProfile: userProfile, currentUser: currentUser } }
+// }
