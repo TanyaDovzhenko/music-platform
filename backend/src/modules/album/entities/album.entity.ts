@@ -26,6 +26,10 @@ export class Album extends Model<Album>{
   @Field({ nullable: true })
   description?: string;
 
+  @Column({ type: DataType.STRING })
+  @Field()
+  authorName: string;
+
   @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 0 })
   @Field()
   rate: number
@@ -45,4 +49,8 @@ export class Album extends Model<Album>{
   @Column({ type: DataType.INTEGER })
   @Field(type => Int)
   authorUserProfileId: number;
+
+  @Column({ type: DataType.INTEGER })
+  @Field(type => Int)
+  authorUserId: number;
 }

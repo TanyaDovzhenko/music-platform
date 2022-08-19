@@ -3,6 +3,7 @@ export enum ProfileTabsEnum {
     REVIEWS = 'reviews',
     PLAYLISTS = 'playlists',
     ALBUMS = 'albums',
+    LIKED_ALBUMS = 'liked albums',
     SINGLES = 'singles',
     ABOUT = 'about musician',
     FOLLOWING = 'following',
@@ -13,7 +14,7 @@ export const ListenerTabsObj = [
     { name: ProfileTabsEnum.POSTS },
     { name: ProfileTabsEnum.REVIEWS },
     { name: ProfileTabsEnum.PLAYLISTS },
-    { name: ProfileTabsEnum.ALBUMS },
+    { name: ProfileTabsEnum.LIKED_ALBUMS },
     { name: ProfileTabsEnum.FOLLOWING }
 ]
 

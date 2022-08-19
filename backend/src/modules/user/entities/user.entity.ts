@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType, HasOne, HasMany, BelongsToMany } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, HasOne, HasMany, BelongsToMany, ForeignKey } from 'sequelize-typescript';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { UserRoles } from 'src/types/user-roles.enum';
 import { IsEmail } from 'class-validator';
@@ -29,4 +29,9 @@ export class User extends Model<User>{
     @HasOne(() => UserProfile)
     @Field(type => UserProfile, { nullable: true })
     userProfile: UserProfile;
+
+    @ForeignKey(() => UserProfile)
+    @Column({ type: DataType.INTEGER })
+    @Field()
+    userProfileId: number;
 }

@@ -15,21 +15,27 @@ export class UserProfileService {
   async createUserProfile(userId: number, email: string, userRole: UserRoles) {
     const profile = await this.userProfileRepo.findOne({ where: { userId } })
     if (profile) return
-
     const name = email.split('@')[0]
     const avatar = `image/random-profile-avatar/${Math.floor(Math.random() * 21)}.jpg`
-
     const newProfile = await this.userProfileRepo.create({ userId, name, avatar })
     await this.playlistService.createDefaultPlaylists(newProfile, userRole)
-
     return newProfile
   }
 
-  async findOne(userId: number) {
-    return await this.userProfileRepo.findOne({ where: { userId }, include: { all: true } })
+  async findOne(profileId: number) {
+    return await this.userProfileRepo.findByPk(profileId,
+      { include: { all: true } })
+  }
+
+  async findOneByUserId(userId: number) {
+    return await this.userProfileRepo.findOne({
+      where: { userId }, include: { all: true }
+    })
   }
 
   async findAll() {
-    return await this.userProfileRepo.findAll({ include: { all: true } })
+    return await this.userProfileRepo.findAll({
+      include: { all: true }
+    })
   }
 }

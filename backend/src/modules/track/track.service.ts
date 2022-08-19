@@ -47,12 +47,9 @@ export class TrackService {
       ...createTrackInput
     })
 
-    //NEED
-    // if (!track.albumId) {
-    //   await this.playlistService.addUserSingle(track.userProfileId, track.id)
-    // }
-
-    await this.playlistService.addUserSingle(track.userProfileId, track.id)
+    if (!track.albumId) {
+      await this.playlistService.addUserSingle(track.userProfileId, track.id)
+    }
 
     // await track.$set('musicStyles', [])
     // track.musicStyles = []

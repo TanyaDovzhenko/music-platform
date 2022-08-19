@@ -26,7 +26,7 @@ const SignUpPage = () => {
         onCompleted: (data) => {
             setToken(data.signup.access_token);
             checkAuth();
-            Router.push('/music/playlists')
+            Router.push('/profile')
         },
         onError: (error) => console.log(error)
     })

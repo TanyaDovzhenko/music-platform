@@ -11,7 +11,6 @@ query Playlists{
 }`
 
 
-
 export const GET_PLAYLIST = gql`
 query Playlist($id: Int!){
   playlist(id: $id) {

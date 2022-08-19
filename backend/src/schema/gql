@@ -8,6 +8,8 @@ input AddTrackInput {
 }
 
 type Album {
+  authorName: String!
+  authorUserId: Int!
   authorUserProfileId: Int!
   description: String
   id: Int!
@@ -21,12 +23,6 @@ type Album {
 type AuthResponse {
   access_token: String!
   user: User!
-}
-
-input CreateAlbumInput {
-  authorUserProfileId: Int
-  description: String
-  tracksIds: [Int!]
 }
 
 input CreatePlaylistInput {
@@ -47,12 +43,9 @@ input CreateUserInput {
 
 type Mutation {
   addTrack(addTrackInput: AddTrackInput!): Boolean!
-  createAlbum(createAlbumInput: CreateAlbumInput!): Album!
   createPlaylist(createPlaylistInput: CreatePlaylistInput!): Playlist!
-  removeAlbum(id: Int!): Album!
   signin(signInInput: SignInInput!): AuthResponse!
   signup(createUserInput: CreateUserInput!): AuthResponse!
-  updateAlbum(updateAlbumInput: UpdateAlbumInput!): Album!
 }
 
 type Playlist {
@@ -70,15 +63,18 @@ type Playlist {
 type Query {
   album(id: Int!): Album!
   currentUser: User!
+  currentUserAlbums: [Album!]!
+  currentUserPlaylists: [Playlist!]!
   currentUserProfile: UserProfile!
   firstImpTracks: Playlist!
   playlist(id: Int!): Playlist!
-  singlesTracks: Playlist!
+  singlesTracks(profileId: Int!): Playlist!
   track(id: Int!): Track!
   tracks: [Track!]!
   user(id: Float!): User!
-  userPlaylists: [Playlist!]!
+  userAlbums(profileId: Int!): [Album!]!
   userProfile(id: Int!): UserProfile!
+  userProfileByUserId(userId: Int!): UserProfile!
   userProfiles: [UserProfile!]!
   users: [User!]!
 }
@@ -98,19 +94,13 @@ type Track {
   userProfileId: Int
 }
 
-input UpdateAlbumInput {
-  authorUserProfileId: Int
-  description: String
-  id: Int!
-  tracksIds: [Int!]
-}
-
 type User {
   email: String!
   id: Int!
   password: String
   role: UserRoles!
   userProfile: UserProfile
+  userProfileId: Float!
 }
 
 type UserProfile {

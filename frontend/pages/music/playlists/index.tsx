@@ -4,7 +4,7 @@ import Button from "../../../components/common/Button";
 import MusicSwitchers from "../../../components/music/MusicSwitchers";
 import PlaylistCard from "../../../components/music/PlaylistCard";
 import CreateClient from "../../../graphql/apollo-client";
-import { GET_USER_PLAYLISTS } from "../../../graphql/queries/music-queries";
+import { GET_USER_PLAYLISTS } from "../../../graphql/queries/playlist-queries";
 import MainLayout from "../../../layouts/MainLayout";
 import style from '../../../styles/Music/Playlists.module.scss'
 
@@ -20,12 +20,13 @@ export default function Playlists({ userPlaylists }: any) {
                 <Button text="+ Create playlist" width="medium" />
             </div>
             <div className={style.list}>
-                {userPlaylists?.map((item: any) =>
+                {userPlaylists?.map((item, index) =>
                     <PlaylistCard
                         img={item.image}
                         name={item.name}
                         author={'author'}
                         playlistId={item.id}
+                        key={index}
                     />)}
             </div>
         </MainLayout >)

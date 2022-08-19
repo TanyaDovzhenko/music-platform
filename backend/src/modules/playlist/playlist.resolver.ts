@@ -5,6 +5,7 @@ import { CreatePlaylistInput } from './dto/create-playlist.input';
 import { User } from 'src/modules/user/entities/user.entity';
 import { AddTrackInput } from './dto/add-track-input';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { CurrentUserProfile } from '../auth/decorators/current-user-profile.decorator';
 
 @Resolver(() => Playlist)
 export class PlaylistResolver {
@@ -16,8 +17,8 @@ export class PlaylistResolver {
   // }
 
   @Query(() => [Playlist])
-  userPlaylists(@CurrentUser() user: User) {
-    return this.playlistService.findUserPlaylists(user.id);
+  currentUserPlaylists(@CurrentUserProfile() profileId: number) {
+    return this.playlistService.findUserPlaylists(profileId);
   }
 
   @Query(() => Playlist)
@@ -27,19 +28,21 @@ export class PlaylistResolver {
 
   @Mutation(() => Playlist)
   createPlaylist(
-    @CurrentUser() user: User,
+    @CurrentUserProfile() profileId: number,
     @Args('createPlaylistInput') createPlaylistInput: CreatePlaylistInput) {
-    return this.playlistService.createPlaylist({ ...createPlaylistInput, authorId: user.id });
+    return this.playlistService.createPlaylist({
+      ...createPlaylistInput, authorId: profileId
+    });
   }
 
   @Query(() => Playlist)
-  singlesTracks(@CurrentUser() user: User) {
-    return this.playlistService.findUserSingles(user.id);
+  singlesTracks(@Args('profileId', { type: () => Int }) profileId: number) {
+    return this.playlistService.findUserSingles(profileId);
   }
 
   @Query(() => Playlist)
-  firstImpTracks(@CurrentUser() user: User) {
-    return this.playlistService.findUserFirstImp(user.id);
+  firstImpTracks(@CurrentUserProfile() profileId: number) {
+    return this.playlistService.findUserFirstImp(profileId);
   }
 
   @Mutation(() => Boolean)

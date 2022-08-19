@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 export const GET_USER_SINGLES = gql`
-query UserSinglesTracks{
-  singlesTracks{
+query UserSinglesTracks($profileId: Int!){
+  singlesTracks(profileId: $profileId){
     id
     name
     tracks{

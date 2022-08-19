@@ -31,16 +31,15 @@ export class PlaylistService {
     return await this.playlistRepo.findByPk(id, { include: { all: true } });
   }
 
-  async findUserPlaylists(userId: number) {
-    const userProfile = await this.userProfileService.findOne(userId)
+  async findUserPlaylists(profileId: number) {
+    const userProfile = await this.userProfileService.findOne(profileId)
     return userProfile.playlists
   }
 
-  async findUserSingles(userId: number) {
-    const userProfile = await this.userProfileService.findOne(userId)
+  async findUserSingles(profileId: number) {
     return await this.playlistRepo.findOne({
       where: {
-        authorId: userProfile.id,
+        authorId: profileId,
         isDefault: true,
         name: DefaultPlaylistsNames.SINGLES,
       },
@@ -61,11 +60,10 @@ export class PlaylistService {
     return true
   }
 
-  async findUserFirstImp(userId: number) {
-    const userProfile = await this.userProfileService.findOne(userId)
+  async findUserFirstImp(userProfileId: number) {
     return await this.playlistRepo.findOne({
       where: {
-        authorId: userProfile.id,
+        authorId: userProfileId,
         isDefault: true,
         name: DefaultPlaylistsNames.FIRST_IMP
       },
@@ -76,7 +74,6 @@ export class PlaylistService {
   async createPlaylist(createPlaylistInput: CreatePlaylistInput) {
     const { tracksIds, musicStylesIds, image, ...data } = createPlaylistInput;
     let playlistImage = image ?? DefaultPlaylistImgSrc.DEFAULT
-
     const playlist = await this.playlistRepo.create({ ...data, image: playlistImage })
 
     // await playlist.$set('musicStyles', [])

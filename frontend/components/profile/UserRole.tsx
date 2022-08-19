@@ -10,11 +10,15 @@ interface ITabsProps {
 }
 
 export default function UserRole({ userRole }: ITabsProps) {
+
     return (
         <div className={style.role}>
-            {userRole === UserRoles.LISTENER ?
-                <Image src={listenerIcon} /> : <Image src={musicianIcon} />}
-            {userRole}
+            {userRole === UserRoles.LISTENER.toUpperCase() ?
+                <Image src={listenerIcon} /> :
+                userRole === UserRoles.MUSICIAN.toUpperCase() ?
+                    <Image src={musicianIcon} />
+                    : <></>}
+            <span>{userRole}</span>
         </div>
     )
 }

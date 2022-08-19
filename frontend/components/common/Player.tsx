@@ -54,8 +54,6 @@ function Player() {
         setAudio(new Audio(PlayerState.activeTrack?.audio))
     }, [])
 
-    console.log(PlayerState.activeTrack?.image)
-
     return (
         <div className={cn(style.player, { [style.notActive]: !PlayerState.activeTrack })}
             style={{ backgroundImage: `url(${PlayerState.activeTrack?.image})` }}>

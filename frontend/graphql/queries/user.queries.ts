@@ -28,6 +28,26 @@ query CurrentUser{
 }`
 
 export const GET_USER_PROFILE = gql`
+query UserProfile($id: Int!){
+  userProfile(id: $id) {
+    id
+    name
+    avatar
+    status
+  }
+}`
+
+export const GET_PROFILE_BY_USER_ID = gql`
+query ProfileByUserID($userId: Int!){
+  userProfileByUserId(userId: $userId) {
+    id
+    name
+    avatar
+    status
+  }
+}`
+
+export const GET_CURRENT_USER_PROFILE = gql`
 query CurrentUserProfile{
   currentUserProfile{
     id
@@ -36,3 +56,4 @@ query CurrentUserProfile{
     status
   }
 }`
+

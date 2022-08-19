@@ -3,33 +3,27 @@ import { AlbumService } from './album.service';
 import { Album } from './entities/album.entity';
 import { CreateAlbumInput } from './dto/create-album.input';
 import { UpdateAlbumInput } from './dto/update-album.input';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { User } from '../user/entities/user.entity';
+import { CurrentUserProfile } from '../auth/decorators/current-user-profile.decorator';
+
 
 @Resolver(() => Album)
 export class AlbumResolver {
-  constructor(private readonly albumService: AlbumService) {}
+  constructor(private readonly albumService: AlbumService) { }
 
-  @Mutation(() => Album)
-  createAlbum(@Args('createAlbumInput') createAlbumInput: CreateAlbumInput) {
-    return this.albumService.create(createAlbumInput);
-  }
-
-  @Query(() => [Album], { name: 'album' })
-  findAll() {
-    return this.albumService.findAll();
-  }
-
-  @Query(() => Album, { name: 'album' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => Album)
+  album(@Args('id', { type: () => Int }) id: number) {
     return this.albumService.findOne(id);
   }
 
-  @Mutation(() => Album)
-  updateAlbum(@Args('updateAlbumInput') updateAlbumInput: UpdateAlbumInput) {
-    return this.albumService.update(updateAlbumInput.id, updateAlbumInput);
+  @Query(() => [Album])
+  currentUserAlbums(@CurrentUserProfile() profileId: number) {
+    return this.albumService.findAllUserAlbums(profileId);
   }
 
-  @Mutation(() => Album)
-  removeAlbum(@Args('id', { type: () => Int }) id: number) {
-    return this.albumService.remove(id);
+  @Query(() => [Album])
+  userAlbums(@Args('profileId', { type: () => Int }) profileId: number) {
+    return this.albumService.findAllUserAlbums(profileId);
   }
 }

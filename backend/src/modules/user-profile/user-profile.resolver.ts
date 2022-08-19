@@ -3,6 +3,7 @@ import { UserProfileService } from './user-profile.service';
 import { UserProfile } from './entities/user-profile.entity';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { User } from '../user/entities/user.entity';
+import { CurrentUserProfile } from '../auth/decorators/current-user-profile.decorator';
 
 
 @Resolver(() => UserProfile)
@@ -20,8 +21,13 @@ export class UserProfileResolver {
   }
 
   @Query(() => UserProfile)
-  currentUserProfile(@CurrentUser() user: User) {
-    return this.userProfileService.findOne(user.id);
+  userProfileByUserId(@Args('userId', { type: () => Int }) userId: number) {
+    return this.userProfileService.findOneByUserId(userId);
+  }
+
+  @Query(() => UserProfile)
+  currentUserProfile(@CurrentUserProfile() profileId: number) {
+    return this.userProfileService.findOne(profileId);
   }
 
   // @Mutation(() => UserProfile)

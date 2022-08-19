@@ -14,7 +14,7 @@ export class FileManagerService {
       const fileName = uuid.v4() + '.' + fileExtension
       const filePath = path.resolve(__dirname, '../../../', 'static', type, resourceType)
 
-      if (!fs.existsSync(filePath)) fs.mkdirSync(filePath, { recursive: true })
+      if (!fs.existsSync(filePath)) fs.mkdirSync(filePath, { recursive: true });
       fs.writeFileSync(path.resolve(filePath, fileName), file.buffer)
 
       return `${type}/${resourceType}/${fileName}`
@@ -22,5 +22,9 @@ export class FileManagerService {
     catch (e) {
       throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR)
     }
+  }
+
+  deleteFile(filePath: string) {
+    fs.unlink(path.join(__dirname, '../../../', 'static', filePath), () => { })
   }
 }

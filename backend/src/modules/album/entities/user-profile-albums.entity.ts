@@ -3,7 +3,7 @@ import { UserProfile } from "src/modules/user-profile/entities/user-profile.enti
 import { Album } from "./album.entity";
 
 
-@Table({ tableName: 'user_profile_albumss', createdAt: false, updatedAt: false })
+@Table({ tableName: 'user_profile_albums', createdAt: false, updatedAt: false })
 export class UserProfileAlbums extends Model<UserProfileAlbums> {
     @ForeignKey(() => Album)
     @Column({ type: DataType.INTEGER })

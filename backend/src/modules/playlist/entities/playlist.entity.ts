@@ -50,10 +50,10 @@ export class Playlist extends Model<Playlist> {
   @Field(type => [UserProfile], { nullable: true })
   userProfiles: UserProfile[];
 
-  @BelongsTo(() => UserProfilePlaylists)
-  userProfile: UserProfilePlaylists
+  @BelongsTo(() => UserProfile)
+  userProfile: UserProfile
 
-  @ForeignKey(() => UserProfilePlaylists)
+  @ForeignKey(() => UserProfile)
   @Column({ type: DataType.INTEGER })
   @Field(type => Int)
   authorId: number;

@@ -14,18 +14,20 @@ export default function ProfileTabs({ userRole, onClick, activeTab }: ITabsProps
     return (
         <div>
             {userRole == (UserRoles.LISTENER).toUpperCase() ?
-                <>{ListenerTabsObj.map(item =>
+                <>{ListenerTabsObj.map((item, index) =>
                     <span
                         className={cn(style.tab, { [style.active]: activeTab == item.name })}
-                        onClick={() => onClick(item.name)}  >
+                        onClick={() => onClick(item.name)}
+                        key={index} >
                         {item.name}
                     </span>)}
                 </>
                 : userRole == (UserRoles.MUSICIAN).toUpperCase() ?
-                    <>{MusicianTabsObj.map(item =>
+                    <>{MusicianTabsObj.map((item, index) =>
                         <span
                             className={cn(style.tab, { [style.active]: activeTab == item.name })}
-                            onClick={() => onClick(item.name)}  >
+                            onClick={() => onClick(item.name)}
+                            key={index} >
                             {item.name}
                         </span>)}
                     </>

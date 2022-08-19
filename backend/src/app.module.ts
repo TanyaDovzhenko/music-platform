@@ -31,7 +31,8 @@ import { UserProfileAlbums } from './modules/album/entities/user-profile-albums.
       cors: {
         origin: 'http://localhost:3000',
         credentials: true,
-      }
+      },
+      uploads: false,
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
@@ -49,21 +50,6 @@ import { UserProfileAlbums } from './modules/album/entities/user-profile-albums.
         PlaylistsTracks,
         Album,
         UserProfileAlbums
-        // MusicStyle,
-        // UserMusicPrefs,
-        // TrackMusicStyles,
-        // PlaylistsTracks,
-        // Playlist,
-        // PlaylistsMusicStyles,
-        // TrackComment,
-        // PlaylistComment,
-        // ReviewComment,
-        // Post,
-        // PostComment,
-        // Album,
-        // MusicianProfile,
-        // AlbumMusicStyles,
-        // UserPlaylists
       ],
       autoLoadModels: true,
     }),

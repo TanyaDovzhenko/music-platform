@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client"
 import { NextPageContext } from "next"
 import BackButton from "../../../components/common/BackButton"
 import Track from "../../../components/music/Track"
-import { GET_PLAYLIST } from "../../../graphql/queries/music-queries"
+import { GET_PLAYLIST } from "../../../graphql/queries/playlist-queries"
 import MainLayout from "../../../layouts/MainLayout"
 import style from '../../../styles/Music/Playlist.module.scss'
 import { BASE_SERVER_URL } from "../../../utilities/constants"
@@ -44,7 +44,7 @@ function Playlist({ id }: any) {
                 </div>
                 <div className={style.tracks}>
                     {playlist?.tracks?.length ?
-                        playlist.tracks.map((item: any) =>
+                        playlist.tracks.map((item, index) =>
                             <Track
                                 id={item.id}
                                 name={item.name}
@@ -53,6 +53,7 @@ function Playlist({ id }: any) {
                                 image={item.image}
                                 playlistId={playlist.id}
                                 setActivePlaylist={setActivePlaylist}
+                                key={index}
                             />)
                         : <div>ADD TRACK</div>}
                 </div>

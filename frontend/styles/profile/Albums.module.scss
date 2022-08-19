@@ -1,0 +1,19 @@
+.albumsList {
+    margin-top: 15px;
+    overflow-y: scroll;
+    max-height: 52vh;
+    margin-top: 15px;
+}
+
+.albumsList::-webkit-scrollbar {
+    width: 5px;
+}
+
+.albumsList::-webkit-scrollbar-track {
+    background: none;
+}
+
+.albumsList::-webkit-scrollbar-thumb {
+    background-color: rgba(251, 251, 251, 0.4392156863);
+    border-radius: 20px;
+}
