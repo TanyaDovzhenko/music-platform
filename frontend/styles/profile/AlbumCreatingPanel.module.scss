@@ -1,16 +1,22 @@
 .container {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    margin: 14px 0;
-    border-bottom: 1px solid rgba(251, 251, 251, 0.4392156863);
+    width: 99%;
+    margin: 3px 0;
     padding: 0 0 7px;
 
     .info {
         display: flex;
+        flex-direction: column;
 
-        input:not(:first-child) {
-            margin: 0 12px;
+        .infoItems {
+            display: flex;
+            align-items: center;
+            margin-bottom: 7px;
+
+            .upload {
+                margin-left: 20px;
+            }
         }
     }
 

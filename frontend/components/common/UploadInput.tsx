@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import checkIcon from '../../images/icons/check.svg'
 import addIcon from '../../images/icons/add.svg'
 import style from '../../styles/common/UploadInput.module.scss'
@@ -8,12 +8,14 @@ interface IUploadInputProps {
     fileType: "image" | "audio"
     onChange: (e: any) => void
     title: string
+    state?: any
 }
 
-export default function UploadInput({ fileType, onChange, title }: IUploadInputProps) {
+export default function UploadInput({ fileType, onChange, title, state }: IUploadInputProps) {
     const [file, setFile] = useState<any>(null)
     const ref = useRef<HTMLInputElement>()
 
+    useEffect(() => { if (!state) setFile(null) }, [state])
     return (
         <div className={style.uploadItem} onClick={() => ref.current.click()}>
             {file?.length ? <Image src={checkIcon} /> : <Image src={addIcon} />}
@@ -25,7 +27,6 @@ export default function UploadInput({ fileType, onChange, title }: IUploadInputP
                 style={{ display: "none" }}
             />
         </div>
-
     )
 }
 

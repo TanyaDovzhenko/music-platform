@@ -1,8 +1,6 @@
 import { Body, Controller, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { CurrentUserProfile } from '../auth/decorators/current-user-profile.decorator';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
-import { User } from '../user/entities/user.entity';
 import { CreateTrackInput } from './dto/create-track.input';
 import { TrackService } from './track.service';
 

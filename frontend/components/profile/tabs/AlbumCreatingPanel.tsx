@@ -37,22 +37,27 @@ export default function AlbumCreatingPanel({ refetchAlbums, loading }: IAlbumCre
     return (
         <div className={style.container}>
             <div className={style.info}>
-                <ProfileInput
-                    placeholder="name of the album..."
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    maxСharacters={45} />
+                <div className={style.infoItems}>
+                    <ProfileInput
+                        placeholder="name of the album..."
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                        maxСharacters={50}
+                        width={250} />
 
+                    <div className={style.upload}>
+                        <UploadInput
+                            title="cover"
+                            state={image}
+                            onChange={(e) => setImage(e.target.files[0])} />
+                    </div>
+                </div>
                 <ProfileInput
                     placeholder="description..."
                     onChange={(e) => setDescription(e.target.value)}
                     value={description}
-                    maxСharacters={100} />
-
-                <UploadInput
-                    title="cover"
-                    onChange={(e) => setImage(e.target.files[0])}
-                />
+                    maxСharacters={250}
+                    width={350} />
             </div>
 
             <div className={style.uploadSubmit}>

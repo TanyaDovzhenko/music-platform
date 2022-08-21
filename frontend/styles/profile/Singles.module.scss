@@ -1,25 +1,3 @@
 .singleList {
-    overflow-y: scroll;
-    max-height: 52vh;
     margin-top: 15px;
-
-    .noTracksMessage {
-        width: 100%;
-        text-align: center;
-        margin-top: 25px;
-        font-size: 14px;
-    }
-}
-
-.singleList::-webkit-scrollbar {
-    width: 5px;
-}
-
-.singleList::-webkit-scrollbar-track {
-    background: none;
-}
-
-.singleList::-webkit-scrollbar-thumb {
-    background-color: rgba(251, 251, 251, 0.4392156863);
-    border-radius: 20px;
 }

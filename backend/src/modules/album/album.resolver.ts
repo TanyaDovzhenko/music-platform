@@ -26,4 +26,10 @@ export class AlbumResolver {
   userAlbums(@Args('profileId', { type: () => Int }) profileId: number) {
     return this.albumService.findAllUserAlbums(profileId);
   }
+
+  @Mutation(() => Boolean)
+  addAlbumTrack(@Args('trackId', { type: () => Int }) trackId: number,
+    @Args('albumId', { type: () => Int }) albumId: number) {
+    return this.albumService.addTrack(trackId, albumId)
+  }
 }

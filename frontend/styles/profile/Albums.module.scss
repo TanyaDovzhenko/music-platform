@@ -1,8 +1,10 @@
 .albumsList {
     margin-top: 15px;
     overflow-y: scroll;
-    max-height: 52vh;
+    overflow-x: hidden;
+    height: 90%;
     margin-top: 15px;
+    padding: 0 5px 0 0;
 }
 
 .albumsList::-webkit-scrollbar {

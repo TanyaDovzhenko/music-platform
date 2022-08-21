@@ -42,6 +42,7 @@ input CreateUserInput {
 }
 
 type Mutation {
+  addAlbumTrack(albumId: Int!, trackId: Int!): Boolean!
   addTrack(addTrackInput: AddTrackInput!): Boolean!
   createPlaylist(createPlaylistInput: CreatePlaylistInput!): Playlist!
   signin(signInInput: SignInInput!): AuthResponse!
@@ -66,9 +67,8 @@ type Query {
   currentUserAlbums: [Album!]!
   currentUserPlaylists: [Playlist!]!
   currentUserProfile: UserProfile!
-  firstImpTracks: Playlist!
   playlist(id: Int!): Playlist!
-  singlesTracks(profileId: Int!): Playlist!
+  singles(profileId: Int!): [Track!]!
   track(id: Int!): Track!
   tracks: [Track!]!
   user(id: Float!): User!
@@ -91,7 +91,7 @@ type Track {
   image: String
   name: String!
   rate: Int!
-  userProfileId: Int
+  userProfileId: Int!
 }
 
 type User {

@@ -5,25 +5,13 @@
     @extend %img-background;
     height: 100%;
     position: relative;
-    color: $white;
+    color: #000;
     letter-spacing: 1px;
-}
-
-.background {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    opacity: 0.5;
-    background-color: black;
-    z-index: 1;
 }
 
 .profile {
     position: absolute;
     width: 100%;
-    z-index: 5;
     height: 100vh;
     overflow: hidden;
 }
@@ -35,6 +23,7 @@
     position: relative;
     height: 230px;
     width: 100%;
+    height: 30%;
     padding: 15px;
 
     .name {
@@ -84,10 +73,24 @@
 
 .content {
     width: 100%;
-    padding: 0 20px 10px 20px;
+    height: 70%;
+    overflow-y: scroll;
 }
 
 .status {
     width: 100%;
     height: 35px;
+}
+
+.content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.content::-webkit-scrollbar-track {
+    background: none;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background-color: #c4c4c4;
+    border-radius: 20px;
 }

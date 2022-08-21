@@ -7,6 +7,7 @@ import { Track } from './entities/track.entity';
 import { FileTypes } from 'src/types/file-manager.types';
 import { FileManagerService } from '../file-manager/file-manager.service';
 import { UserProfileService } from '../user-profile/user-profile.service';
+import { AlbumService } from '../album/album.service';
 
 
 @Injectable()
@@ -15,17 +16,20 @@ export class TrackService {
     @InjectModel(Track) private trackRepo: typeof Track,
     @Inject(forwardRef(() => PlaylistService))
     private playlistService: PlaylistService,
-    private fileManagerService: FileManagerService,
-    private userProfileService: UserProfileService) { }
+    private fileManagerService: FileManagerService) { }
 
   async findAll(): Promise<Track[]> {
-    return await this.trackRepo.findAll({ include: { all: true } })
+    return await this.trackRepo.findAll({
+      include: { all: true },
+      order: [['updatedAt', 'DESC']]
+    })
   }
 
   async findUserSingles(userProfileId: number): Promise<Track[]> {
     return await this.trackRepo.findAll({
-      where: { userProfileId },
-      include: { all: true }
+      where: { userProfileId, albumId: null },
+      include: { all: true },
+      order: [['updatedAt', 'DESC']]
     })
   }
 
@@ -46,10 +50,6 @@ export class TrackService {
       image: imagePath,
       ...createTrackInput
     })
-
-    if (!track.albumId) {
-      await this.playlistService.addUserSingle(track.userProfileId, track.id)
-    }
 
     // await track.$set('musicStyles', [])
     // track.musicStyles = []

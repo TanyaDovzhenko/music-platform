@@ -1,7 +1,7 @@
+import cn from 'classnames'
 import { BASE_SERVER_URL } from "../../utilities/constants"
 import style from '../../styles/Music/Track.module.scss'
 import PlayerState from "../../store/PlayerState";
-import cn from 'classnames'
 import { observer } from 'mobx-react-lite'
 
 
@@ -11,7 +11,7 @@ interface ITrackProps {
     name: string,
     image: string,
     audio: string,
-    musician: string,
+    musician?: string,
     comments?: any,
     musicStyles?: any,
     album?: any,
@@ -19,9 +19,9 @@ interface ITrackProps {
 }
 
 const Track = ({
-    id, name, image, audio, musician, setActivePlaylist, playlistId, comments, musicStyles, album }
+    id, name, image, audio, musician, setActivePlaylist,
+    playlistId, comments, musicStyles, album }
     : ITrackProps) => {
-
 
     let isActive =
         PlayerState.activeTrack?.id === id
@@ -38,8 +38,9 @@ const Track = ({
     }
 
     return (
-        <div className={cn(style.track, { [style.active]: isActive })}
-            onClick={clickTrackHandler}>
+        <div onClick={clickTrackHandler}
+            className={cn(style.track,
+                { [style.active]: isActive })}>
             <div className={style.mainInfo}>
                 <div className={style.img}
                     style={{ backgroundImage: `url(${BASE_SERVER_URL + image})` }}>

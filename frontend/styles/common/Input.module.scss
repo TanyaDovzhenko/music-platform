@@ -21,16 +21,28 @@
     width: 400px;
 }
 
-.profileInput {
-    color: #fff;
-    background-color: rgba(251, 251, 251, 0.4392156863);
+.profileInputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border: 1px solid #616060;
     height: 25px;
-    width: 170px;
     border-radius: 5px;
     padding: 5px;
+    color: #616060;
 
-    &::placeholder {
-        color: #efeaea;
+
+    .profileInput {
+        background-color: transparent;
+
+        &::placeholder {
+            color: #818181;
+        }
+    }
+
+    span {
+        font-size: 12px;
     }
 
 }

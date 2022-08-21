@@ -9,11 +9,12 @@ import { setTemporaryMessage } from '../../../utilities/common/set-temporary-mes
 import UploadInput from '../../common/UploadInput'
 
 interface ITrackCreatingPanelProps {
-    refetchSingles: any
-    loading: boolean
+    refetchTracks?: any
+    loading?: boolean
+    albumId?: number
 }
 
-const TrackCreatingPanel = ({ refetchSingles, loading }: ITrackCreatingPanelProps) => {
+const TrackCreatingPanel = ({ refetchTracks, loading, albumId }: ITrackCreatingPanelProps) => {
     const [name, setName] = useState('')
     const [image, setImage] = useState<any>(null)
     const [audio, setAudio] = useState<any>(null)
@@ -24,16 +25,18 @@ const TrackCreatingPanel = ({ refetchSingles, loading }: ITrackCreatingPanelProp
 
     const createTrackHandler = async () => {
         setButtonDisable(true)
-        const created = await createTrack({ name, image, audio })
+        const created = await createTrack({ name, image, audio, albumId })
         setButtonDisable(false)
+        setImage(null)
+        setAudio(null)
         if (created) {
-            setTemporaryMessage(setCreatedMessage)
-            refetchSingles()
             setName('')
-            setImage(null)
-            setAudio(null)
+            setTemporaryMessage(setCreatedMessage)
+            if (refetchTracks) refetchTracks()
         }
-        if (!created) setTemporaryMessage(setError)
+        if (!created) {
+            setTemporaryMessage(setError)
+        }
     }
 
     useEffect(() => {
@@ -47,10 +50,17 @@ const TrackCreatingPanel = ({ refetchSingles, loading }: ITrackCreatingPanelProp
                     placeholder="name of the track..."
                     onChange={(e) => setName(e.target.value)}
                     value={name}
-                    maxСharacters={45} />
-                <UploadInput title="cover"
-                    onChange={(e) => setImage(e.target.files[0])} />
-                <UploadInput title="audio" fileType="audio"
+                    maxСharacters={45}
+                    width={250} />
+                <UploadInput
+                    title="cover"
+                    onChange={(e) => setImage(e.target.files[0])}
+                    state={image}
+                />
+                <UploadInput
+                    title="audio"
+                    fileType="audio"
+                    state={audio}
                     onChange={(e) => setAudio(e.target.files[0])} />
             </div>
 
@@ -58,7 +68,7 @@ const TrackCreatingPanel = ({ refetchSingles, loading }: ITrackCreatingPanelProp
                 {loading &&
                     <Image src={loadGif} className={style.loading} width="20px" height="20px" />}
                 {error && <span className={style.error}>error</span>}
-                {createdMessage && <span className={style.trackCreated}>successfully added</span>}
+                {createdMessage && <span className={style.trackCreated}>added</span>}
 
                 <ProfileButton
                     text='upload track'
@@ -68,5 +78,9 @@ const TrackCreatingPanel = ({ refetchSingles, loading }: ITrackCreatingPanelProp
         </div>
     )
 }
+
+TrackCreatingPanel.defaultProps = {
+    borderBottom: true
+};
 
 export default TrackCreatingPanel

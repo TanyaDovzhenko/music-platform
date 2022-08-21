@@ -18,6 +18,7 @@ import { AlbumController } from './album.controller';
     FileManagerModule,
     UserProfileModule
   ],
-  controllers: [AlbumController]
+  controllers: [AlbumController],
+  exports: [AlbumService]
 })
 export class AlbumModule { }

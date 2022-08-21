@@ -35,16 +35,6 @@ export class PlaylistResolver {
     });
   }
 
-  @Query(() => Playlist)
-  singlesTracks(@Args('profileId', { type: () => Int }) profileId: number) {
-    return this.playlistService.findUserSingles(profileId);
-  }
-
-  @Query(() => Playlist)
-  firstImpTracks(@CurrentUserProfile() profileId: number) {
-    return this.playlistService.findUserFirstImp(profileId);
-  }
-
   @Mutation(() => Boolean)
   addTrack(@Args('addTrackInput') addTrackInput: AddTrackInput) {
     return this.playlistService.addTrack(addTrackInput);

@@ -8,9 +8,9 @@ export const createTrack = async (data: any) => {
 
     const formData = new FormData()
     formData.append('name', data.name)
-    formData.append('userProfileId', String(data.userProfileId))
     formData.append('image', data.image)
     formData.append('audio', data.audio)
+    if (data.albumId) formData.append('albumId', data.albumId)
 
     await axios.post(`${BASE_SERVER_URL}track`, formData, {
         headers: {

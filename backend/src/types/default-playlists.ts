@@ -1,9 +1,6 @@
 export enum DefaultPlaylistsNames {
     FAVORITE = 'Favorite',
-    SUGGESTED = 'Suggested',
-    FIRST_IMP = 'First impression',
-    SINGLES = 'Signles',
-
+    SUGGESTED = 'Suggested'
 }
 
 export enum DefaultPlaylistImgSrc {
@@ -22,18 +19,5 @@ export const DefaultPlaylistsObj = [
         name: DefaultPlaylistsNames.SUGGESTED,
         image: DefaultPlaylistImgSrc.SUGGESTED,
         description: 'Tracks that other users invite you to listen.'
-    }
-]
-
-export const DefaultMusicianPlaylistsObj = [
-    {
-        name: DefaultPlaylistsNames.FIRST_IMP,
-        image: '',
-        description: ''
-    },
-    {
-        name: DefaultPlaylistsNames.SINGLES,
-        image: '',
-        description: ''
     }
 ]

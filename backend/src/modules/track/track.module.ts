@@ -8,6 +8,7 @@ import { TrackController } from './track.controller';
 import { FileManagerModule } from 'src/modules/file-manager/file-manager.module';
 import { UserProfileModule } from '../user-profile/user-profile.module';
 import { PlaylistsTracks } from '../playlist/entities/playlists-tracks.entity';
+import { AlbumModule } from '../album/album.module';
 
 @Module({
   providers: [TrackResolver, TrackService],
@@ -17,6 +18,7 @@ import { PlaylistsTracks } from '../playlist/entities/playlists-tracks.entity';
       PlaylistsTracks
     ]),
     forwardRef(() => UserProfileModule),
+    forwardRef(() => AlbumModule),
     forwardRef(() => PlaylistModule),
     FileManagerModule
   ],

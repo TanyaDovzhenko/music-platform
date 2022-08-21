@@ -1,0 +1,39 @@
+.container {
+    height: 185px;
+    width: 100%;
+    border-radius: 4px;
+    z-index: 2;
+
+    .creatingPanel {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 10px;
+    }
+
+    .backBtn {
+        margin-left: 15px;
+    }
+
+    .tracks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 130px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        margin: 0 7px;
+    }
+}
+
+.tracks::-webkit-scrollbar {
+    width: 5px;
+}
+
+.tracks::-webkit-scrollbar-track {
+    background: none;
+}
+
+.tracks::-webkit-scrollbar-thumb {
+    background-color: rgba(251, 251, 251, 0.4392156863);
+    border-radius: 20px;
+}

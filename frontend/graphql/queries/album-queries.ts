@@ -13,12 +13,28 @@ query UserAlbums($profileId: Int!){
     rate
     tracks{
       id
-      albumId
+    }
+  }
+}`
+
+export const GET_ALBUM = gql`
+query GetAlbum($id: Int!){
+  album(id: $id){
+    id
+    authorUserProfileId
+    authorName
+    authorUserId
+    name
+    description
+    image
+    rate
+    tracks{
+      id
+      name
       audio
       image
-      name
-      userProfileId
       rate
+      userProfileId
     }
   }
 }`

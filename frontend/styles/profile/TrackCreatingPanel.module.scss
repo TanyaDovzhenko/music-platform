@@ -4,16 +4,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    border-bottom: 1px solid $transparent-grey;
-    margin: 14px 0;
-    padding: 0 0 7px;
+    width: 99%;
+    margin: 5px 0;
 
     .info {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        max-width: 350px;
+        max-width: 400px;
         width: 100%;
         margin-right: 15px;
     }

@@ -15,10 +15,7 @@ export default function CurrentProfile({ currentUserProfile, currentUser }: any)
     const changeActiveTag = (tab: string) => setActiveTab(tab)
 
     return (<MainLayout>
-        <div className={style.container} style={{
-            backgroundImage: `url(${BASE_SERVER_URL + currentUserProfile?.avatar})`
-        }}>
-            <div className={style.background}></div>
+        <div className={style.container}>
             <div className={style.profile}>
                 <div className={style.header}>
                     <div className={style.avatar}
@@ -38,15 +35,18 @@ export default function CurrentProfile({ currentUserProfile, currentUser }: any)
                             {/* {userProfile?.musicStylePreferences.map(
                                 (item: any) => <MusicStyleCard name={item.name} id={item.id} />)} */}
                         </div>
+                        <div>albums: 100</div>
+                        <div>singles: 100</div>
+                        <div>all tracks: 100</div>
                     </div>
                 </div>
+                <ProfileTabs
+                    userRole={currentUser?.role}
+                    onClick={changeActiveTag}
+                    activeTab={activeTab} />
                 <div className={style.content}>
-                    <ProfileTabs
-                        userRole={currentUser?.role}
-                        onClick={changeActiveTag}
-                        activeTab={activeTab} />
                     <ProfileContent
-                        currentUser={true}
+                        isCurrentUser={true}
                         activeTab={activeTab}
                         userProfileId={currentUserProfile?.id} />
                 </div>

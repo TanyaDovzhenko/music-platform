@@ -39,7 +39,8 @@ export class AlbumService {
   async findAllUserAlbums(profileId: number) {
     return await this.albumRepo.findAll({
       where: { authorUserProfileId: profileId },
-      include: { all: true }
+      include: { all: true },
+      order: [['updatedAt', 'DESC']]
     })
   }
 
@@ -48,7 +49,5 @@ export class AlbumService {
     const album = await this.findOne(albumId)
     await album.$add('track', track.id)
     return true
-    //const album = await this.albumRepo.create(createAlbumInput)
   }
-
 }

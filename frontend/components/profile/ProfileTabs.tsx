@@ -12,7 +12,7 @@ interface ITabsProps {
 export default function ProfileTabs({ userRole, onClick, activeTab }: ITabsProps) {
 
     return (
-        <div>
+        <div className={style.tabs}>
             {userRole == (UserRoles.LISTENER).toUpperCase() ?
                 <>{ListenerTabsObj.map((item, index) =>
                     <span

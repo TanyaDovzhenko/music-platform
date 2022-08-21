@@ -1,4 +1,3 @@
-import { NextPageContext } from "next"
 import { ProfileTabsEnum } from "../../types/profile/profile-tabs"
 import Albums from "./tabs/Albums"
 import FirstImpression from "./tabs/FirstImpression"
@@ -8,10 +7,10 @@ import Singles from "./tabs/Singles"
 interface IProfileContentProps {
     activeTab: string
     userProfileId: number
-    currentUser?: boolean
+    isCurrentUser?: boolean
 }
 
-export default function ProfileContent({ activeTab, userProfileId, currentUser }: IProfileContentProps) {
+export default function ProfileContent({ activeTab, userProfileId, isCurrentUser }: IProfileContentProps) {
 
     return (<div>
         {
@@ -30,7 +29,7 @@ export default function ProfileContent({ activeTab, userProfileId, currentUser }
                             activeTab == ProfileTabsEnum.ALBUMS ?
                                 <Albums
                                     userProfileId={userProfileId}
-                                    currentUser={currentUser} /> :
+                                    isCurrentUser={isCurrentUser} /> :
 
                                 activeTab == ProfileTabsEnum.FOLLOWING ?
                                     <div>FOLLOWING</div> :
@@ -38,7 +37,7 @@ export default function ProfileContent({ activeTab, userProfileId, currentUser }
                                     activeTab == ProfileTabsEnum.SINGLES ?
                                         <Singles
                                             userProfileId={userProfileId}
-                                            currentUser={currentUser} /> :
+                                            isCurrentUser={isCurrentUser} /> :
                                         <></>
         }
     </div>)

@@ -1,10 +1,12 @@
 import PlayerState from "../../store/PlayerState"
 
-export const setActivePlaylist = async (e: React.MouseEvent<HTMLElement>, singlesTracks: any) => {
+export const setActivePlaylist = async (
+    e: React.MouseEvent<HTMLElement>, tracks: any, playlistId: number
+) => {
     e.stopPropagation()
-    if (PlayerState.activePlaylist?.id === singlesTracks?.singlesTracks?.id) return
+    if (PlayerState.activePlaylist?.id === playlistId) return
     else PlayerState.setActivePlaylist({
-        id: singlesTracks?.singlesTracks?.id,
-        tracks: singlesTracks?.singlesTracks?.tracks
+        id: playlistId,
+        tracks: tracks
     })
 }

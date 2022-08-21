@@ -36,7 +36,7 @@ export class Album extends Model<Album>{
 
   @HasMany(() => Track)
   @Field(type => [Track], { nullable: true })
-  tracks: Track[];
+  tracks?: Track[];
 
   @BelongsToMany(() => UserProfile, () => UserProfileAlbums)
   @Field(type => [UserProfile], { nullable: true })

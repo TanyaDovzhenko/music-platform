@@ -27,4 +27,11 @@ export class FileManagerService {
   deleteFile(filePath: string) {
     fs.unlink(path.join(__dirname, '../../../', 'static', filePath), () => { })
   }
+
+  async createRandomAvatar() {
+    let images = fs.readdirSync(path.join(__dirname,
+      '../../../', 'static', 'image', 'random-profile-avatar'))
+    let avatar = images[Math.floor(Math.random() * images.length)]
+    return `image/random-profile-avatar/${avatar}`
+  }
 }

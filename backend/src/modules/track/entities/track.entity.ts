@@ -11,7 +11,7 @@ import { UserProfile } from 'src/modules/user-profile/entities/user-profile.enti
 // import { PlaylistsTracks } from 'src/modules/playlist/entities/playlists-tracks.entity';
 
 @ObjectType()
-@Table({ tableName: 'tracks', createdAt: false, updatedAt: false })
+@Table({ tableName: 'tracks' })
 export class Track extends Model<Track>{
 
   @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
@@ -39,7 +39,7 @@ export class Track extends Model<Track>{
 
   @ForeignKey(() => UserProfile)
   @Column({ type: DataType.INTEGER })
-  @Field(type => Int, { nullable: true })
+  @Field(type => Int)
   userProfileId?: number;
 
   @BelongsTo(() => Album)

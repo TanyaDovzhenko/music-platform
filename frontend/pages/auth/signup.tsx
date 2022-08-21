@@ -12,6 +12,7 @@ import { setToken } from '../../utilities/tokens-service'
 import { checkAuth } from '../../utilities/auth/checkAuth'
 import RoleButton from '../../components/auth/RoleButton'
 import { SIGN_UP } from '../../graphql/mutations.js/auth.mutations'
+import { reload } from '../../utilities/common/reload'
 
 
 
@@ -25,8 +26,8 @@ const SignUpPage = () => {
         variables: { createUserInput: { email, password, role } },
         onCompleted: (data) => {
             setToken(data.signup.access_token);
-            checkAuth();
-            Router.push('/profile')
+            checkAuth()
+            Router.push('/music')
         },
         onError: (error) => console.log(error)
     })
