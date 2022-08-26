@@ -38,13 +38,8 @@ export default function AlbumPage({ setAlbumPage, albumId, isCurrentUser }: IAlb
                     </Link>
                     <div className={style.description}>{album?.description}</div>
                     <div className={style.addInfo}>
-                        <div className={style.styles}>music style items!!!!!</div>
-                        <div>
-                            <div className={style.tracksNumber}>tracks: {album?.tracks?.length}</div>
-                            <div className={style.likes}>
-                                <Image src={fireIcon} width={25} height={25} />: {album?.rate}
-                            </div>
-                        </div>
+                        <div className={style.styles}></div>
+                        <div className={style.tracksNumber}>tracks: {album?.tracks?.length}</div>
                     </div>
                 </div>
             </div>
@@ -53,9 +48,7 @@ export default function AlbumPage({ setAlbumPage, albumId, isCurrentUser }: IAlb
                     <div className={style.createPanel}>
                         <TrackCreatingPanel albumId={albumId} refetchTracks={refetch} />
                     </div>
-                    : <div>
-                        LEAVE ANONIMUS FEEDBACK TO MUSICIAN
-                    </div>
+                    : <div></div>
                 }
                 {album?.tracks?.map((item) =>
                     <Track
@@ -66,19 +59,14 @@ export default function AlbumPage({ setAlbumPage, albumId, isCurrentUser }: IAlb
                         playlistId={plylistId}
                         setActivePlaylist={(e) => setActivePlaylist(e, album?.tracks, plylistId)}
                         key={item.id}
+                        musicianName={album?.authorName}
+                        userId={album?.authorUserId}
                     />)}
             </div>
 
             <div className={style.reviews}>
-                reviews reviews reviews reviews reviewsreviewsreviewsreviews
-                reviews reviews reviews reviews reviewsreviewsreviewsreviews
-                reviews reviews reviews reviews reviewsreviewsreviewsreviews
-                reviews reviews reviews reviews reviewsreviewsreviewsreviews
-                reviews reviews reviews reviews reviewsreviewsreviewsreviews
             </div>
             <div className={style.comments}>
-                commentscomments commentscommentscomments comments comments comments comments comments
-                commentscomments commentscommentscomments
             </div>
         </div >)
 }

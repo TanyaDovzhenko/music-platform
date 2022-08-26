@@ -16,6 +16,7 @@ type Album {
   image: String
   name: String!
   rate: Float!
+  styles: [Style!]
   tracks: [Track!]
   userProfiles: [UserProfile!]
 }
@@ -30,8 +31,8 @@ input CreatePlaylistInput {
   description: String
   image: String
   isDefault: Boolean = false
-  musicStylesIds: [Int!]
   name: String!
+  stylesIds: [Int!]
   tracksIds: [Int!]
 }
 
@@ -39,14 +40,25 @@ input CreateUserInput {
   email: String!
   password: String!
   role: String!
+  stylesIds: [Int!]!
+}
+
+type Follow {
+  followedId: Int!
+  followerId: Int!
+  id: Int!
 }
 
 type Mutation {
   addAlbumTrack(albumId: Int!, trackId: Int!): Boolean!
+  addStyle(objId: Int!, styleId: Int!, type: String!): Boolean!
   addTrack(addTrackInput: AddTrackInput!): Boolean!
   createPlaylist(createPlaylistInput: CreatePlaylistInput!): Playlist!
+  follow(followedId: Int!): Boolean!
   signin(signInInput: SignInInput!): AuthResponse!
   signup(createUserInput: CreateUserInput!): AuthResponse!
+  unfollow(followedId: Int!): Boolean!
+  updateUserProfile(updateUserProfileInput: UpdateUserProfileInput!): UserProfile!
 }
 
 type Playlist {
@@ -57,22 +69,28 @@ type Playlist {
   isDefault: Boolean!
   likes: Float!
   name: String!
+  styles: [Style!]
   tracks: [Track!]
   userProfiles: [UserProfile!]
 }
 
 type Query {
   album(id: Int!): Album!
+  checkFollowing(followedId: Int!): Boolean!
   currentUser: User!
   currentUserAlbums: [Album!]!
   currentUserPlaylists: [Playlist!]!
   currentUserProfile: UserProfile!
   playlist(id: Int!): Playlist!
   singles(profileId: Int!): [Track!]!
+  style(id: Int!): Style!
+  styles: [Style!]!
   track(id: Int!): Track!
   tracks: [Track!]!
   user(id: Float!): User!
   userAlbums(profileId: Int!): [Album!]!
+  userFollowed(followerId: Int!): [Follow!]!
+  userFollowers(followedId: Int!): [Follow!]!
   userProfile(id: Int!): UserProfile!
   userProfileByUserId(userId: Int!): UserProfile!
   userProfiles: [UserProfile!]!
@@ -84,6 +102,15 @@ input SignInInput {
   password: String!
 }
 
+type Style {
+  albums: [Album!]
+  id: Int!
+  name: String!
+  playlists: [Playlist!]
+  tracks: [Track!]
+  users: [User!]
+}
+
 type Track {
   albumId: Int
   audio: String!
@@ -91,7 +118,15 @@ type Track {
   image: String
   name: String!
   rate: Int!
+  styles: [Style!]
   userProfileId: Int!
+}
+
+input UpdateUserProfileInput {
+  avatar: String
+  id: Float
+  name: String
+  status: String
 }
 
 type User {
@@ -99,6 +134,7 @@ type User {
   id: Int!
   password: String
   role: UserRoles!
+  styles: [Style!]!
   userProfile: UserProfile
   userProfileId: Float!
 }

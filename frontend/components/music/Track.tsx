@@ -3,23 +3,25 @@ import { BASE_SERVER_URL } from "../../utilities/constants"
 import style from '../../styles/Music/Track.module.scss'
 import PlayerState from "../../store/PlayerState";
 import { observer } from 'mobx-react-lite'
+import Link from 'next/link';
 
 
 interface ITrackProps {
-    id: number,
-    playlistId: number,
-    name: string,
-    image: string,
-    audio: string,
-    musician?: string,
-    comments?: any,
-    musicStyles?: any,
-    album?: any,
-    setActivePlaylist: (e: React.MouseEvent<HTMLElement>) => void,
+    id: number
+    playlistId: number
+    name: string
+    image: string
+    audio: string
+    musicianName?: string
+    comments?: any
+    musicStyles?: any
+    album?: any
+    userId?: number
+    setActivePlaylist: (e: React.MouseEvent<HTMLElement>) => void
 }
 
 const Track = ({
-    id, name, image, audio, musician, setActivePlaylist,
+    id, name, image, audio, musicianName, setActivePlaylist, userId,
     playlistId, comments, musicStyles, album }
     : ITrackProps) => {
 
@@ -47,7 +49,10 @@ const Track = ({
                 </div>
                 <div>
                     <div className={style.name}>{name}</div>
-                    <div>{musician}</div>
+                    <div className={style.musicianName} onClick={(e) => e.stopPropagation()}>
+                        by: <Link href={`/profile/${userId}`}>
+                            <a>{musicianName}</a></Link>
+                    </div>
                 </div>
             </div>
             {/* <div className={style.addInfo}>

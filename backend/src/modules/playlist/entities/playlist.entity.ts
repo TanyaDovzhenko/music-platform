@@ -1,5 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import { PlaylistStyles } from 'src/modules/style/entities/playlists-styles.entity';
+import { Style } from 'src/modules/style/entities/style.entity';
 import { Track } from 'src/modules/track/entities/track.entity';
 import { UserProfile } from 'src/modules/user-profile/entities/user-profile.entity';
 import { User } from 'src/modules/user/entities/user.entity';
@@ -34,13 +36,9 @@ export class Playlist extends Model<Playlist> {
   @Field()
   isDefault: boolean;
 
-  // @HasMany(() => PlaylistComment)
-  // @Field(type => [PlaylistComment], { nullable: true })
-  // comments: PlaylistComment[];
-
-  // @BelongsToMany(() => MusicStyle, () => PlaylistsMusicStyles)
-  // @Field(type => [MusicStyle], { nullable: true })
-  // musicStyles: MusicStyle[];
+  @BelongsToMany(() => Style, () => PlaylistStyles)
+  @Field(type => [Style], { nullable: true })
+  styles: Style[];
 
   @BelongsToMany(() => Track, () => PlaylistsTracks)
   @Field(type => [Track], { nullable: true })

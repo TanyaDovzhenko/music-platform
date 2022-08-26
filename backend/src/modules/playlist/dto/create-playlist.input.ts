@@ -22,5 +22,5 @@ export class CreatePlaylistInput {
   tracksIds?: number[];
 
   @Field(type => [Int], { nullable: true })
-  musicStylesIds?: number[];
+  stylesIds?: number[];
 }

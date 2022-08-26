@@ -18,6 +18,9 @@ export class TrackController {
         @Body() createTrackDto: CreateTrackInput,
         @CurrentUserProfile() profileId: number) {
         return this.trackService.create(
-            { ...createTrackDto, userProfileId: profileId }, files)
+            {
+                ...createTrackDto,
+                userProfileId: profileId,
+            }, files)
     }
 }

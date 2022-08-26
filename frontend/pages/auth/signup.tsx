@@ -7,30 +7,40 @@ import { UserRoles } from '../../types/user/userRoles.enum'
 import Input from '../../components/common/Input'
 import Button from '../../components/common/Button'
 import AuthBackground from '../../components/auth/AuthBackground'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { setToken } from '../../utilities/tokens-service'
 import { checkAuth } from '../../utilities/auth/checkAuth'
 import RoleButton from '../../components/auth/RoleButton'
 import { SIGN_UP } from '../../graphql/mutations.js/auth.mutations'
-import { reload } from '../../utilities/common/reload'
-
-
+import { GET_ALL_STYLES } from '../../graphql/queries/style-queries'
+import MusicStyleCard from '../../components/music/MusicStyleCard'
 
 
 const SignUpPage = () => {
+    const { data: styles } = useQuery(GET_ALL_STYLES)
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [role, setRole] = useState<UserRoles | string>('')
+    const [stylesIds, setStylesIds] = useState<number[]>([])
 
     const [singUp, { loading }] = useMutation(SIGN_UP, {
-        variables: { createUserInput: { email, password, role } },
+        variables: { createUserInput: { email, password, role, stylesIds } },
         onCompleted: (data) => {
             setToken(data.signup.access_token);
             checkAuth()
-            Router.push('/music')
+            Router.push('/profile')
         },
         onError: (error) => console.log(error)
     })
+
+    const chooseStyle = (styleId: number, add: boolean) => {
+        if (add && stylesIds?.length < 5) {
+            setStylesIds(prev => [...prev, styleId])
+        } else if (!add) {
+            setStylesIds(prev => prev.filter(el => el !== styleId))
+        }
+    }
 
     return (
         <AuthBackground>
@@ -54,8 +64,25 @@ const SignUpPage = () => {
                             selectedRole={role} />
                     </div>
                 </div>
+                {role == UserRoles.MUSICIAN &&
+                    <div className={style.chooseStyle}>
+                        <div className={style.stylesTitle}>
+                            ... and your musical styles {stylesIds.length}/5
+                        </div>
+                        <div className={style.styles}>
+                            {styles?.styles.map(item =>
+                                <MusicStyleCard
+                                    chooseStyle={chooseStyle}
+                                    name={item.name}
+                                    id={item.id}
+                                    key={item.id}
+                                    limit={stylesIds.length < 5}
+                                    auth={true}
+                                />)}
+                        </div>
+                    </div>}
                 <Button text='Sign up' onClick={singUp} disabled={loading} />
-                <div>Already have an account?
+                <div className={style.message}> Already have an account?
                     <Link href='/auth/signin'><a>Sign in!</a></Link>
                 </div>
             </div>

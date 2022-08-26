@@ -49,26 +49,9 @@ export default function Albums({ isCurrentUser, userProfileId }: IAlbumsProps) {
                                 authorUserId={item.authorUserId}
                                 isCurrentUser={isCurrentUser}
                                 showAlbumPage={showAlbumPage}
+                                styles={item.styles}
                             />)}
                     </div >
                 </>}
         </div >)
 }
-
-
-// export async function getServerSideProps(context: NextPageContext) {
-//     const client = CreateClient(context);
-//     const { data: userProfile } = await client.query({ query: GET_CURRENT_USER_PROFILE })
-//     const { data: currentUser } = await client.query({ query: GET_CURRENT_USER })
-
-
-//     const { data: userAlbums } = await client.query(
-//         { query: GET_USER_ALBUMS, variables: { profileId: userProfileId } })
-
-//     return {
-//         props: {
-//             currentUserProfile: userProfile.currentUserProfile,
-//             currentUser: currentUser.currentUser
-//         }
-//     }
-// }

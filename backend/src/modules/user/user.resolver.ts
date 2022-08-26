@@ -2,6 +2,7 @@ import { UserService } from './user.service';
 import { Resolver, Query, Args } from '@nestjs/graphql';
 import { User } from './entities/user.entity';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { UserProfile } from '../user-profile/entities/user-profile.entity';
 
 @Resolver(of => User)
 export class UserResolver {

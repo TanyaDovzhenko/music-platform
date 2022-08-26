@@ -1,5 +1,8 @@
+import {
+  BelongsTo, BelongsToMany, Column,
+  DataType, ForeignKey, HasMany, Model, Table
+} from 'sequelize-typescript';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
 import { Album } from 'src/modules/album/entities/album.entity';
 import { UserProfileAlbums } from 'src/modules/album/entities/user-profile-albums.entity';
 import { Playlist } from 'src/modules/playlist/entities/playlist.entity';
@@ -49,30 +52,4 @@ export class UserProfile extends Model<UserProfile>{
   @BelongsToMany(() => Album, () => UserProfileAlbums)
   @Field(type => [Album], { nullable: true })
   albums: Album[];
-
-  // @HasOne(() => ProfileSettings
-  // @Field(type => ProfileSettings)
-  // profileSettings: ProfileSettings;
-
-  // @HasMany(() => Post)
-  // @Field(type => [Post], { nullable: true })
-  // posts: Post[];
-
-  // @HasMany(() => TrackComment)
-  // @Field(type => [TrackComment], { nullable: true })
-  // tracksComments: TrackComment[];
-
-  // @HasMany(() => PlaylistComment)
-  // @Field(type => [PlaylistComment], { nullable: true })
-  // playlistsComments: PlaylistComment[];
-
-  // @HasMany(() => ReviewComment)
-  // @Field(type => [ReviewComment], { nullable: true })
-  // reviewsComments: ReviewComment[];
-
-  // @BelongsToMany(() => MusicStyle, () => UserMusicPrefs)
-  // @Field(type => [MusicStyle], { nullable: true })
-  // musicStylePrefs: MusicStyle[];
-
-
 }

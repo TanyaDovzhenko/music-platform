@@ -31,26 +31,3 @@ const CreateClient = (ctx: NextPageContext | null) => {
 
 
 export default CreateClient;
-
-
-// const authLink = setContext((_, { headers }) => {
-//     return {
-//         headers: {
-//             ...headers,
-//             authorization: cookies.access_token ? `Bearer ${cookies.access_token}` : ""
-//         }
-//     }
-// });
-
-
-// export let client = new ApolloClient({
-//     ssrMode: true,
-//     cache: new InMemoryCache(),
-//     credentials: 'same-origin',
-//     link: authLink.concat(httpLink),
-// })
-
-
-
-
-//"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAZ21haWwuY29tIiwic3ViIjo2LCJpYXQiOjE2NTgxNDI3MTcsImV4cCI6MTY1ODc0NzUxN30.y7FLDrfzzL58SElCMyb-IzVPi_7UtYAPzVfecvl50As",

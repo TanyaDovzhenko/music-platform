@@ -11,20 +11,3 @@ query UserSingles($profileId: Int!){
       userProfileId
   }
 }`
-
-
-// export const GET_FIRST_IMP_TRACKS = gql`
-// query UserFirstImpTracks{
-//   firstImpTracks{
-//     id
-//     tracks{
-//       id
-//       name
-//       audio
-//       image
-//       rate
-//       userProfileId
-//     }
-//   }
-// }
-// }`

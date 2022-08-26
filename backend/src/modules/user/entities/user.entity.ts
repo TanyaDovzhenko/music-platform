@@ -1,8 +1,10 @@
-import { Table, Column, Model, DataType, HasOne, HasMany, BelongsToMany, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, HasOne, BelongsToMany, ForeignKey } from 'sequelize-typescript';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { UserRoles } from 'src/types/user-roles.enum';
 import { IsEmail } from 'class-validator';
 import { UserProfile } from 'src/modules/user-profile/entities/user-profile.entity';
+import { Style } from 'src/modules/style/entities/style.entity';
+import { UserStyles } from 'src/modules/style/entities/user-styles.entity';
 
 
 @ObjectType()
@@ -34,4 +36,8 @@ export class User extends Model<User>{
     @Column({ type: DataType.INTEGER })
     @Field()
     userProfileId: number;
+
+    @BelongsToMany(() => Style, () => UserStyles)
+    @Field(type => [Style])
+    styles: Style[];
 }

@@ -1,8 +1,10 @@
+import Router from "next/router";
+import { useEffect } from "react";
 import MainLayout from "../../layouts/MainLayout";
+import PeopleSwitchers from "../../components/people/PeopleSwitchers";
+
 
 export default function People() {
-
-    return (<MainLayout>
-
-    </MainLayout>)
+    useEffect(() => { Router.push('/people/followed') }, [])
+    return (<MainLayout><PeopleSwitchers /></MainLayout>)
 }

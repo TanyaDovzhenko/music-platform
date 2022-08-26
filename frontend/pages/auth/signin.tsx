@@ -21,7 +21,7 @@ const SignInPage = () => {
         onCompleted: (data) => {
             setToken(data.signin.access_token);
             checkAuth();
-            Router.push('/music/playlists')
+            Router.push('/profile')
         },
         onError: (error) => console.log(error)
     })
@@ -38,7 +38,7 @@ const SignInPage = () => {
                     width='medium'
                     onChange={(e) => setPassword(e.target.value)} />
                 <Button text='Sign in' onClick={singIn} disabled={loading} />
-                <div>Don't have an account?
+                <div className={style.message}>Don't have an account?
                     <Link href="/auth/signup"><a>Sign up!</a></Link>
                 </div>
             </div>

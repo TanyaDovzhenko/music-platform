@@ -23,9 +23,11 @@ const TrackCreatingPanel = ({ refetchTracks, loading, albumId }: ITrackCreatingP
     const [error, setError] = useState(false)
     const [createdMessage, setCreatedMessage] = useState(false)
 
+    const stylesIds = [1, 2, 3]
+
     const createTrackHandler = async () => {
         setButtonDisable(true)
-        const created = await createTrack({ name, image, audio, albumId })
+        const created = await createTrack({ name, image, audio, albumId, stylesIds })
         setButtonDisable(false)
         setImage(null)
         setAudio(null)

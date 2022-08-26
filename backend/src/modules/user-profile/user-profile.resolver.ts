@@ -1,9 +1,8 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Args, Int, Mutation } from '@nestjs/graphql';
 import { UserProfileService } from './user-profile.service';
 import { UserProfile } from './entities/user-profile.entity';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
-import { User } from '../user/entities/user.entity';
 import { CurrentUserProfile } from '../auth/decorators/current-user-profile.decorator';
+import { UpdateUserProfileInput } from './dto/update-user-profile.input';
 
 
 @Resolver(() => UserProfile)
@@ -30,8 +29,12 @@ export class UserProfileResolver {
     return this.userProfileService.findOne(profileId);
   }
 
-  // @Mutation(() => UserProfile)
-  // updateUserProfile(@Args('updateUserProfileInput') updateUserProfileInput: UpdateUserProfileInput) {
-  //   return this.userProfileService.update(updateUserProfileInput.id, updateUserProfileInput);
-  // }
+  @Mutation(() => UserProfile)
+  updateUserProfile(
+    @CurrentUserProfile() profileId: number,
+    @Args('updateUserProfileInput') updateUserProfileInput: UpdateUserProfileInput) {
+    return this.userProfileService.update({
+      ...updateUserProfileInput, id: profileId
+    });
+  }
 }

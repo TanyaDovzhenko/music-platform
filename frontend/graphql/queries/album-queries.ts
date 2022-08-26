@@ -11,6 +11,10 @@ query UserAlbums($profileId: Int!){
     description
     image
     rate
+    styles{
+      id 
+      name
+    }
     tracks{
       id
     }
@@ -28,6 +32,10 @@ query GetAlbum($id: Int!){
     description
     image
     rate
+    styles{
+      id 
+      name
+    }
     tracks{
       id
       name

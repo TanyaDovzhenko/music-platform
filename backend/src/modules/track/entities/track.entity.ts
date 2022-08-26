@@ -1,14 +1,12 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo, BelongsToMany, Column, DataType,
+  ForeignKey, Model, Table
+} from 'sequelize-typescript';
 import { Album } from 'src/modules/album/entities/album.entity';
+import { Style } from 'src/modules/style/entities/style.entity';
+import { TracksStyles } from 'src/modules/style/entities/tracks-styles.entity';
 import { UserProfile } from 'src/modules/user-profile/entities/user-profile.entity';
-// import { Album } from 'src/modules/album/entities/album.entity';
-// import { TrackComment } from 'src/modules/comment/entities/track-comment.entity';
-// import { MusicStyle } from 'src/modules/music-style/entities/music-style.entity';
-// import { TrackMusicStyles } from 'src/modules/music-style/entities/tracks-music-styles.entity';
-// import { MusicianProfile } from 'src/modules/musician-profile/entities/musician-profile.entity';
-// import { Playlist } from 'src/modules/playlist/entities/playlist.entity';
-// import { PlaylistsTracks } from 'src/modules/playlist/entities/playlists-tracks.entity';
 
 @ObjectType()
 @Table({ tableName: 'tracks' })
@@ -50,25 +48,9 @@ export class Track extends Model<Track>{
   @Field(type => Int, { nullable: true })
   albumId?: number;
 
-  // @HasMany(() => TrackComment)
-  // @Field(type => [TrackComment], { nullable: true })
-  // comments?: TrackComment[];
-
-  // @BelongsToMany(() => MusicStyle, () => TrackMusicStyles)
-  // @Field(type => [MusicStyle], { nullable: true })
-  // musicStyles?: MusicStyle[];
-
-  // @BelongsToMany(() => Playlist, () => PlaylistsTracks)
-  // @Field(type => [Playlist], { nullable: true })
-  // playlists?: Playlist[];
-
-  // @BelongsTo(() => MusicianProfile)
-  // musicianProfile: MusicianProfile;
-
-  // @ForeignKey(() => MusicianProfile)
-  // @Column({ type: DataType.INTEGER })
-  // @Field(type => Int)
-  // musicianProfileId: number;
+  @BelongsToMany(() => Style, () => TracksStyles)
+  @Field(type => [Style], { nullable: true })
+  styles: Style[];
 }
 
 

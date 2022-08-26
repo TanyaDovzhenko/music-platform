@@ -8,6 +8,7 @@ import { PlaylistResolver } from './playlist.resolver';
 import { Playlist } from './entities/playlist.entity';
 import { UserProfilePlaylists } from './entities/user-profile-playlists.entity';
 import { PlaylistsTracks } from './entities/playlists-tracks.entity';
+import { StyleModule } from '../style/style.module';
 
 
 @Module({
@@ -20,6 +21,7 @@ import { PlaylistsTracks } from './entities/playlists-tracks.entity';
     ]),
     forwardRef(() => UserProfileModule),
     forwardRef(() => TrackModule),
+    StyleModule,
   ],
   exports: [PlaylistService]
 })

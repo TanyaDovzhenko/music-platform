@@ -2,11 +2,11 @@ import cn from 'classnames'
 import style from '../../styles/common/Button.module.scss'
 
 interface IButtonProps {
-    text?: string;
-    className?: string;
-    width: 'small' | 'medium';
-    disabled?: boolean;
-    onClick?: (e: any) => void;
+    text?: string
+    className?: string
+    width: 'small' | 'medium' | 'large' | 'auto'
+    disabled?: boolean
+    onClick?: (e: any) => void
 }
 
 const Button = ({ text, onClick, width, className, disabled }: IButtonProps) => {

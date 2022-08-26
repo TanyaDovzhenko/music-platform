@@ -6,6 +6,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { UserProfile } from './entities/user-profile.entity';
 import { FileManagerModule } from '../file-manager/file-manager.module';
 
+
 @Module({
   providers: [UserProfileResolver, UserProfileService],
   imports: [SequelizeModule.forFeature([UserProfile]),

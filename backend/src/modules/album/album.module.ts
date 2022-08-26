@@ -8,6 +8,7 @@ import { UserProfileAlbums } from './entities/user-profile-albums.entity';
 import { TrackModule } from '../track/track.module';
 import { FileManagerModule } from '../file-manager/file-manager.module';
 import { AlbumController } from './album.controller';
+import { StyleModule } from '../style/style.module';
 
 @Module({
   providers: [AlbumResolver, AlbumService],
@@ -16,7 +17,8 @@ import { AlbumController } from './album.controller';
       [Album, UserProfileAlbums]),
     TrackModule,
     FileManagerModule,
-    UserProfileModule
+    UserProfileModule,
+    StyleModule
   ],
   controllers: [AlbumController],
   exports: [AlbumService]

@@ -9,9 +9,12 @@ import AbsenceMessage from '../../common/AbsenceMessage';
 interface ISinglesProps {
     userProfileId: number
     isCurrentUser?: boolean
+    musicianName: string
+    userId: number
 }
 
-export default function Singles({ userProfileId, isCurrentUser }: ISinglesProps) {
+export default function Singles({ userProfileId, userId,
+    isCurrentUser, musicianName }: ISinglesProps) {
     const { data: singles, refetch: refetchSingles, loading } = useQuery(GET_USER_SINGLES,
         { variables: { profileId: userProfileId } })
 
@@ -33,7 +36,8 @@ export default function Singles({ userProfileId, isCurrentUser }: ISinglesProps)
                         name={item.name}
                         image={item.image}
                         audio={item.audio}
-                        musician={''}
+                        musicianName={musicianName}
+                        userId={userId}
                         playlistId={plylistId}
                         setActivePlaylist={
                             (e) => setActivePlaylist(e, singles?.singles, plylistId)

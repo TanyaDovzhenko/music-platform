@@ -1,0 +1,22 @@
+.container {
+    padding: 20px 0;
+}
+
+.userList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.noMessage {
+    width: 100%;
+    text-align: center;
+}
+
+
+@media (max-width: 1170px) {
+    .userList {
+        padding: 0 17px;
+        grid-template-columns: 1fr;
+    }
+}

@@ -25,11 +25,12 @@ query Playlist($id: Int!){
     image
     audio
     albumId
+    styles{
+      id 
+      name
+    }
     comments{
       text
-    }
-    musicStyles{
-      name
     }
     }
   }

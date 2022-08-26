@@ -1,3 +1,4 @@
+import { UpdateUserProfileInput } from './dto/update-user-profile.input';
 import { PlaylistService } from './../playlist/playlist.service';
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
@@ -40,5 +41,12 @@ export class UserProfileService {
     return await this.userProfileRepo.findAll({
       include: { all: true }
     })
+  }
+
+  async update(updateProfileInput: UpdateUserProfileInput) {
+    const profile = await this.findOne(updateProfileInput.id)
+    await profile.update(updateProfileInput)
+    await profile.save()
+    return profile
   }
 }

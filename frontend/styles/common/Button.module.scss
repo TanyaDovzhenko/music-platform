@@ -15,17 +15,15 @@
     }
 }
 
+.auto {
+    height: fit-content;
+    width: fit-content;
+}
+
 .medium {
     width: 200px;
 }
 
-.small-marg {
-    margin: 5px;
-}
-
-.medium-marg {
-    margin: 10px;
-}
 
 .backButton {
     position: absolute;
@@ -61,4 +59,13 @@
     width: fit-content;
     height: fit-content;
     padding: 2px 6px;
+}
+
+.button:disabled {
+    background-color: #e3e1de5e;
+    color: #ffffff78;
+}
+
+.followBtn {
+    font-size: 13px;
 }

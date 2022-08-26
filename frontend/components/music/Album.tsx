@@ -13,10 +13,11 @@ interface IAlbumProps {
     authorUserId: number
     isCurrentUser?: boolean
     showAlbumPage: any
+    styles: any
 }
 
 export default function Album({ id, name, description, image, tracksNumber,
-    authorName, authorUserId, showAlbumPage }: IAlbumProps) {
+    authorName, authorUserId, showAlbumPage, styles }: IAlbumProps) {
 
     return (
         <div className={style.album}
@@ -31,7 +32,7 @@ export default function Album({ id, name, description, image, tracksNumber,
                     <a className={style.authorName}>by: <span>{authorName}</span></a>
                 </Link>
                 <div className={style.description}>{description}</div>
-                <div className={style.styles}>music style items!!!!!</div>
+                <div className={style.styles}></div>
             </div>
             <div className={style.addTrackBtn}>
                 <ProfileButton
@@ -41,7 +42,6 @@ export default function Album({ id, name, description, image, tracksNumber,
             </div>
             <div className={style.addInfo}>
                 <div className={style.tracksNumber}>tracks: {tracksNumber}</div>
-                <div className={style.likes}>likes: {tracksNumber}</div>
             </div>
         </div >
     )

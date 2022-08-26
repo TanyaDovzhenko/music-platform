@@ -22,9 +22,4 @@ export class TrackResolver {
   singles(@Args('profileId', { type: () => Int }) profileId: number) {
     return this.trackService.findUserSingles(profileId);
   }
-
-  // @Query(returns => [Track])
-  // forstImpTracks(@Args('profileId', { type: () => Int }) profileId: number) {
-  //   return this.trackService.findAll(profileId);
-  // }
 }

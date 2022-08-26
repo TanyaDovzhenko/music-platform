@@ -11,19 +11,22 @@
     flex-direction: column;
     width: fit-content;
     margin: auto;
-    justify-content: space-between;
+    justify-content: center;
 
     a {
         font-weight: 700;
     }
 }
 
+.signUp,
 .signIn {
-    height: 165px;
-}
 
-.signUp {
-    height: 255px;
+    .chooseRole,
+    .chooseStyle,
+    button,
+    input {
+        margin-bottom: 10px;
+    }
 }
 
 .chooseRole {
@@ -47,4 +50,30 @@
         text-align: center;
         margin-bottom: 6px;
     }
+}
+
+.chooseStyle {
+    background-color: white;
+    border-radius: 8px;
+    text-align: center;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 350px;
+
+    .styles {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 350px;
+    }
+
+    .stylesTitle {
+        font-weight: 700;
+        color: #6a6a6a;
+        text-align: center;
+        margin-bottom: 6px;
+    }
+}
+
+.message {
+    color: #fff;
 }

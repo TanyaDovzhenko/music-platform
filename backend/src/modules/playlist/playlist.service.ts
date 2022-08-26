@@ -8,6 +8,8 @@ import { UserProfileService } from '../user-profile/user-profile.service';
 import { TrackService } from '../track/track.service';
 import { UserProfile } from '../user-profile/entities/user-profile.entity';
 import { UserRoles } from 'src/types/user-roles.enum';
+import { StyleService } from '../style/style.service';
+import { convertIdsToNumber } from 'src/utilities/convert-ids-to-number';
 
 
 @Injectable()
@@ -18,6 +20,7 @@ export class PlaylistService {
     private userProfileService: UserProfileService,
     @Inject(forwardRef(() => TrackService))
     private trackService: TrackService,
+    private styleService: StyleService
   ) { }
 
   async findAll(): Promise<Playlist[]> {
@@ -34,16 +37,9 @@ export class PlaylistService {
   }
 
   async createPlaylist(createPlaylistInput: CreatePlaylistInput) {
-    const { tracksIds, musicStylesIds, image, ...data } = createPlaylistInput;
+    const { tracksIds, image, ...data } = createPlaylistInput;
     let playlistImage = image ?? DefaultPlaylistImgSrc.DEFAULT
     const playlist = await this.playlistRepo.create({ ...data, image: playlistImage })
-
-    // await playlist.$set('musicStyles', [])
-    // playlist.musicStyles = []
-    // musicStylesIds?.forEach(async element => {  //НАХОДИТЬ ПО СЕРВИСУ А НЕ ПО МОДЕЛИ
-    //   const musicStyle = await this.musicStyleRepo.findByPk(musicStylesIds[element])
-    //   if (musicStyle) await playlist.$add('musicStyle', musicStyle.id)
-    // })
 
     await playlist.$set('tracks', [])
     playlist.tracks = []
@@ -51,6 +47,14 @@ export class PlaylistService {
       const track = await this.trackService.findOne(tracksIds[element])
       if (track) await playlist.$add('track', track.id)
     })
+
+    let stylesIds = createPlaylistInput.stylesIds
+    if (typeof stylesIds == 'string') stylesIds = convertIdsToNumber(stylesIds)
+    stylesIds?.forEach(async element => {
+      const musicStyle = await this.styleService.findOne(element)
+      if (musicStyle) await playlist.$add('style', musicStyle.id)
+    })
+
     return playlist
   }
 

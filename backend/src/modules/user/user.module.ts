@@ -4,12 +4,14 @@ import { forwardRef, Module } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserResolver } from './user.resolver';
 import { User } from './entities/user.entity';
+import { StyleModule } from '../style/style.module';
 
 @Module({
   providers: [UserResolver, UserService],
   imports: [
     SequelizeModule.forFeature([User]),
-    forwardRef(() => UserProfileModule)
+    forwardRef(() => UserProfileModule),
+    StyleModule
   ],
   exports: [UserService]
 })

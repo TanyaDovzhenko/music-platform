@@ -13,6 +13,7 @@ import closeIcon from '../../images/icons/close-icon.svg'
 import Image from 'next/image'
 import cn from 'classnames'
 
+
 function Player() {
     const [audio, setAudio] = useState<any>()
     const [volume, setVolume] = useState<number>(50)

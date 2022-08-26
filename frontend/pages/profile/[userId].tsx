@@ -1,19 +1,23 @@
+import {
+    GET_USER,
+    GET_PROFILE_BY_USER_ID,
+    GET_CURRENT_USER
+} from "../../graphql/queries/user.queries";
+import Router from 'next/router';
+import { NextPageContext } from "next";
 import { useEffect, useState } from "react";
-import Router from 'next/router'
 import MainLayout from "../../layouts/MainLayout";
-import { BASE_SERVER_URL } from "../../utilities/constants";
 import style from '../../styles/profile/Profile.module.scss';
 import ProfileTabs from "../../components/profile/ProfileTabs";
-import { GET_USER, GET_PROFILE_BY_USER_ID, GET_CURRENT_USER } from "../../graphql/queries/user.queries";
 import ProfileContent from "../../components/profile/ProfileContent";
-import UserRole from "../../components/profile/UserRole";
 import CreateClient from "../../graphql/apollo-client";
-import { NextPageContext } from "next";
+import ProfileHeader from "../../components/profile/ProfileHeader";
+import { UserRoles } from "../../types/user/userRoles.enum";
 
 
 export default function Profile({ user, userProfile, currentUserId }: any) {
-    const [activeTab, setActiveTab] = useState('first impression')
-
+    const [activeTab, setActiveTab] = useState(
+        userProfile?.role == (UserRoles.LISTENER).toUpperCase() ? 'music' : 'albums')
     const changeActiveTag = (tab: string) => setActiveTab(tab)
 
     useEffect(() => {
@@ -24,35 +28,23 @@ export default function Profile({ user, userProfile, currentUserId }: any) {
         <div className={style.container}>
             <div className={style.background}></div>
             <div className={style.profile}>
-                <div className={style.header}>
-                    <div className={style.avatar}
-                        style={{
-                            backgroundImage: `url(${BASE_SERVER_URL + userProfile?.avatar})`
-                        }}>
-                    </div>
-                    <div className={style.info}>
-                        <div className={style.infoContainer}>
-                            <UserRole userRole={user?.role} />
-                            <div className={style.followers}><span>10020</span> followers</div>
-                        </div>
-                        <div className={style.name}>{userProfile?.name}</div>
-                        <div className={style.status}>{userProfile?.status}</div>
-                        <div className={style.musicPrefs}>
-                            mus prefs
-                            {/* {userProfile?.musicStylePreferences.map(
-                                (item: any) => <MusicStyleCard name={item.name} id={item.id} />)} */}
-                        </div>
-                    </div>
-                </div>
-                <div className={style.content}>
-                    <ProfileTabs
-                        userRole={user?.role}
-                        onClick={changeActiveTag}
-                        activeTab={activeTab} />
-                    <ProfileContent
-                        activeTab={activeTab}
-                        userProfileId={userProfile?.id} />
-                </div>
+                <ProfileHeader
+                    avatar={userProfile?.avatar}
+                    name={userProfile?.name}
+                    status={userProfile?.status}
+                    styles={user?.styles}
+                    userRole={user?.role}
+                    userProfileId={userProfile?.id}
+                />
+                <ProfileTabs
+                    userRole={user?.role}
+                    onClick={changeActiveTag}
+                    activeTab={activeTab} />
+                <ProfileContent
+                    activeTab={activeTab}
+                    musicianName={userProfile?.name}
+                    userId={user?.id}
+                    userProfileId={userProfile?.id} />
             </div>
         </div>
     </MainLayout>)

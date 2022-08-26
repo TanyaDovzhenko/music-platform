@@ -11,11 +11,6 @@ import { CurrentUserProfile } from '../auth/decorators/current-user-profile.deco
 export class PlaylistResolver {
   constructor(private readonly playlistService: PlaylistService) { }
 
-  // @Query(() => [Playlist])
-  // playlists() {
-  //   return this.playlistService.findAll();
-  // }
-
   @Query(() => [Playlist])
   currentUserPlaylists(@CurrentUserProfile() profileId: number) {
     return this.playlistService.findUserPlaylists(profileId);

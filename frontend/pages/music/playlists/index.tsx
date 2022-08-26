@@ -11,13 +11,12 @@ import style from '../../../styles/Music/Playlists.module.scss'
 
 
 export default function Playlists({ userPlaylists }: any) {
-    //const { data } = useQuery(GET_USER_PLAYLISTS)
 
     return (
         <MainLayout>
             <div className={style.header}>
                 <MusicSwitchers />
-                <Button text="+ Create playlist" width="medium" />
+                <Button text="+ create playlist" width="auto" />
             </div>
             <div className={style.list}>
                 {userPlaylists?.map((item, index) =>

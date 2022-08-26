@@ -11,6 +11,7 @@ export const createTrack = async (data: any) => {
     formData.append('image', data.image)
     formData.append('audio', data.audio)
     if (data.albumId) formData.append('albumId', data.albumId)
+    if (data.stylesIds) formData.append('stylesIds', data.stylesIds)
 
     await axios.post(`${BASE_SERVER_URL}track`, formData, {
         headers: {

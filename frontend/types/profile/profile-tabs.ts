@@ -7,22 +7,19 @@ export enum ProfileTabsEnum {
     SINGLES = 'singles',
     ABOUT = 'about musician',
     FOLLOWING = 'following',
-    FIRST_IMP = 'first impression'
+    FIRST_IMP = 'first impression',
+    MUSIC = 'music'
 }
 
 export const ListenerTabsObj = [
-    { name: ProfileTabsEnum.POSTS },
-    { name: ProfileTabsEnum.REVIEWS },
+    { name: ProfileTabsEnum.MUSIC },
     { name: ProfileTabsEnum.PLAYLISTS },
-    { name: ProfileTabsEnum.LIKED_ALBUMS },
     { name: ProfileTabsEnum.FOLLOWING }
 ]
 
 export const MusicianTabsObj = [
-    { name: ProfileTabsEnum.FIRST_IMP },
     { name: ProfileTabsEnum.ALBUMS },
     { name: ProfileTabsEnum.SINGLES },
-    { name: ProfileTabsEnum.POSTS },
     { name: ProfileTabsEnum.PLAYLISTS },
     { name: ProfileTabsEnum.FOLLOWING }
 ]

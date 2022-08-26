@@ -1,3 +1,4 @@
+import { StyleModule } from './../style/style.module';
 import { PlaylistModule } from './../playlist/playlist.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { forwardRef, Module } from '@nestjs/common';
@@ -20,7 +21,8 @@ import { AlbumModule } from '../album/album.module';
     forwardRef(() => UserProfileModule),
     forwardRef(() => AlbumModule),
     forwardRef(() => PlaylistModule),
-    FileManagerModule
+    FileManagerModule,
+    StyleModule
   ],
   controllers: [TrackController],
   exports: [TrackService]

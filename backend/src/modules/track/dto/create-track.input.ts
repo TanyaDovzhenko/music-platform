@@ -1,4 +1,4 @@
-import { InputType, Field } from '@nestjs/graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
 
 @InputType()
 export class CreateTrackInput {
@@ -11,6 +11,6 @@ export class CreateTrackInput {
   @Field()
   albumId?: number;
 
-  // @Field(type => [Int], { nullable: true })
-  // musicStylesIds?: [number];
+  @Field(type => [Int], { nullable: true })
+  stylesIds?: number[];
 }

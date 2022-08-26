@@ -6,15 +6,33 @@ query Users{
       id
       email
       role
+      styles{
+      id 
+      name
     }
+    userProfile{
+      name
+      avatar
+      status
+    }
+  }
 }`
 
 export const GET_USER = gql`
 query User($id: Float!){
   user(id: $id) {
-    id
-    email
-    role
+      id
+      email
+      role
+      styles{
+      id 
+      name
+    }
+    userProfile{
+      name
+      avatar
+      status
+    }
   }
 }`
 
@@ -24,6 +42,10 @@ query CurrentUser{
     id
     email
     role
+    styles{
+      id 
+      name
+    }
   }
 }`
 

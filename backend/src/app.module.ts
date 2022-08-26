@@ -1,5 +1,5 @@
+import * as path from 'path';
 import { AlbumModule } from './modules/album/album.module';
-import * as path from 'path'
 import { ApolloDriver } from '@nestjs/apollo';
 import { forwardRef, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -19,6 +19,14 @@ import { UserProfilePlaylists } from './modules/playlist/entities/user-profile-p
 import { PlaylistsTracks } from './modules/playlist/entities/playlists-tracks.entity';
 import { Album } from './modules/album/entities/album.entity';
 import { UserProfileAlbums } from './modules/album/entities/user-profile-albums.entity';
+import { StyleModule } from './modules/style/style.module';
+import { Style } from './modules/style/entities/style.entity';
+import { AlbumStyles } from './modules/style/entities/albums-styles.entity';
+import { UserStyles } from './modules/style/entities/user-styles.entity';
+import { TracksStyles } from './modules/style/entities/tracks-styles.entity';
+import { PlaylistStyles } from './modules/style/entities/playlists-styles.entity';
+import { FollowModule } from './modules/follow/follow.module';
+import { Follow } from './modules/follow/entities/follow.entity';
 
 
 @Module({
@@ -49,7 +57,13 @@ import { UserProfileAlbums } from './modules/album/entities/user-profile-albums.
         UserProfilePlaylists,
         PlaylistsTracks,
         Album,
-        UserProfileAlbums
+        UserProfileAlbums,
+        Style,
+        AlbumStyles,
+        UserStyles,
+        TracksStyles,
+        PlaylistStyles,
+        Follow,
       ],
       autoLoadModels: true,
     }),
@@ -63,6 +77,8 @@ import { UserProfileAlbums } from './modules/album/entities/user-profile-albums.
     forwardRef(() => AlbumModule),
     AuthModule,
     TrackModule,
+    StyleModule,
+    FollowModule,
   ],
 })
 export class AppModule { }
