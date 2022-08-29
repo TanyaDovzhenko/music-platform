@@ -1,22 +1,24 @@
 @import "../variables.scss";
 
 .card {
-    display: inline-block;
-    width: 220px;
-    max-height: 300px;
+    width: 300px;
+    height: 140px;
     overflow: hidden;
-    margin: 0 0 1em;
-    padding: 15px;
-    background-color: $orange-grey;
+    padding: 10px;
+    background-color: #e3e1de;
     border-radius: 6px;
-
-    img {
-        width: 100%;
-        height: auto;
-        margin-bottom: 10px;
-    }
+    overflow: hidden;
 
     .title {
         font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .info {
+        font-size: 14px
+    }
+
+    .description {
+        margin-top: 10px;
     }
 }

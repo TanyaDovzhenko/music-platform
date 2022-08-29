@@ -15,14 +15,13 @@ export class UserService {
 
     async createUser(createUserInput: CreateUserInput): Promise<User> {
         const user = await this.userRepo.create({ ...createUserInput })
-        const userProfile = await this.userProfileService.createUserProfile(user.id, user.email, user.role)
+        const userProfile = await this.userProfileService.createUserProfile(user.id, user.email)
         await user.update({ userProfileId: userProfile.id })
         await user.save()
 
         createUserInput.stylesIds?.forEach(async styleId => {
             await this.styleService.addStyle(AddStyleType.USER, user.id, styleId)
         })
-
         return user
     }
 

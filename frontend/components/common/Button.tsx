@@ -3,18 +3,18 @@ import style from '../../styles/common/Button.module.scss'
 
 interface IButtonProps {
     text?: string
-    className?: string
+    type?: "button" | "submit" | "reset"
     width: 'small' | 'medium' | 'large' | 'auto'
     disabled?: boolean
     onClick?: (e: any) => void
 }
 
-const Button = ({ text, onClick, width, className, disabled }: IButtonProps) => {
+const Button = ({ text, onClick, width, type, disabled }: IButtonProps) => {
     return (
-        <button
-            className={cn(className, style.button, style[width])}
+        <button className={cn(style.button, style[width])}
             onClick={onClick}
-            disabled={disabled}>
+            disabled={disabled}
+            type={type}>
             {text}
         </button>
     )

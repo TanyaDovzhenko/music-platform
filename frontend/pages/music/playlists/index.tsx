@@ -1,16 +1,15 @@
 import { useQuery } from "@apollo/client";
-import { NextPageContext } from "next";
+import MainLayout from "../../../layouts/MainLayout";
 import Button from "../../../components/common/Button";
+import style from '../../../styles/Music/Playlists.module.scss'
 import MusicSwitchers from "../../../components/music/MusicSwitchers";
 import PlaylistCard from "../../../components/music/PlaylistCard";
-import CreateClient from "../../../graphql/apollo-client";
-import { GET_USER_PLAYLISTS } from "../../../graphql/queries/playlist-queries";
-import MainLayout from "../../../layouts/MainLayout";
-import style from '../../../styles/Music/Playlists.module.scss'
+import { GET_CURRENT_USER_PLAYLISTS } from "../../../graphql/queries/playlist-queries";
 
 
-
-export default function Playlists({ userPlaylists }: any) {
+export default function Playlists() {
+    const { data, refetch } = useQuery(GET_CURRENT_USER_PLAYLISTS)
+    console.log(data?.currentUserPlaylists)
 
     return (
         <MainLayout>
@@ -19,24 +18,15 @@ export default function Playlists({ userPlaylists }: any) {
                 <Button text="+ create playlist" width="auto" />
             </div>
             <div className={style.list}>
-                {userPlaylists?.map((item, index) =>
+                {data?.currentUserPlaylists.map((item, index) =>
                     <PlaylistCard
-                        img={item.image}
                         name={item.name}
-                        author={'author'}
+                        authorId={item.authorId}
                         playlistId={item.id}
+                        description={item.description}
                         key={index}
                     />)}
             </div>
         </MainLayout >)
 }
-
-export async function getStaticProps(ctx: NextPageContext) {
-    const client = CreateClient(ctx);
-    //const { data: playlists } = await client.query({ query: GET_USER_PLAYLISTS })
-    // const { data: playlists } = await client.query({ query: GET_USER_PLAYLISTS })
-
-    return { props: {} }
-}
-
 

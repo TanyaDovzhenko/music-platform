@@ -23,8 +23,11 @@ export class FollowService {
   }
 
   async follow(followerId: number, followedId: number) {
-    await this.followRepo.create({ followerId, followedId })
-    return true
+    if (followerId !== followedId) {
+      await this.followRepo.create({ followerId, followedId })
+      return true
+    }
+    return false
   }
 
   async unfollow(followerId: number, followedId: number) {

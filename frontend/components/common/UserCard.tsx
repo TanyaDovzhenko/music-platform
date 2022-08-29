@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import cn from 'classnames'
 import { useEffect } from 'react'
 import UserRole from '../profile/UserRole'
 import FollowButton from './FollowButton'
@@ -17,10 +18,11 @@ interface IUserCardProps {
     userId: number
     request?: boolean
     status?: string
+    small?: boolean
 }
 
 export default function UserCard({ role, name, styles, avatar,
-    userId, status, request }: IUserCardProps) {
+    userId, status, request, small }: IUserCardProps) {
 
     const [getUser, { data }] = useLazyQuery(GET_USER, { variables: { id: userId } })
     const user = data?.user
@@ -29,7 +31,7 @@ export default function UserCard({ role, name, styles, avatar,
     useEffect(() => { if (request) getUser() }, [])
 
     return (<div
-        className={style.userCard}
+        className={cn(style.userCard, { [style.small]: small })}
         style={{ backgroundImage: `url(${BASE_SERVER_URL + (avatar ?? userProfile?.avatar)})` }}>
         <div className={style.back}></div>
         <div
@@ -44,7 +46,7 @@ export default function UserCard({ role, name, styles, avatar,
             </div>
             <UserRole userRole={role ?? user?.role} size="small" />
             <StylesPanel styles={styles ?? user?.styles} />
-            <span className={style.status}>{status ?? userProfile?.status}</span>
+            {!small && <span className={style.status}>{status ?? userProfile?.status}</span>}
         </div>
         <div className={style.followBtn}>
             <FollowButton followedUserId={userId} />

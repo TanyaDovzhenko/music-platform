@@ -33,6 +33,7 @@ export class Track extends Model<Track>{
   rate: number
 
   @BelongsTo(() => UserProfile)
+  @Field(type => UserProfile)
   userProfile: UserProfile
 
   @ForeignKey(() => UserProfile)
@@ -41,6 +42,7 @@ export class Track extends Model<Track>{
   userProfileId?: number;
 
   @BelongsTo(() => Album)
+  @Field(type => Album, { nullable: true })
   album: Album
 
   @ForeignKey(() => Album)

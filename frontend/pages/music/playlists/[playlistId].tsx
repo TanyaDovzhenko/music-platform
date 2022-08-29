@@ -43,19 +43,19 @@ function Playlist({ id }: any) {
                     </div>
                 </div>
                 <div className={style.tracks}>
-                    {playlist?.tracks?.length ?
+                    {/* {playlist?.tracks?.length ?
                         playlist.tracks.map((item, index) =>
                             <Track
                                 id={item.id}
                                 name={item.name}
                                 audio={item.audio}
-                                musician={'musician'}
+                                musicianName={item.userProfile?.name}
                                 image={item.image}
                                 playlistId={playlist.id}
                                 setActivePlaylist={setActivePlaylist}
                                 key={index}
                             />)
-                        : <div>ADD TRACK</div>}
+                        : <div>ADD TRACK</div>} */}
                 </div>
             </div>
         </MainLayout >)

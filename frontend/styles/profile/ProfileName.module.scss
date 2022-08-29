@@ -1,0 +1,29 @@
+.container {
+    margin: 5px 0 15px 0;
+}
+
+.edPanel,
+.edPanelTrue {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.edPanelTrue {
+    align-items: flex-start;
+}
+
+.icon {
+    margin-right: 3px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 8px;
+}
+
+.name {
+    font-family: "Oswald", sans-serif;
+    font-size: 26px;
+    line-height: 33px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

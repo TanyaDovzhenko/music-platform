@@ -1,9 +1,9 @@
 import style from '../../styles/profile/Profile.module.scss';
 import { ProfileTabsEnum } from "../../types/profile/profile-tabs"
 import Albums from "./tabs/Albums"
-import FirstImpression from "./tabs/FirstImpression"
+import Followings from './tabs/Followings';
 import Posts from "./tabs/Posts"
-import Singles from "./tabs/Singles"
+import Singles from "./tabs/TracksList"
 
 interface IProfileContentProps {
     activeTab: string
@@ -18,27 +18,24 @@ export default function ProfileContent({ activeTab, userProfileId,
 
     return (<div className={style.content}>
         {
-            activeTab == ProfileTabsEnum.POSTS ?
-                <Posts /> :
+            activeTab == ProfileTabsEnum.PLAYLISTS ?
+                <div>PLAYLISTS</div> :
 
-                activeTab == ProfileTabsEnum.PLAYLISTS ?
-                    <div>PLAYLISTS</div> :
+                activeTab == ProfileTabsEnum.ALBUMS ?
+                    <Albums
+                        userProfileId={userProfileId}
+                        isCurrentUser={isCurrentUser} /> :
 
-                    activeTab == ProfileTabsEnum.ALBUMS ?
-                        <Albums
-                            userProfileId={userProfileId}
-                            isCurrentUser={isCurrentUser} /> :
+                    activeTab == ProfileTabsEnum.FOLLOWING ?
+                        <Followings userId={userId} /> :
 
-                        activeTab == ProfileTabsEnum.FOLLOWING ?
-                            <div>FOLLOWING</div> :
-
-                            activeTab == ProfileTabsEnum.SINGLES ?
-                                <Singles
-                                    userId={userId}
-                                    userProfileId={userProfileId}
-                                    isCurrentUser={isCurrentUser}
-                                    musicianName={musicianName} /> :
-                                <></>
+                        activeTab == ProfileTabsEnum.SINGLES ?
+                            <Singles
+                                userId={userId}
+                                userProfileId={userProfileId}
+                                isCurrentUser={isCurrentUser}
+                                musicianName={musicianName} /> :
+                            <></>
         }
     </div>)
 }

@@ -1,10 +1,10 @@
 import Image from "next/image";
+import { useState } from "react";
+import { useMutation } from "@apollo/client";
+import ProfileInput from "../common/ProfileInput";
 import editIcon from '../../images/icons/edit.svg'
 import checkIcon from '../../images/icons/check.svg'
-import { useState } from "react";
 import style from '../../styles/profile/ProfileStatus.module.scss';
-import ProfileInput from "../common/ProfileInput";
-import { useMutation } from "@apollo/client";
 import { UPDATE_PROFILE } from "../../graphql/mutations.js/user.mutations";
 
 interface IProfileStatusProps {
@@ -40,7 +40,7 @@ export default function ProfileStatus({ text, isCurrentUser }: IProfileStatusPro
                                 maxСharacters={100}
                                 value={status}
                                 onChange={(e) => setStatus(e.target.value)}
-                                width={250} />
+                                width={300} />
                         </div>
                         :
                         <div className={style.edPanelTrue} >

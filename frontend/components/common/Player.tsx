@@ -1,17 +1,18 @@
-import style from '../../styles/Music/Player.module.scss'
-import { observer } from 'mobx-react-lite'
-import PlayerState from '../../store/PlayerState'
-import { useEffect, useState } from 'react'
-import playButtonIcon from '../../images/icons/play-button.svg'
-import soundIcon from '../../images/icons/sound-icon.svg'
-import pauseButtonIcon from '../../images/icons/pause-button.svg'
-import noSoundIcon from '../../images/icons/no-sound.svg'
-import forwardButtonIcon from '../../images/icons/fast-forward-button.svg'
-import backwardButtonIcon from '../../images/icons/backward-button.svg'
-import heartIcon from '../../images/icons/heart-icon.svg'
-import closeIcon from '../../images/icons/close-icon.svg'
 import Image from 'next/image'
 import cn from 'classnames'
+import { useEffect, useState } from 'react'
+import { observer } from 'mobx-react-lite'
+import PlayerState from '../../store/PlayerState'
+import style from '../../styles/Music/Player.module.scss'
+import soundIcon from '../../images/icons/sound-icon.svg'
+import noSoundIcon from '../../images/icons/no-sound.svg'
+import heartIcon from '../../images/icons/heart-icon.svg'
+import closeIcon from '../../images/icons/close-icon.svg'
+import playButtonIcon from '../../images/icons/play-button.svg'
+import pauseButtonIcon from '../../images/icons/pause-button.svg'
+import forwardButtonIcon from '../../images/icons/fast-forward-button.svg'
+import backwardButtonIcon from '../../images/icons/backward-button.svg'
+
 
 
 function Player() {
@@ -20,13 +21,12 @@ function Player() {
     const [currentTime, setCurrentTime] = useState<number>(0)
     const [duration, setDuration] = useState<number>(0)
 
-
     if (audio) {
         audio.ontimeupdate = () =>
             setCurrentTime(Math.ceil(audio.currentTime))
         audio.onended = function () {
             PlayerState.nextTrack()
-        };
+        }
     }
 
     const volumeToggle = () => {
@@ -39,9 +39,7 @@ function Player() {
         else if (!PlayerState.playing) audio?.pause()
     }, [PlayerState.playing])
 
-    useEffect(() => {
-        if (audio) audio.volume = volume / 100;
-    }, [volume])
+    useEffect(() => { if (audio) audio.volume = volume / 100 }, [volume])
 
     useEffect(() => {
         if (audio) {
@@ -51,9 +49,7 @@ function Player() {
         }
     }, [PlayerState.activeTrack])
 
-    useEffect(() => {
-        setAudio(new Audio(PlayerState.activeTrack?.audio))
-    }, [])
+    useEffect(() => { setAudio(new Audio(PlayerState.activeTrack?.audio)) }, [])
 
     return (
         <div className={cn(style.player, { [style.notActive]: !PlayerState.activeTrack })}
@@ -84,7 +80,13 @@ function Player() {
                     </div>
                     <div className={style.time}>
                         <span>{Math.floor(currentTime / 60)}:{currentTime % 60}</span>
-                        <input type='range' />
+                        <input
+                            type='range'
+                            max={duration}
+                            min={0}
+                            value={currentTime}
+                            onChange={e => { if (audio) audio.currentTime = Number(e.target.value) }
+                            } />
                         <span>{Math.floor(duration / 60)}:{duration % 60}</span>
                     </div>
                 </div>

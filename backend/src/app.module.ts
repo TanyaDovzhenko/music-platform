@@ -9,24 +9,24 @@ import { AuthModule } from './modules/auth/auth.module';
 import { SeederModule } from 'nestjs-sequelize-seeder';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { User } from 'src/modules/user/entities/user.entity';
-import { UserProfileModule } from './modules/user-profile/user-profile.module';
-import { UserProfile } from 'src/modules/user-profile/entities/user-profile.entity';
-import { Track } from './modules/track/entities/track.entity';
-import { TrackModule } from './modules/track/track.module';
-import { Playlist } from './modules/playlist/entities/playlist.entity';
-import { PlaylistModule } from './modules/playlist/playlist.module';
-import { UserProfilePlaylists } from './modules/playlist/entities/user-profile-playlists.entity';
-import { PlaylistsTracks } from './modules/playlist/entities/playlists-tracks.entity';
-import { Album } from './modules/album/entities/album.entity';
-import { UserProfileAlbums } from './modules/album/entities/user-profile-albums.entity';
 import { StyleModule } from './modules/style/style.module';
 import { Style } from './modules/style/entities/style.entity';
-import { AlbumStyles } from './modules/style/entities/albums-styles.entity';
-import { UserStyles } from './modules/style/entities/user-styles.entity';
-import { TracksStyles } from './modules/style/entities/tracks-styles.entity';
-import { PlaylistStyles } from './modules/style/entities/playlists-styles.entity';
+import { Track } from './modules/track/entities/track.entity';
+import { TrackModule } from './modules/track/track.module';
 import { FollowModule } from './modules/follow/follow.module';
 import { Follow } from './modules/follow/entities/follow.entity';
+import { SearchModule } from './modules/search/search.module';
+import { Album } from './modules/album/entities/album.entity';
+import { AlbumStyles } from './modules/style/entities/albums-styles.entity';
+import { UserStyles } from './modules/style/entities/user-styles.entity';
+import { Playlist } from './modules/playlist/entities/playlist.entity';
+import { PlaylistModule } from './modules/playlist/playlist.module';
+import { PlaylistsTracks } from './modules/playlist/entities/playlists-tracks.entity';
+import { UserProfileAlbums } from './modules/album/entities/user-profile-albums.entity';
+import { UserProfileModule } from './modules/user-profile/user-profile.module';
+import { UserProfile } from 'src/modules/user-profile/entities/user-profile.entity';
+import { TracksStyles } from './modules/style/entities/tracks-styles.entity';
+import { UserProfilePlaylists } from './modules/playlist/entities/user-profile-playlists.entity';
 
 
 @Module({
@@ -36,10 +36,7 @@ import { Follow } from './modules/follow/entities/follow.entity';
       sortSchema: true,
       driver: ApolloDriver,
       context: ({ req, res }) => ({ req, res }),
-      cors: {
-        origin: 'http://localhost:3000',
-        credentials: true,
-      },
+      cors: { origin: 'http://localhost:3000', credentials: true },
       uploads: false,
     }),
     SequelizeModule.forRoot({
@@ -62,7 +59,6 @@ import { Follow } from './modules/follow/entities/follow.entity';
         AlbumStyles,
         UserStyles,
         TracksStyles,
-        PlaylistStyles,
         Follow,
       ],
       autoLoadModels: true,
@@ -79,6 +75,7 @@ import { Follow } from './modules/follow/entities/follow.entity';
     TrackModule,
     StyleModule,
     FollowModule,
+    SearchModule,
   ],
 })
 export class AppModule { }

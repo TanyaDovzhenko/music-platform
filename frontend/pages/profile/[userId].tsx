@@ -35,6 +35,7 @@ export default function Profile({ user, userProfile, currentUserId }: any) {
                     styles={user?.styles}
                     userRole={user?.role}
                     userProfileId={userProfile?.id}
+                    userId={user?.id}
                 />
                 <ProfileTabs
                     userRole={user?.role}
@@ -54,20 +55,28 @@ export async function getServerSideProps(context: NextPageContext) {
     const client = CreateClient(context);
     const userId = Number(context.query.userId)
 
-    const { data: currentUser } = await client.query({ query: GET_CURRENT_USER })
+    try {
+        const { data: currentUser } = await client.query({ query: GET_CURRENT_USER })
 
-    const { data: userProfile } = await client.query({
-        query: GET_PROFILE_BY_USER_ID, variables: { userId }
-    })
-    const { data: user } = await client.query({
-        query: GET_USER, variables: { id: userId }
-    })
+        const { data: userProfile } = await client.query({
+            query: GET_PROFILE_BY_USER_ID, variables: { userId }
+        })
+        const { data: user } = await client.query({
+            query: GET_USER, variables: { id: userId }
+        })
 
-    return {
-        props: {
-            user: user.user,
-            userProfile: userProfile.userProfileByUserId,
-            currentUserId: currentUser.currentUser.id
+        return {
+            props: {
+                user: user.user,
+                userProfile: userProfile.userProfileByUserId,
+                currentUserId: currentUser.currentUser.id
+            }
         }
     }
+    catch {
+        return {
+            props: { user: null, userProfile: null, currentUserId: null }
+        }
+    }
+
 }

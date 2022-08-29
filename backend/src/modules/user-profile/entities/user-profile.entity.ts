@@ -35,6 +35,7 @@ export class UserProfile extends Model<UserProfile>{
 
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
+  @Field(type => Int)
   userId: number;
 
   @HasMany(() => Track)

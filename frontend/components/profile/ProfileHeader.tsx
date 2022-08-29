@@ -6,6 +6,8 @@ import style from '../../styles/profile/Profile.module.scss';
 import { UserRoles } from '../../types/user/userRoles.enum';
 import { BASE_SERVER_URL } from '../../utilities/constants';
 import StylesPanel from '../music/StylesPanel';
+import ProfileAvatar from './ProfileAvatar';
+import ProfileName from './ProfileName';
 import ProfileStatus from './ProfileStatus';
 import UserRole from './UserRole';
 
@@ -21,7 +23,6 @@ interface IProfileHeaderProps {
     userId: number
 }
 
-
 export default function ProfileHeader({ avatar, userRole, name,
     status, styles, isCurrentUser, userProfileId, userId }: IProfileHeaderProps) {
 
@@ -29,32 +30,29 @@ export default function ProfileHeader({ avatar, userRole, name,
         { variables: { profileId: userProfileId } })
     const { data: singles } = useQuery(GET_USER_SINGLES,
         { variables: { profileId: userProfileId } })
-
     const { data: followers } = useQuery(USER_FOLLOWERS,
         { variables: { followedId: userId } })
 
     return (
         <div className={style.header}>
-            <div className={style.avatar}
-                style={{ backgroundImage: `url(${BASE_SERVER_URL + avatar})` }}>
-            </div>
+            <ProfileAvatar avatar={avatar} isCurrentUser={isCurrentUser} />
             <div className={style.info}>
-                <div className={style.infoContainer}>
-                    <div className={style.counts}>
-                        {userRole == UserRoles.MUSICIAN && <>
-                            <div>albums: {userAlbums?.userAlbums.length}</div>
-                            <div>singles: {singles?.singles.length}</div>
-                        </>}
-                        <div className={style.followers}>
-                            {followers?.userFollowers.length} followers
-                        </div>
-                    </div>
-                </div>
                 <UserRole userRole={userRole} />
-                <div className={style.name}>{name}</div>
+                <ProfileName text={name} isCurrentUser={isCurrentUser} />
                 <ProfileStatus text={status} isCurrentUser={isCurrentUser} />
                 <div className={style.styles}>
                     <StylesPanel styles={styles} />
+                </div>
+            </div>
+            <div className={style.infoContainer}>
+                <div className={style.counts}>
+                    {userRole == (UserRoles.MUSICIAN).toUpperCase() && <>
+                        <div>albums: {userAlbums?.userAlbums.length}</div>
+                        <div>singles: {singles?.singles.length}</div>
+                    </>}
+                    <div className={style.followers}>
+                        followers: {followers?.userFollowers.length}
+                    </div>
                 </div>
             </div>
         </div >

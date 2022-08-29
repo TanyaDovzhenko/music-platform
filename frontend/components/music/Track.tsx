@@ -20,10 +20,8 @@ interface ITrackProps {
     setActivePlaylist: (e: React.MouseEvent<HTMLElement>) => void
 }
 
-const Track = ({
-    id, name, image, audio, musicianName, setActivePlaylist, userId,
-    playlistId, comments, musicStyles, album }
-    : ITrackProps) => {
+const Track = ({ id, name, image, audio, musicianName, setActivePlaylist, userId,
+    playlistId }: ITrackProps) => {
 
     let isActive =
         PlayerState.activeTrack?.id === id
@@ -55,12 +53,6 @@ const Track = ({
                     </div>
                 </div>
             </div>
-            {/* <div className={style.addInfo}>
-                <div>ALBUM</div>
-                <div>RATE</div>
-                <div>MUS STYLE</div>
-                <div>COMMENTS</div>
-            </div> */}
         </div>
     )
 }

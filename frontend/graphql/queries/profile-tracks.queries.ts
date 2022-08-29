@@ -9,5 +9,9 @@ query UserSingles($profileId: Int!){
       image
       rate
       userProfileId
+      userProfile{
+      name
+      userId
+      }
   }
 }`

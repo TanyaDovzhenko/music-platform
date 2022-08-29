@@ -4,7 +4,7 @@
     @extend %img-background;
     position: relative;
     display: grid;
-    grid-template-columns: 160px auto 80px;
+    grid-template-columns: 160px auto;
     border-radius: 4px;
     color: #fff;
     overflow: hidden;
@@ -26,9 +26,12 @@
 }
 
 .name {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 5px;
     cursor: pointer;
+    overflow: hidden;
+    width: 78%;
+    font-weight: 600;
 
     &:hover {
         text-decoration: underline;
@@ -49,10 +52,47 @@
 }
 
 .followBtn {
-    padding: 8px 8px 0 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     text-align: right;
 }
 
 .status {
     font-size: 13px;
+}
+
+.userCard.small {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 170px;
+
+    .avatar {
+        width: 160px;
+        height: 115px;
+        margin: 5px;
+    }
+
+    .info {
+        padding: 0 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .name {
+        font-size: 15px;
+        width: 94%;
+        text-align: center;
+    }
+
+    .followBtn {
+        top: auto;
+        left: auto;
+        right: 53px;
+        bottom: 5px;
+    }
+
 }

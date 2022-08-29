@@ -2,11 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input AddTrackInput {
-  playlistId: Int!
-  trackId: Int!
-}
-
 type Album {
   authorName: String!
   authorUserId: Int!
@@ -29,10 +24,8 @@ type AuthResponse {
 input CreatePlaylistInput {
   authorId: Int!
   description: String
-  image: String
   isDefault: Boolean = false
   name: String!
-  stylesIds: [Int!]
   tracksIds: [Int!]
 }
 
@@ -52,7 +45,7 @@ type Follow {
 type Mutation {
   addAlbumTrack(albumId: Int!, trackId: Int!): Boolean!
   addStyle(objId: Int!, styleId: Int!, type: String!): Boolean!
-  addTrack(addTrackInput: AddTrackInput!): Boolean!
+  addTrack(playlistId: Float!, trackId: Float!): Boolean!
   createPlaylist(createPlaylistInput: CreatePlaylistInput!): Playlist!
   follow(followedId: Int!): Boolean!
   signin(signInInput: SignInInput!): AuthResponse!
@@ -65,17 +58,16 @@ type Playlist {
   authorId: Int!
   description: String
   id: Int!
-  image: String
   isDefault: Boolean!
-  likes: Float!
   name: String!
-  styles: [Style!]
   tracks: [Track!]
+  userProfile: UserProfile!
   userProfiles: [UserProfile!]
 }
 
 type Query {
   album(id: Int!): Album!
+  albumsByParams(albumName: String!): [Album!]!
   checkFollowing(followedId: Int!): Boolean!
   currentUser: User!
   currentUserAlbums: [Album!]!
@@ -87,14 +79,18 @@ type Query {
   styles: [Style!]!
   track(id: Int!): Track!
   tracks: [Track!]!
+  tracksByParams(trackName: String!): [Track!]!
   user(id: Float!): User!
   userAlbums(profileId: Int!): [Album!]!
   userFollowed(followerId: Int!): [Follow!]!
   userFollowers(followedId: Int!): [Follow!]!
+  userPlaylists(profileId: Int!): [Playlist!]!
   userProfile(id: Int!): UserProfile!
   userProfileByUserId(userId: Int!): UserProfile!
   userProfiles: [UserProfile!]!
   users: [User!]!
+  usersByParams(userName: String!, userRole: UserRoles): [User!]!
+  usersByRole(userRole: UserRoles!): [User!]!
 }
 
 input SignInInput {
@@ -106,12 +102,12 @@ type Style {
   albums: [Album!]
   id: Int!
   name: String!
-  playlists: [Playlist!]
   tracks: [Track!]
   users: [User!]
 }
 
 type Track {
+  album: Album
   albumId: Int
   audio: String!
   id: Int!
@@ -119,6 +115,7 @@ type Track {
   name: String!
   rate: Int!
   styles: [Style!]
+  userProfile: UserProfile!
   userProfileId: Int!
 }
 
@@ -134,7 +131,7 @@ type User {
   id: Int!
   password: String
   role: UserRoles!
-  styles: [Style!]!
+  styles: [Style!]
   userProfile: UserProfile
   userProfileId: Float!
 }
@@ -148,6 +145,7 @@ type UserProfile {
   playlists: [Playlist!]
   status: String
   track: [Track!]
+  userId: Int!
 }
 
 enum UserRoles {

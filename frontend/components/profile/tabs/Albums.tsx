@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/client'
-import { useState } from 'react'
+import { useLazyQuery } from '@apollo/client'
+import { useEffect, useState } from 'react'
 import { GET_USER_ALBUMS } from '../../../graphql/queries/album-queries'
 import style from '../../../styles/profile/Albums.module.scss'
 import AbsenceMessage from '../../common/AbsenceMessage'
@@ -9,13 +9,15 @@ import AlbumPage from './AlbumPage'
 
 
 interface IAlbumsProps {
+    albums?: any
     isCurrentUser?: boolean
-    userProfileId: number
+    userProfileId?: number
 }
 
-export default function Albums({ isCurrentUser, userProfileId }: IAlbumsProps) {
-    const { data: userAlbums, refetch: refetchAlbums, loading } = useQuery(GET_USER_ALBUMS,
-        { variables: { profileId: userProfileId } });
+export default function Albums({ albums, isCurrentUser, userProfileId }: IAlbumsProps) {
+    const [getAlbums, { data: userAlbums, refetch: refetchAlbums, loading }] =
+        useLazyQuery(GET_USER_ALBUMS,
+            { variables: { profileId: userProfileId } });
 
     const [albumPage, setAlbumPage] = useState(false)
     const [currentAlbumId, setcurrentAlbumId] = useState<number>(0)
@@ -25,6 +27,7 @@ export default function Albums({ isCurrentUser, userProfileId }: IAlbumsProps) {
         setAlbumPage(true)
     }
 
+    useEffect(() => { if (!albums) getAlbums() }, [])
     return (
         <div className={style.container}>
             {albumPage ? <AlbumPage
@@ -33,18 +36,34 @@ export default function Albums({ isCurrentUser, userProfileId }: IAlbumsProps) {
                 albumId={currentAlbumId} /> :
                 <>
                     {isCurrentUser &&
-                        <AlbumCreatingPanel refetchAlbums={refetchAlbums} loading={loading} />}
+                        <AlbumCreatingPanel
+                            refetchAlbums={refetchAlbums}
+                            loading={loading} />}
 
-                    {!userAlbums?.userAlbums.length && <AbsenceMessage message='albums' />}
+                    {(!userAlbums?.userAlbums.length && !albums?.length)
+                        && <AbsenceMessage message='no albums' />}
 
                     <div className={style.albumsList}>
+                        {albums?.map((item, index) =>
+                            <Album key={index}
+                                id={item.id}
+                                name={item.name}
+                                description={item.description}
+                                image={item.image}
+                                tracksNumber={item.tracks?.length}
+                                authorName={item.authorName}
+                                authorUserId={item.authorUserId}
+                                isCurrentUser={isCurrentUser}
+                                showAlbumPage={showAlbumPage}
+                                styles={item.styles}
+                            />)}
                         {userAlbums?.userAlbums.map((item, index) =>
                             <Album key={index}
                                 id={item.id}
                                 name={item.name}
                                 description={item.description}
                                 image={item.image}
-                                tracksNumber={item.tracks.length}
+                                tracksNumber={item.tracks?.length}
                                 authorName={item.authorName}
                                 authorUserId={item.authorUserId}
                                 isCurrentUser={isCurrentUser}

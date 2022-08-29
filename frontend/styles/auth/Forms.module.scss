@@ -41,7 +41,7 @@
     &Btns {
         display: flex;
         justify-content: space-between;
-        width: 85%;
+        width: 80%;
     }
 
     &Title {
@@ -76,4 +76,9 @@
 
 .message {
     color: #fff;
+}
+
+.error {
+    color: white;
+    font-size: 12px;
 }

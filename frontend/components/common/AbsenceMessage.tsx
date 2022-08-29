@@ -5,5 +5,5 @@ interface IAlbumsProps {
 }
 
 export default function AbsenceMessage({ message }: IAlbumsProps) {
-    return (<div className={style.message}>no {message} yet</div >)
+    return (<div className={style.message}>{message}</div >)
 }

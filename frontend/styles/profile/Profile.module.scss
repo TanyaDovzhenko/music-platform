@@ -18,7 +18,8 @@
 
 .header {
     @extend %img-background;
-    display: flex;
+    display: grid;
+    grid-template-columns: 200px auto 115px;
     align-items: center;
     position: relative;
     width: 100%;
@@ -30,16 +31,6 @@
         padding: 20px 0 10px 0;
         position: relative;
         width: 100%;
-    }
-
-    .name {
-        font-family: "Oswald", sans-serif;
-        font-size: 32px;
-        margin-bottom: 10px;
-        max-width: 450px;
-        max-height: 100px;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
     .status,
@@ -64,16 +55,6 @@
         position: absolute;
         bottom: 25px;
     }
-}
-
-.avatar {
-    @extend %img-background;
-    display: inline-block;
-    flex-shrink: 0;
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-    margin-right: 30px;
 }
 
 .content {

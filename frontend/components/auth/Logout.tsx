@@ -8,7 +8,7 @@ export default function Logout() {
     return (
         <div className={style.containter} onClick={logout}>
             <Image src={logoutIcon} width={18} height={18} />
-            <span className={style.text}>Log out</span>
+            <span className={style.text}>log out</span>
         </div>
     )
 }

@@ -56,6 +56,7 @@ query UserProfile($id: Int!){
     name
     avatar
     status
+    userId
   }
 }`
 
@@ -66,6 +67,7 @@ query ProfileByUserID($userId: Int!){
     name
     avatar
     status
+    userId
   }
 }`
 

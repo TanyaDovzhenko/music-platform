@@ -38,6 +38,6 @@ export class User extends Model<User>{
     userProfileId: number;
 
     @BelongsToMany(() => Style, () => UserStyles)
-    @Field(type => [Style])
+    @Field(type => [Style], { nullable: true })
     styles: Style[];
 }

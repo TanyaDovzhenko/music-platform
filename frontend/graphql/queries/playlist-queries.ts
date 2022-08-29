@@ -1,12 +1,24 @@
 import { gql } from '@apollo/client'
 
 export const GET_USER_PLAYLISTS = gql`
-query Playlists{
-  userProfile{
-    playlists{
-      name
-      image
-    }
+query UserPlaylists($profileId: Int!){
+  userPlaylists(profileId: $profileId) {
+    id
+    name
+    description
+    authorId
+    isDefault
+  }
+}`
+
+export const GET_CURRENT_USER_PLAYLISTS = gql`
+query CurrentUserPlaylists{
+  currentUserPlaylists {
+    id
+    name
+    description
+    authorId
+    isDefault
   }
 }`
 
@@ -16,22 +28,18 @@ query Playlist($id: Int!){
   playlist(id: $id) {
     id
     name
-    image
     description
-    likes
     tracks{
     id
     name
     image
     audio
     albumId
-    styles{
-      id 
+    userProfileId
+      userProfile{
       name
-    }
-    comments{
-      text
-    }
+      userId
+      }
     }
   }
 }`

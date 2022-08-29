@@ -2,14 +2,16 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { PlaylistService } from './playlist.service';
 import { Playlist } from './entities/playlist.entity';
 import { CreatePlaylistInput } from './dto/create-playlist.input';
-import { User } from 'src/modules/user/entities/user.entity';
-import { AddTrackInput } from './dto/add-track-input';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { CurrentUserProfile } from '../auth/decorators/current-user-profile.decorator';
 
 @Resolver(() => Playlist)
 export class PlaylistResolver {
   constructor(private readonly playlistService: PlaylistService) { }
+
+  @Query(() => [Playlist])
+  userPlaylists(@Args('profileId', { type: () => Int }) profileId: number) {
+    return this.playlistService.findUserPlaylists(profileId);
+  }
 
   @Query(() => [Playlist])
   currentUserPlaylists(@CurrentUserProfile() profileId: number) {
@@ -31,7 +33,9 @@ export class PlaylistResolver {
   }
 
   @Mutation(() => Boolean)
-  addTrack(@Args('addTrackInput') addTrackInput: AddTrackInput) {
-    return this.playlistService.addTrack(addTrackInput);
+  addTrack(
+    @Args('playlistId') playlistId: number,
+    @Args('trackId') trackId: number) {
+    return this.playlistService.addTrack(playlistId, trackId);
   }
 }

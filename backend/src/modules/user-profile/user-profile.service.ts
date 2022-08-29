@@ -1,10 +1,9 @@
+import { InjectModel } from '@nestjs/sequelize';
+import { UserProfile } from './entities/user-profile.entity';
+import { FileManagerService } from '../file-manager/file-manager.service';
 import { UpdateUserProfileInput } from './dto/update-user-profile.input';
 import { PlaylistService } from './../playlist/playlist.service';
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { UserRoles } from 'src/types/user-roles.enum';
-import { UserProfile } from './entities/user-profile.entity';
-import { FileManagerService } from '../file-manager/file-manager.service';
 
 
 @Injectable()
@@ -16,13 +15,13 @@ export class UserProfileService {
     @Inject(forwardRef(() => FileManagerService))
     private fileManagerService: FileManagerService) { }
 
-  async createUserProfile(userId: number, email: string, userRole: UserRoles) {
+  async createUserProfile(userId: number, email: string) {
     const profile = await this.userProfileRepo.findOne({ where: { userId } })
     if (profile) return
     const name = email.split('@')[0]
     const avatar = await this.fileManagerService.createRandomAvatar()
     const newProfile = await this.userProfileRepo.create({ userId, name, avatar })
-    await this.playlistService.createDefaultPlaylists(newProfile, userRole)
+    await this.playlistService.createDefaultPlaylists(newProfile)
     return newProfile
   }
 
@@ -38,9 +37,7 @@ export class UserProfileService {
   }
 
   async findAll() {
-    return await this.userProfileRepo.findAll({
-      include: { all: true }
-    })
+    return await this.userProfileRepo.findAll({ include: { all: true } })
   }
 
   async update(updateProfileInput: UpdateUserProfileInput) {

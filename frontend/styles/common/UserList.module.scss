@@ -1,0 +1,5 @@
+.userList {
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(auto-fill, 170px);
+}

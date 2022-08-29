@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import MainLayout from "../../layouts/MainLayout";
 import style from '../../styles/profile/Profile.module.scss';
 import ProfileTabs from "../../components/profile/ProfileTabs";
-import { GET_CURRENT_USER, GET_CURRENT_USER_PROFILE } from "../../graphql/queries/user.queries";
 import ProfileContent from "../../components/profile/ProfileContent";
 import CreateClient from "../../graphql/apollo-client";
 import { NextPageContext } from "next";
 import { reload } from "../../utilities/common/reload";
 import ProfileHeader from "../../components/profile/ProfileHeader";
 import { UserRoles } from "../../types/user/userRoles.enum";
+import { GET_CURRENT_USER, GET_CURRENT_USER_PROFILE } from "../../graphql/queries/user.queries";
 
 
 export default function CurrentProfile({ currentProfile, currentUser }: any) {
@@ -47,13 +47,21 @@ export default function CurrentProfile({ currentProfile, currentUser }: any) {
 
 export async function getServerSideProps(context: NextPageContext) {
     const client = CreateClient(context);
-    const { data: userProfile } = await client.query({ query: GET_CURRENT_USER_PROFILE })
-    const { data: currentUser } = await client.query({ query: GET_CURRENT_USER })
-
-    return {
-        props: {
-            currentProfile: userProfile.currentUserProfile,
-            currentUser: currentUser.currentUser
+    try {
+        const { data: userProfile } = await client.query({ query: GET_CURRENT_USER_PROFILE })
+        const { data: currentUser } = await client.query({ query: GET_CURRENT_USER })
+        return {
+            props: {
+                currentProfile: userProfile.currentUserProfile,
+                currentUser: currentUser.currentUser
+            }
+        }
+    } catch {
+        return {
+            props: {
+                currentProfile: null,
+                currentUser: null
+            }
         }
     }
 }
