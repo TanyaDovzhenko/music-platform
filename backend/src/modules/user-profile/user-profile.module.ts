@@ -1,4 +1,3 @@
-import { PlaylistModule } from './../playlist/playlist.module';
 import { forwardRef, Module } from '@nestjs/common';
 import { UserProfileService } from './user-profile.service';
 import { UserProfileResolver } from './user-profile.resolver';
@@ -10,7 +9,6 @@ import { FileManagerModule } from '../file-manager/file-manager.module';
 @Module({
   providers: [UserProfileResolver, UserProfileService],
   imports: [SequelizeModule.forFeature([UserProfile]),
-  forwardRef(() => PlaylistModule),
   forwardRef(() => FileManagerModule)],
   exports: [UserProfileService]
 })

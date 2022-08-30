@@ -17,7 +17,7 @@ function Menu() {
             </div>
             <div className={style.menuItem}>
                 <Image src={musicIcon} />
-                <Link href={'/music/playlists'}><a>my music</a></Link>
+                <Link href={'/music'}><a>my music</a></Link>
             </div>
             <div className={style.menuItem}>
                 <Image src={peopleIcon} />

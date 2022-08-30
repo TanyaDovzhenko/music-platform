@@ -10,11 +10,6 @@ query UserAlbums($profileId: Int!){
     name
     description
     image
-    rate
-    styles{
-      id 
-      name
-    }
     tracks{
       id
     }
@@ -31,18 +26,31 @@ query GetAlbum($id: Int!){
     name
     description
     image
-    rate
-    styles{
-      id 
-      name
-    }
     tracks{
       id
       name
       audio
       image
-      rate
       userProfileId
     }
   }
+}`
+
+export const GET_CURRENT_USER_LIKED_ALBUM = gql`
+query CurrentUserLikedAlbums{
+  currentUserLikedAlbums{
+    id
+    authorUserProfileId
+    authorName
+    authorUserId
+    name
+    description
+    image
+  }
+}`
+
+
+export const CHECK_LIKED_ALBUM = gql`
+query CheckLikedAlbum($albumId: Float!){
+  checkLikedAlbum(albumId: $albumId)
 }`

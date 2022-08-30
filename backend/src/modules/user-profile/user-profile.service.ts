@@ -2,7 +2,6 @@ import { InjectModel } from '@nestjs/sequelize';
 import { UserProfile } from './entities/user-profile.entity';
 import { FileManagerService } from '../file-manager/file-manager.service';
 import { UpdateUserProfileInput } from './dto/update-user-profile.input';
-import { PlaylistService } from './../playlist/playlist.service';
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
 
@@ -10,8 +9,6 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 export class UserProfileService {
   constructor(
     @InjectModel(UserProfile) private userProfileRepo: typeof UserProfile,
-    @Inject(forwardRef(() => PlaylistService))
-    private playlistService: PlaylistService,
     @Inject(forwardRef(() => FileManagerService))
     private fileManagerService: FileManagerService) { }
 
@@ -21,7 +18,6 @@ export class UserProfileService {
     const name = email.split('@')[0]
     const avatar = await this.fileManagerService.createRandomAvatar()
     const newProfile = await this.userProfileRepo.create({ userId, name, avatar })
-    await this.playlistService.createDefaultPlaylists(newProfile)
     return newProfile
   }
 

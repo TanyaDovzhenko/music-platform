@@ -10,7 +10,4 @@ export class CreateTrackInput {
 
   @Field()
   albumId?: number;
-
-  @Field(type => [Int], { nullable: true })
-  stylesIds?: number[];
 }

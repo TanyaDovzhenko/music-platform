@@ -6,11 +6,10 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from '../user/entities/user.entity';
 import { Album } from '../album/entities/album.entity';
 import { Track } from '../track/entities/track.entity';
-import { Playlist } from '../playlist/entities/playlist.entity';
 
 @Module({
   providers: [SearchResolver, SearchService],
   imports: [SequelizeModule.forFeature(
-    [User, Album, Track, Playlist, UserProfile])],
+    [User, Album, Track, UserProfile])],
 })
 export class SearchModule { }

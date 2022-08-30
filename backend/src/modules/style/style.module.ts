@@ -1,4 +1,3 @@
-import { AlbumStyles } from './entities/albums-styles.entity';
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Style } from './entities/style.entity';
@@ -13,7 +12,6 @@ import { StyleResolver } from './style.resolver';
     providers: [StyleService, StyleResolver],
     imports: [SequelizeModule.forFeature([
         Style,
-        AlbumStyles,
         UserStyles,
         TracksStyles
     ]),

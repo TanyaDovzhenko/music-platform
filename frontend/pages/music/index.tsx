@@ -1,12 +1,14 @@
-import Router from 'next/router'
-import { useEffect } from "react";
+import LikedTracks from "../../components/music/LikedTracks";
 import MainLayout from "../../layouts/MainLayout";
-import MusicSwitchers from "../../components/music/MusicSwitchers";
+import style from '../../styles/music/Music.module.scss'
+
 
 
 export default function Music() {
-    useEffect(() => { Router.push('/people/followed') }, [])
-    return (<MainLayout><MusicSwitchers /></MainLayout >)
+    return (
+        <MainLayout>
+            <div className={style.tracks}>
+                <LikedTracks />
+            </div>
+        </MainLayout >)
 }
-
-

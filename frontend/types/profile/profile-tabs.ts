@@ -1,19 +1,18 @@
 export enum ProfileTabsEnum {
-    PLAYLISTS = 'playlists',
     ALBUMS = 'albums',
     SINGLES = 'singles',
     FOLLOWING = 'following',
-    MUSIC = 'music'
+    LIKED_TRACKS = 'liked tracks'
 }
 
 export const ListenerTabsObj = [
-    { name: ProfileTabsEnum.MUSIC },
+    { name: ProfileTabsEnum.LIKED_TRACKS },
     { name: ProfileTabsEnum.FOLLOWING }
 ]
 
 export const MusicianTabsObj = [
     { name: ProfileTabsEnum.ALBUMS },
     { name: ProfileTabsEnum.SINGLES },
-    { name: ProfileTabsEnum.PLAYLISTS },
+    { name: ProfileTabsEnum.LIKED_TRACKS },
     { name: ProfileTabsEnum.FOLLOWING }
 ]

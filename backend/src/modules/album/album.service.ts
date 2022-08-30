@@ -2,7 +2,6 @@ import { UserProfileService } from './../user-profile/user-profile.service';
 import { FileManagerService } from './../file-manager/file-manager.service';
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { CreateAlbumInput } from './dto/create-album.input';
-import { UpdateAlbumInput } from './dto/update-album.input';
 import { FileTypes, ResourceTypes } from 'src/types/file-manager.types';
 import { TrackService } from '../track/track.service';
 import { InjectModel } from '@nestjs/sequelize';
@@ -18,8 +17,7 @@ export class AlbumService {
     @Inject(forwardRef(() => TrackService))
     private trackService: TrackService,
     @Inject(forwardRef(() => UserProfileService))
-    private userProfileService: UserProfileService,
-    private styleService: StyleService) { }
+    private userProfileService: UserProfileService) { }
 
   async create(createAlbumInput: CreateAlbumInput, fileImg: any) {
     const userProfile = await this.userProfileService.findOne(createAlbumInput.authorUserProfileId)
@@ -34,14 +32,6 @@ export class AlbumService {
       authorName: userProfile.name,
       authorUserId: userProfile.userId
     })
-
-    let stylesIds = createAlbumInput.stylesIds
-    if (typeof stylesIds == 'string') stylesIds = convertIdsToNumber(stylesIds)
-    stylesIds?.forEach(async element => {
-      const musicStyle = await this.styleService.findOne(element)
-      if (musicStyle) await album.$add('style', musicStyle.id)
-    })
-
     return album
   }
 
@@ -62,5 +52,33 @@ export class AlbumService {
     const album = await this.findOne(albumId)
     await album.$add('track', track.id)
     return true
+  }
+
+  async likeAlbum(profileId: number, albumId: number) {
+    const profile = await this.userProfileService.findOne(profileId)
+    const album = await this.findOne(albumId)
+    await profile.$add('likedAlbum', album.id)
+    return true
+  }
+
+  async unlikeAlbum(profileId: number, albumId: number) {
+    const profile = await this.userProfileService.findOne(profileId)
+    const album = await this.findOne(albumId)
+    await profile.$remove('likedAlbum', album.id)
+    return true
+  }
+
+  async findUserLikedAlbums(profileId: number) {
+    const profile = await this.userProfileService.findOne(profileId)
+    return profile.likedAlbums
+  }
+
+  async checkLikedAlbum(profileId: number, albumId: number) {
+    const profile = await this.userProfileService.findOne(profileId)
+    let isLiked = false
+    profile.likedAlbums.forEach(item => {
+      if (item.id == albumId) isLiked = true
+    })
+    return isLiked
   }
 }

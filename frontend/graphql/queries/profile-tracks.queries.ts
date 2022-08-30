@@ -7,7 +7,6 @@ query UserSingles($profileId: Int!){
       name
       audio
       image
-      rate
       userProfileId
       userProfile{
       name

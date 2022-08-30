@@ -43,7 +43,6 @@ query TracksByParams($trackName: String!){
       name
       audio
       image
-      rate
       userProfileId
       userProfile{
       name
@@ -62,17 +61,11 @@ query AlbumsByParams($albumName: String!){
     name
     description
     image
-    rate
-    styles{
-      id 
-      name
-    }
     tracks{
       id
       name
       audio
       image
-      rate
       userProfileId
     }
   }

@@ -10,8 +10,6 @@ type Album {
   id: Int!
   image: String
   name: String!
-  rate: Float!
-  styles: [Style!]
   tracks: [Track!]
   userProfiles: [UserProfile!]
 }
@@ -19,14 +17,6 @@ type Album {
 type AuthResponse {
   access_token: String!
   user: User!
-}
-
-input CreatePlaylistInput {
-  authorId: Int!
-  description: String
-  isDefault: Boolean = false
-  name: String!
-  tracksIds: [Int!]
 }
 
 input CreateUserInput {
@@ -45,35 +35,30 @@ type Follow {
 type Mutation {
   addAlbumTrack(albumId: Int!, trackId: Int!): Boolean!
   addStyle(objId: Int!, styleId: Int!, type: String!): Boolean!
-  addTrack(playlistId: Float!, trackId: Float!): Boolean!
-  createPlaylist(createPlaylistInput: CreatePlaylistInput!): Playlist!
   follow(followedId: Int!): Boolean!
+  likeAlbum(albumId: Float!): Boolean!
+  likeTrack(trackId: Float!): Boolean!
   signin(signInInput: SignInInput!): AuthResponse!
   signup(createUserInput: CreateUserInput!): AuthResponse!
   unfollow(followedId: Int!): Boolean!
+  unlikeAlbum(albumId: Float!): Boolean!
+  unlikeTrack(trackId: Float!): Boolean!
   updateUserProfile(updateUserProfileInput: UpdateUserProfileInput!): UserProfile!
-}
-
-type Playlist {
-  authorId: Int!
-  description: String
-  id: Int!
-  isDefault: Boolean!
-  name: String!
-  tracks: [Track!]
-  userProfile: UserProfile!
-  userProfiles: [UserProfile!]
 }
 
 type Query {
   album(id: Int!): Album!
   albumsByParams(albumName: String!): [Album!]!
   checkFollowing(followedId: Int!): Boolean!
+  checkLikedAlbum(albumId: Float!): Boolean!
+  checkLikedTrack(trackId: Float!): Boolean!
   currentUser: User!
   currentUserAlbums: [Album!]!
-  currentUserPlaylists: [Playlist!]!
+  currentUserLikedAlbums: [Album!]!
+  currentUserLikedTracks: [Track!]!
   currentUserProfile: UserProfile!
-  playlist(id: Int!): Playlist!
+  likedAlbums(profileId: Int!): [Album!]!
+  likedTracks(profileId: Int!): [Track!]!
   singles(profileId: Int!): [Track!]!
   style(id: Int!): Style!
   styles: [Style!]!
@@ -84,7 +69,6 @@ type Query {
   userAlbums(profileId: Int!): [Album!]!
   userFollowed(followerId: Int!): [Follow!]!
   userFollowers(followedId: Int!): [Follow!]!
-  userPlaylists(profileId: Int!): [Playlist!]!
   userProfile(id: Int!): UserProfile!
   userProfileByUserId(userId: Int!): UserProfile!
   userProfiles: [UserProfile!]!
@@ -99,7 +83,6 @@ input SignInInput {
 }
 
 type Style {
-  albums: [Album!]
   id: Int!
   name: String!
   tracks: [Track!]
@@ -113,10 +96,9 @@ type Track {
   id: Int!
   image: String
   name: String!
-  rate: Int!
-  styles: [Style!]
   userProfile: UserProfile!
   userProfileId: Int!
+  userProfiles: [UserProfile!]
 }
 
 input UpdateUserProfileInput {
@@ -138,11 +120,11 @@ type User {
 
 type UserProfile {
   album: [Album!]
-  albums: [Album!]
   avatar: String
   id: Int!
+  likedAlbums: [Album!]
+  likedTracks: [Track!]
   name: String!
-  playlists: [Playlist!]
   status: String
   track: [Track!]
   userId: Int!

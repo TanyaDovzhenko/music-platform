@@ -13,7 +13,8 @@ interface IAlbumCreatingPanelProps {
     loading: boolean
 }
 
-export default function AlbumCreatingPanel({ refetchAlbums, loading }: IAlbumCreatingPanelProps) {
+export default function AlbumCreatingPanel({ refetchAlbums, loading }
+    : IAlbumCreatingPanelProps) {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState<any>(null)
@@ -22,12 +23,15 @@ export default function AlbumCreatingPanel({ refetchAlbums, loading }: IAlbumCre
     const [error, setError] = useState(false)
 
     const createAlbumHandler = async () => {
-        const created = await createAlbum({ name, description, image })
-        setName(''); setDescription(''); setImage('')
-        if (created) {
-            setTemporaryMessage(setCreatedMessage)
-            refetchAlbums()
-        } else setTemporaryMessage(setError)
+        await createAlbum({ name, description, image })
+            .then((data) => {
+                if (data) setTemporaryMessage(setCreatedMessage)
+                else setTemporaryMessage(setError)
+                refetchAlbums()
+            })
+        setName('')
+        setDescription('')
+        setImage('')
     }
 
     useEffect(() => {

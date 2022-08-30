@@ -1,8 +1,8 @@
 import style from '../../styles/profile/Profile.module.scss';
 import { ProfileTabsEnum } from "../../types/profile/profile-tabs"
+import LikedTracks from '../music/LikedTracks';
 import Albums from "./tabs/Albums"
 import Followings from './tabs/Followings';
-import Posts from "./tabs/Posts"
 import Singles from "./tabs/TracksList"
 
 interface IProfileContentProps {
@@ -18,8 +18,8 @@ export default function ProfileContent({ activeTab, userProfileId,
 
     return (<div className={style.content}>
         {
-            activeTab == ProfileTabsEnum.PLAYLISTS ?
-                <div>PLAYLISTS</div> :
+            activeTab == ProfileTabsEnum.LIKED_TRACKS ?
+                <LikedTracks userProfileId={userProfileId} /> :
 
                 activeTab == ProfileTabsEnum.ALBUMS ?
                     <Albums

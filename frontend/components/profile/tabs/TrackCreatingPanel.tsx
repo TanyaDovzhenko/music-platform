@@ -23,22 +23,17 @@ const TrackCreatingPanel = ({ refetchTracks, loading, albumId }: ITrackCreatingP
     const [error, setError] = useState(false)
     const [createdMessage, setCreatedMessage] = useState(false)
 
-    const stylesIds = [1, 2, 3]
-
     const createTrackHandler = async () => {
         setButtonDisable(true)
-        const created = await createTrack({ name, image, audio, albumId, stylesIds })
+        await createTrack({ name, image, audio, albumId })
+            .then((data) => {
+                if (data) setTemporaryMessage(setCreatedMessage)
+                else setTemporaryMessage(setError)
+                refetchTracks()
+            })
         setButtonDisable(false)
         setImage(null)
         setAudio(null)
-        if (created) {
-            setName('')
-            setTemporaryMessage(setCreatedMessage)
-            if (refetchTracks) refetchTracks()
-        }
-        if (!created) {
-            setTemporaryMessage(setError)
-        }
     }
 
     useEffect(() => {

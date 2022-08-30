@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import Track from '../../music/Track';
-import { useLazyQuery, useQuery } from '@apollo/client';
+import AbsenceMessage from '../../common/AbsenceMessage';
+import { useLazyQuery } from '@apollo/client';
 import TrackCreatingPanel from "./TrackCreatingPanel";
 import style from '../../../styles/profile/Singles.module.scss'
 import { GET_USER_SINGLES } from '../../../graphql/queries/profile-tracks.queries';
 import { setActivePlaylist } from '../../../utilities/music/set-active-playlist';
-import AbsenceMessage from '../../common/AbsenceMessage';
+
 
 
 interface ISinglesProps {
@@ -22,7 +23,7 @@ export default function TracksList({ userProfileId, userId,
         useLazyQuery(GET_USER_SINGLES,
             { variables: { profileId: userProfileId } })
 
-    const plylistId = Math.random() * Math.random()
+    const playlistId = Math.random() * Math.random()
 
     useEffect(() => { if (!tracks) getSingles() }, [])
     return (
@@ -44,9 +45,9 @@ export default function TracksList({ userProfileId, userId,
                         audio={item.audio}
                         musicianName={item.userProfile.name}
                         userId={userId}
-                        playlistId={plylistId}
+                        playlistId={playlistId}
                         setActivePlaylist={
-                            (e) => setActivePlaylist(e, singles?.singles, plylistId)
+                            (e) => setActivePlaylist(e, singles?.singles, playlistId)
                         }
                     />)}
                 {tracks?.map((item, index) =>
@@ -58,9 +59,9 @@ export default function TracksList({ userProfileId, userId,
                         audio={item.audio}
                         musicianName={item.userProfile.name}
                         userId={item.userProfile.userId}
-                        playlistId={plylistId}
+                        playlistId={playlistId}
                         setActivePlaylist={
-                            (e) => setActivePlaylist(e, tracks, plylistId)
+                            (e) => setActivePlaylist(e, tracks, playlistId)
                         }
                     />)}
             </div >

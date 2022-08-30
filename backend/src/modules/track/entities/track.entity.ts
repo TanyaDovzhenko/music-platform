@@ -4,9 +4,9 @@ import {
   ForeignKey, Model, Table
 } from 'sequelize-typescript';
 import { Album } from 'src/modules/album/entities/album.entity';
-import { Style } from 'src/modules/style/entities/style.entity';
-import { TracksStyles } from 'src/modules/style/entities/tracks-styles.entity';
 import { UserProfile } from 'src/modules/user-profile/entities/user-profile.entity';
+import { UserProfileTracks } from './user-profile-tracks';
+
 
 @ObjectType()
 @Table({ tableName: 'tracks' })
@@ -28,10 +28,6 @@ export class Track extends Model<Track>{
   @Field({ nullable: true })
   image: string;
 
-  @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 0 })
-  @Field(type => Int)
-  rate: number
-
   @BelongsTo(() => UserProfile)
   @Field(type => UserProfile)
   userProfile: UserProfile
@@ -50,9 +46,9 @@ export class Track extends Model<Track>{
   @Field(type => Int, { nullable: true })
   albumId?: number;
 
-  @BelongsToMany(() => Style, () => TracksStyles)
-  @Field(type => [Style], { nullable: true })
-  styles: Style[];
+  @BelongsToMany(() => UserProfile, () => UserProfileTracks)
+  @Field(type => [UserProfile], { nullable: true })
+  userProfiles: UserProfile[];
 }
 
 

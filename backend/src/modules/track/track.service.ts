@@ -5,9 +5,7 @@ import { CreateTrackInput } from './dto/create-track.input';
 import { Track } from './entities/track.entity';
 import { FileTypes } from 'src/types/file-manager.types';
 import { FileManagerService } from '../file-manager/file-manager.service';
-import { StyleService } from '../style/style.service';
-import { AddStyleType } from 'src/types/add-style-type.enum';
-import { convertIdsToNumber } from 'src/utilities/convert-ids-to-number';
+import { UserProfileService } from '../user-profile/user-profile.service';
 
 
 @Injectable()
@@ -15,7 +13,7 @@ export class TrackService {
   constructor(
     @InjectModel(Track) private trackRepo: typeof Track,
     private fileManagerService: FileManagerService,
-    private styleService: StyleService) { }
+    private userProfileService: UserProfileService) { }
 
   async findAll(): Promise<Track[]> {
     return await this.trackRepo.findAll({
@@ -49,5 +47,33 @@ export class TrackService {
       ...createTrackInput
     })
     return track
+  }
+
+  async likeTrack(profileId: number, trackId: number) {
+    const profile = await this.userProfileService.findOne(profileId)
+    const track = await this.findOne(trackId)
+    await profile.$add('likedTrack', track.id)
+    return true
+  }
+
+  async unlikeTrack(profileId: number, trackId: number) {
+    const profile = await this.userProfileService.findOne(profileId)
+    const track = await this.findOne(trackId)
+    await profile.$remove('likedTrack', track.id)
+    return true
+  }
+
+  async findUserLikedTracks(profileId: number) {
+    const profile = await this.userProfileService.findOne(profileId)
+    return profile.likedTracks
+  }
+
+  async checkLikedTrack(profileId: number, trackId: number) {
+    const profile = await this.userProfileService.findOne(profileId)
+    let isLiked = false
+    profile.likedTracks.forEach((item) => {
+      if (item.id == trackId) isLiked = true
+    })
+    return isLiked
   }
 }

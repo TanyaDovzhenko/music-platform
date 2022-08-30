@@ -17,7 +17,7 @@ import { UserRoles } from "../../types/user/userRoles.enum";
 
 export default function Profile({ user, userProfile, currentUserId }: any) {
     const [activeTab, setActiveTab] = useState(
-        userProfile?.role == (UserRoles.LISTENER).toUpperCase() ? 'music' : 'albums')
+        userProfile?.role == (UserRoles.LISTENER).toUpperCase() ? 'liked tracks' : 'albums')
     const changeActiveTag = (tab: string) => setActiveTab(tab)
 
     useEffect(() => {
@@ -57,7 +57,6 @@ export async function getServerSideProps(context: NextPageContext) {
 
     try {
         const { data: currentUser } = await client.query({ query: GET_CURRENT_USER })
-
         const { data: userProfile } = await client.query({
             query: GET_PROFILE_BY_USER_ID, variables: { userId }
         })
@@ -78,5 +77,4 @@ export async function getServerSideProps(context: NextPageContext) {
             props: { user: null, userProfile: null, currentUserId: null }
         }
     }
-
 }

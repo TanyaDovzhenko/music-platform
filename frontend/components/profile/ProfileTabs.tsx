@@ -1,7 +1,8 @@
 import cn from 'classnames'
 import style from '../../styles/profile/Tabs.module.scss'
-import { ListenerTabsObj, MusicianTabsObj } from '../../types/profile/profile-tabs'
 import { UserRoles } from '../../types/user/userRoles.enum'
+import { ListenerTabsObj, MusicianTabsObj } from '../../types/profile/profile-tabs'
+
 
 interface ITabsProps {
     userRole: string

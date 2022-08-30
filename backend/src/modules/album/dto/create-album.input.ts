@@ -13,7 +13,4 @@ export class CreateAlbumInput {
 
   @Field({ nullable: true })
   image?: string;
-
-  @Field(type => [Int], { nullable: true })
-  stylesIds?: number[];
 }

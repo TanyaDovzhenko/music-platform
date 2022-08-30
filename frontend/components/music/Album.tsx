@@ -3,6 +3,7 @@ import ProfileButton from '../common/ProfileButton'
 import style from '../../styles/music/Album.module.scss'
 import { BASE_SERVER_URL } from '../../utilities/constants'
 
+
 interface IAlbumProps {
     id: number
     name: string
@@ -13,11 +14,10 @@ interface IAlbumProps {
     authorUserId: number
     isCurrentUser?: boolean
     showAlbumPage: any
-    styles: any
 }
 
 export default function Album({ id, name, description, image, tracksNumber,
-    authorName, authorUserId, showAlbumPage, styles }: IAlbumProps) {
+    authorName, authorUserId, showAlbumPage }: IAlbumProps) {
 
     return (
         <div className={style.album}
@@ -32,7 +32,6 @@ export default function Album({ id, name, description, image, tracksNumber,
                     <a className={style.authorName}>by: <span>{authorName}</span></a>
                 </Link>
                 <div className={style.description}>{description}</div>
-                <div className={style.styles}></div>
             </div>
             <div className={style.addTrackBtn}>
                 <ProfileButton

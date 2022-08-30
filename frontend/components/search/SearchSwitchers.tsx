@@ -7,7 +7,6 @@ export default function SearchSwitchers() {
         <SwitchButton href="/search/listeners" text="listeners" />
         <SwitchButton href="/search/tracks" text="tracks" />
         <SwitchButton href="/search/albums" text="albums" />
-        <SwitchButton href="/search/playlists" text="playlists" />
     </div >
     )
 }

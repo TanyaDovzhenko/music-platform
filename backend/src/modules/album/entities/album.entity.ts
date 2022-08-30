@@ -1,7 +1,8 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript';
-import { AlbumStyles } from 'src/modules/style/entities/albums-styles.entity';
-import { Style } from 'src/modules/style/entities/style.entity';
+import {
+  BelongsTo, BelongsToMany, Column,
+  DataType, ForeignKey, HasMany, Model, Table
+} from 'sequelize-typescript';
 import { Track } from 'src/modules/track/entities/track.entity';
 import { UserProfile } from 'src/modules/user-profile/entities/user-profile.entity';
 import { UserProfileAlbums } from './user-profile-albums.entity';
@@ -32,10 +33,6 @@ export class Album extends Model<Album>{
   @Field()
   authorName: string;
 
-  @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 0 })
-  @Field()
-  rate: number
-
   @HasMany(() => Track)
   @Field(type => [Track], { nullable: true })
   tracks?: Track[];
@@ -55,8 +52,4 @@ export class Album extends Model<Album>{
   @Column({ type: DataType.INTEGER })
   @Field(type => Int)
   authorUserId: number;
-
-  @BelongsToMany(() => Style, () => AlbumStyles)
-  @Field(type => [Style], { nullable: true })
-  styles: Style[];
 }

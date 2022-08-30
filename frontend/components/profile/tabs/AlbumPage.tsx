@@ -7,7 +7,6 @@ import style from '../../../styles/music/AlbumPage.module.scss'
 import { BASE_SERVER_URL } from '../../../utilities/constants'
 import { setActivePlaylist } from '../../../utilities/music/set-active-playlist'
 import arrowIcon from '../../../images/icons/arrow-back-icon.svg'
-import fireIcon from '../../../images/icons/fire.svg'
 import TrackCreatingPanel from './TrackCreatingPanel'
 
 
@@ -20,7 +19,7 @@ interface IAlbumPageProps {
 export default function AlbumPage({ setAlbumPage, albumId, isCurrentUser }: IAlbumPageProps) {
     const { data, refetch } = useQuery(GET_ALBUM, { variables: { id: albumId } })
     const album = data?.album
-    const plylistId = Math.random() * Math.random()
+    const playlistId = Math.random() * Math.random()
 
     return (
         <div className={style.container}>
@@ -56,8 +55,8 @@ export default function AlbumPage({ setAlbumPage, albumId, isCurrentUser }: IAlb
                         name={item.name}
                         image={item.image}
                         audio={item.audio}
-                        playlistId={plylistId}
-                        setActivePlaylist={(e) => setActivePlaylist(e, album?.tracks, plylistId)}
+                        playlistId={playlistId}
+                        setActivePlaylist={(e) => setActivePlaylist(e, album?.tracks, playlistId)}
                         key={item.id}
                         musicianName={album?.authorName}
                         userId={album?.authorUserId}

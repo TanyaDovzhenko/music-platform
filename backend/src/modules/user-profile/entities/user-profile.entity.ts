@@ -2,13 +2,12 @@ import {
   BelongsTo, BelongsToMany, Column,
   DataType, ForeignKey, HasMany, Model, Table
 } from 'sequelize-typescript';
+import { Track } from 'src/modules/track/entities/track.entity';
+import { User } from 'src/modules/user/entities/user.entity';
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Album } from 'src/modules/album/entities/album.entity';
 import { UserProfileAlbums } from 'src/modules/album/entities/user-profile-albums.entity';
-import { Playlist } from 'src/modules/playlist/entities/playlist.entity';
-import { UserProfilePlaylists } from 'src/modules/playlist/entities/user-profile-playlists.entity';
-import { Track } from 'src/modules/track/entities/track.entity';
-import { User } from 'src/modules/user/entities/user.entity';
+import { UserProfileTracks } from 'src/modules/track/entities/user-profile-tracks';
 
 @ObjectType()
 @Table({ tableName: 'user_profiles', createdAt: false, updatedAt: false })
@@ -38,6 +37,10 @@ export class UserProfile extends Model<UserProfile>{
   @Field(type => Int)
   userId: number;
 
+  @BelongsToMany(() => Track, () => UserProfileTracks)
+  @Field(type => [Track], { nullable: true })
+  likedTracks: Track[];
+
   @HasMany(() => Track)
   @Field(type => [Track], { nullable: true })
   track: Track[];
@@ -46,11 +49,7 @@ export class UserProfile extends Model<UserProfile>{
   @Field(type => [Album], { nullable: true })
   album: Album[];
 
-  @BelongsToMany(() => Playlist, () => UserProfilePlaylists)
-  @Field(type => [Playlist], { nullable: true })
-  playlists: Playlist[];
-
   @BelongsToMany(() => Album, () => UserProfileAlbums)
   @Field(type => [Album], { nullable: true })
-  albums: Album[];
+  likedAlbums: Album[];
 }

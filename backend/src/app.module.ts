@@ -17,16 +17,11 @@ import { FollowModule } from './modules/follow/follow.module';
 import { Follow } from './modules/follow/entities/follow.entity';
 import { SearchModule } from './modules/search/search.module';
 import { Album } from './modules/album/entities/album.entity';
-import { AlbumStyles } from './modules/style/entities/albums-styles.entity';
 import { UserStyles } from './modules/style/entities/user-styles.entity';
-import { Playlist } from './modules/playlist/entities/playlist.entity';
-import { PlaylistModule } from './modules/playlist/playlist.module';
-import { PlaylistsTracks } from './modules/playlist/entities/playlists-tracks.entity';
 import { UserProfileAlbums } from './modules/album/entities/user-profile-albums.entity';
 import { UserProfileModule } from './modules/user-profile/user-profile.module';
 import { UserProfile } from 'src/modules/user-profile/entities/user-profile.entity';
-import { TracksStyles } from './modules/style/entities/tracks-styles.entity';
-import { UserProfilePlaylists } from './modules/playlist/entities/user-profile-playlists.entity';
+import { UserProfileTracks } from './modules/track/entities/user-profile-tracks';
 
 
 @Module({
@@ -50,16 +45,12 @@ import { UserProfilePlaylists } from './modules/playlist/entities/user-profile-p
         User,
         UserProfile,
         Track,
-        Playlist,
-        UserProfilePlaylists,
-        PlaylistsTracks,
         Album,
         UserProfileAlbums,
         Style,
-        AlbumStyles,
         UserStyles,
-        TracksStyles,
         Follow,
+        UserProfileTracks
       ],
       autoLoadModels: true,
     }),
@@ -69,7 +60,6 @@ import { UserProfilePlaylists } from './modules/playlist/entities/user-profile-p
     }),
     forwardRef(() => UserProfileModule),
     forwardRef(() => UserModule),
-    forwardRef(() => PlaylistModule),
     forwardRef(() => AlbumModule),
     AuthModule,
     TrackModule,

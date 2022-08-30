@@ -17,8 +17,7 @@ import { StyleModule } from '../style/style.module';
       [Album, UserProfileAlbums]),
     TrackModule,
     FileManagerModule,
-    UserProfileModule,
-    StyleModule
+    UserProfileModule
   ],
   controllers: [AlbumController],
   exports: [AlbumService]

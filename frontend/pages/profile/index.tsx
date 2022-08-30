@@ -5,7 +5,6 @@ import ProfileTabs from "../../components/profile/ProfileTabs";
 import ProfileContent from "../../components/profile/ProfileContent";
 import CreateClient from "../../graphql/apollo-client";
 import { NextPageContext } from "next";
-import { reload } from "../../utilities/common/reload";
 import ProfileHeader from "../../components/profile/ProfileHeader";
 import { UserRoles } from "../../types/user/userRoles.enum";
 import { GET_CURRENT_USER, GET_CURRENT_USER_PROFILE } from "../../graphql/queries/user.queries";
@@ -16,7 +15,6 @@ export default function CurrentProfile({ currentProfile, currentUser }: any) {
         currentUser?.role == (UserRoles.LISTENER).toUpperCase() ? 'music' : 'albums')
     const changeActiveTag = (tab: string) => setActiveTab(tab)
 
-    useEffect(reload, [])
     return (<MainLayout>
         <div className={style.container}>
             <div className={style.profile}>

@@ -11,7 +11,7 @@ import Image from "next/image"
 
 
 interface ISearchProps {
-    type: 'album' | 'user' | 'track' | 'playlist'
+    type: 'album' | 'user' | 'track'
     userRole?: UserRoles
     onDataRecieved: any
 }
@@ -53,13 +53,13 @@ export default function Search({ type, userRole, onDataRecieved }: ISearchProps)
     const getInitialData = async () => {
         if (type == 'user') {
             await getUsers()
-                .then(data => onDataRecieved(data?.data.usersByParams))
+                .then(data => onDataRecieved(data?.data?.usersByParams))
         } else if (type == 'album') {
             await getAlbums()
-                .then(data => onDataRecieved(data?.data.albumsByParams))
+                .then(data => onDataRecieved(data?.data?.albumsByParams))
         } else if (type == 'track') {
             await getTracks()
-                .then(data => onDataRecieved(data?.data.tracksByParams))
+                .then(data => onDataRecieved(data?.data?.tracksByParams))
         }
     }
 

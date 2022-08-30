@@ -55,7 +55,6 @@ export default function Albums({ albums, isCurrentUser, userProfileId }: IAlbums
                                 authorUserId={item.authorUserId}
                                 isCurrentUser={isCurrentUser}
                                 showAlbumPage={showAlbumPage}
-                                styles={item.styles}
                             />)}
                         {userAlbums?.userAlbums.map((item, index) =>
                             <Album key={index}
@@ -68,7 +67,6 @@ export default function Albums({ albums, isCurrentUser, userProfileId }: IAlbums
                                 authorUserId={item.authorUserId}
                                 isCurrentUser={isCurrentUser}
                                 showAlbumPage={showAlbumPage}
-                                styles={item.styles}
                             />)}
                     </div >
                 </>}
