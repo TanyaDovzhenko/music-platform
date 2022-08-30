@@ -4,7 +4,6 @@ import { Style } from './entities/style.entity';
 import { SeederModule } from 'nestjs-sequelize-seeder';
 import { SeedStyle } from './music-styles.seeder';
 import { UserStyles } from './entities/user-styles.entity';
-import { TracksStyles } from './entities/tracks-styles.entity';
 import { StyleService } from './style.service';
 import { StyleResolver } from './style.resolver';
 
@@ -12,8 +11,7 @@ import { StyleResolver } from './style.resolver';
     providers: [StyleService, StyleResolver],
     imports: [SequelizeModule.forFeature([
         Style,
-        UserStyles,
-        TracksStyles
+        UserStyles
     ]),
     SeederModule.forFeature([SeedStyle]),
     ],

@@ -85,7 +85,6 @@ input SignInInput {
 type Style {
   id: Int!
   name: String!
-  tracks: [Track!]
   users: [User!]
 }
 
