@@ -1,4 +1,4 @@
-## Installation
+## Installation (back/front)
 $ npm install
 
 ## Running frontend
