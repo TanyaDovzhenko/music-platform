@@ -1,0 +1,47 @@
+@import '../variables.scss';
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 99%;
+    margin: 5px 0;
+
+    .info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 400px;
+        width: 100%;
+        margin-right: 15px;
+    }
+
+    .uploadItem {
+        display: flex;
+        align-items: center;
+
+        span {
+            margin-left: 2px;
+            cursor: pointer;
+        }
+    }
+
+    .uploadSubmit {
+        display: flex;
+        align-items: center;
+    }
+
+    .error {
+        color: #ff0000;
+        letter-spacing: 0px;
+        margin-right: 3px;
+        font-size: 14px;
+    }
+
+    .trackCreated {
+        font-size: 14px;
+        color: #6dca71;
+        letter-spacing: 0px;
+        margin-right: 3px;
+    }
+}

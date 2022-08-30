@@ -1,0 +1,24 @@
+@import "../variables.scss";
+
+.card {
+    width: 300px;
+    height: 140px;
+    overflow: hidden;
+    padding: 10px;
+    background-color: #e3e1de;
+    border-radius: 6px;
+    overflow: hidden;
+
+    .title {
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .info {
+        font-size: 14px
+    }
+
+    .description {
+        margin-top: 10px;
+    }
+}

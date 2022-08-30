@@ -1,0 +1,48 @@
+@import "../variables.scss";
+
+.input {
+    height: 40px;
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid $grey;
+    padding: 4px 10px;
+    font-size: 14px;
+}
+
+.small {
+    width: 200px;
+}
+
+.medium {
+    width: 350px;
+}
+
+.lagre {
+    width: 400px;
+}
+
+.profileInputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border: 1px solid #616060;
+    height: 25px;
+    border-radius: 5px;
+    padding: 5px;
+    color: #616060;
+
+
+    .profileInput {
+        background-color: transparent;
+
+        &::placeholder {
+            color: #818181;
+        }
+    }
+
+    span {
+        font-size: 12px;
+    }
+
+}

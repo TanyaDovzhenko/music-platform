@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 99%;
+    margin: 3px 0;
+    padding: 0 0 7px;
+
+    .info {
+        display: flex;
+        flex-direction: column;
+
+        .infoItems {
+            display: flex;
+            align-items: center;
+            margin-bottom: 7px;
+
+            div+div {
+                margin-left: 10px;
+            }
+
+            .upload {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    .uploadSubmit {
+        position: relative;
+    }
+
+    .albumCreated {
+        font-size: 13px;
+        color: #6dca71;
+        letter-spacing: 0px;
+        margin-right: 3px;
+    }
+
+    .error {
+        color: #ff0000;
+        letter-spacing: 0px;
+        margin-right: 3px;
+        font-size: 13px;
+    }
+}

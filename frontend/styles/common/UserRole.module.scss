@@ -1,0 +1,12 @@
+.role {
+    display: flex;
+    align-items: center;
+
+    span {
+        margin-left: 3px;
+    }
+}
+
+.role.small {
+    font-size: 13px;
+}

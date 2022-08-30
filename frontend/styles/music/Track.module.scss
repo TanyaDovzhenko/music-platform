@@ -1,0 +1,68 @@
+@import "../variables.scss";
+@import '../extensions.scss';
+
+.track {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 99%;
+    height: 70px;
+    padding: 0 7px;
+    cursor: pointer;
+
+    .background {
+        @extend %img-background;
+        position: absolute;
+        background: #00000052;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+}
+
+.track:not(:first-child) {
+    margin-top: 17px;
+}
+
+.track.active {
+    background-color: rgb(196 196 196 / 53%);
+    border-radius: 4px;
+}
+
+.mainInfo {
+    display: grid;
+    grid-template-columns: 85px auto;
+    align-items: center;
+    z-index: 2;
+}
+
+.addInfo {
+    display: grid;
+    grid-template-columns: 85px 85px 100px 70px;
+    align-items: center;
+}
+
+.img {
+    @extend %img-background;
+    width: 75px;
+    height: 60px;
+}
+
+.name {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.musicianName {
+    font-size: 14px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.icon {
+    position: absolute;
+    right: 10px;
+}

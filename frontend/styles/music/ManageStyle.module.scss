@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.edPanel {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.icon {
+    cursor: pointer;
+    flex-shrink: 0;
+}

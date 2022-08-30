@@ -1,0 +1,17 @@
+.tabs {
+    margin-bottom: 10px;
+}
+
+.tab {
+    padding: 3px 8px 0 8px;
+    border-radius: 6px 6px 0 0;
+    background-color: #c4c4c4;
+    color: #000;
+    margin: 0 3px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.tab.active {
+    background-color: #818181;
+}

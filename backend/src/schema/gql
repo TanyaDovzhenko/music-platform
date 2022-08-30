@@ -1,0 +1,136 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Album {
+  authorName: String!
+  authorUserId: Int!
+  authorUserProfileId: Int!
+  description: String
+  id: Int!
+  image: String
+  name: String!
+  tracks: [Track!]
+  userProfiles: [UserProfile!]
+}
+
+type AuthResponse {
+  access_token: String!
+  user: User!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  role: String!
+  stylesIds: [Int!]!
+}
+
+type Follow {
+  followedId: Int!
+  followerId: Int!
+  id: Int!
+}
+
+type Mutation {
+  addAlbumTrack(albumId: Int!, trackId: Int!): Boolean!
+  addStyle(objId: Int!, styleId: Int!, type: String!): Boolean!
+  follow(followedId: Int!): Boolean!
+  likeAlbum(albumId: Float!): Boolean!
+  likeTrack(trackId: Float!): Boolean!
+  signin(signInInput: SignInInput!): AuthResponse!
+  signup(createUserInput: CreateUserInput!): AuthResponse!
+  unfollow(followedId: Int!): Boolean!
+  unlikeAlbum(albumId: Float!): Boolean!
+  unlikeTrack(trackId: Float!): Boolean!
+  updateUserProfile(updateUserProfileInput: UpdateUserProfileInput!): UserProfile!
+}
+
+type Query {
+  album(id: Int!): Album!
+  albumsByParams(albumName: String!): [Album!]!
+  checkFollowing(followedId: Int!): Boolean!
+  checkLikedAlbum(albumId: Float!): Boolean!
+  checkLikedTrack(trackId: Float!): Boolean!
+  currentUser: User!
+  currentUserAlbums: [Album!]!
+  currentUserLikedAlbums: [Album!]!
+  currentUserLikedTracks: [Track!]!
+  currentUserProfile: UserProfile!
+  likedAlbums(profileId: Int!): [Album!]!
+  likedTracks(profileId: Int!): [Track!]!
+  singles(profileId: Int!): [Track!]!
+  style(id: Int!): Style!
+  styles: [Style!]!
+  track(id: Int!): Track!
+  tracks: [Track!]!
+  tracksByParams(trackName: String!): [Track!]!
+  user(id: Float!): User!
+  userAlbums(profileId: Int!): [Album!]!
+  userFollowed(followerId: Int!): [Follow!]!
+  userFollowers(followedId: Int!): [Follow!]!
+  userProfile(id: Int!): UserProfile!
+  userProfileByUserId(userId: Int!): UserProfile!
+  userProfiles: [UserProfile!]!
+  users: [User!]!
+  usersByParams(userName: String!, userRole: UserRoles): [User!]!
+  usersByRole(userRole: UserRoles!): [User!]!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+type Style {
+  id: Int!
+  name: String!
+  tracks: [Track!]
+  users: [User!]
+}
+
+type Track {
+  album: Album
+  albumId: Int
+  audio: String!
+  id: Int!
+  image: String
+  name: String!
+  userProfile: UserProfile!
+  userProfileId: Int!
+  userProfiles: [UserProfile!]
+}
+
+input UpdateUserProfileInput {
+  avatar: String
+  id: Float
+  name: String
+  status: String
+}
+
+type User {
+  email: String!
+  id: Int!
+  password: String
+  role: UserRoles!
+  styles: [Style!]
+  userProfile: UserProfile
+  userProfileId: Float!
+}
+
+type UserProfile {
+  album: [Album!]
+  avatar: String
+  id: Int!
+  likedAlbums: [Album!]
+  likedTracks: [Track!]
+  name: String!
+  status: String
+  track: [Track!]
+  userId: Int!
+}
+
+enum UserRoles {
+  LISTENER
+  MUSICIAN
+}

@@ -1,0 +1,21 @@
+.edPanel,
+.edPanelTrue {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    font-size: 14px;
+}
+
+.edPanelTrue {
+    align-items: flex-start;
+}
+
+.status {
+    font-size: 14px;
+}
+
+.icon {
+    margin-right: 3px;
+    cursor: pointer;
+    flex-shrink: 0;
+}

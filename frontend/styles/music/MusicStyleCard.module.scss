@@ -1,0 +1,24 @@
+.card {
+    text-transform: lowercase;
+    font-size: 12px;
+    padding: 1px 7px;
+    margin: 2px 3px;
+    border-radius: 6px;
+    color: #000000;
+    background-color: #dfdfdf;
+    pointer-events: none;
+    cursor: default;
+}
+
+.card.auth {
+    border-radius: 4px;
+    font-weight: 800;
+    color: #f2f1f1;
+    background-color: rgb(106 106 106);
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.card.auth.selected {
+    background-color: #812a2a;
+}

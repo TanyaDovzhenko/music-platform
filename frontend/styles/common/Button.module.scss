@@ -1,0 +1,71 @@
+@import "../variables.scss";
+
+.button {
+    height: 40px;
+    font-size: 16px;
+    border-radius: 6px;
+    width: 350px;
+    background-color: $orange-grey;
+    transition: all 0.3s;
+    font-weight: 700;
+    color: #6a6a6a;
+
+    &:hover {
+        background-color: $grey;
+    }
+}
+
+.auto {
+    height: fit-content;
+    width: fit-content;
+}
+
+.medium {
+    width: 200px;
+}
+
+
+.backButton {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 10;
+    border-radius: 8px;
+    background-color: #dfdfdf5c;
+    height: 25px;
+    padding: 4px;
+}
+
+.profileButton {
+    color: #000;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 8px;
+    background-color: #c4c4c4;
+    transition: all 0.4s;
+
+    &:hover {
+        background-color: #818181;
+    }
+}
+
+.profileButton.transparent {
+    background: transparent;
+    border: 1px solid #fff;
+    color: $white;
+    width: fit-content;
+    height: fit-content;
+    padding: 2px 6px;
+}
+
+.button:disabled {
+    background-color: #e3e1de5e;
+    color: #ffffff78;
+}
+
+.followBtn {
+    font-size: 12px;
+}
